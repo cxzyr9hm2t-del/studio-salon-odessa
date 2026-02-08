@@ -221,16 +221,18 @@ select.glass-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
   </div>
   <div id="cl-main">
     <nav class="cl-nav" role="navigation" aria-label="ChromaLuxe navigation">
-      <button class="active" onclick="clNav('dash')" data-view="dash">📊 Dashboard</button>
-      <button onclick="clNav('mix')" data-view="mix">🧪 New Mix</button>
-      <button onclick="clNav('clients')" data-view="clients">👥 Clients</button>
-      <button onclick="clNav('formulas')" data-view="formulas">📋 Formulas</button>
-      <button onclick="clNav('calendar')" data-view="calendar">📅 Calendar</button>
-      <button onclick="clNav('inventory')" data-view="inventory">📦 Inventory</button>
-      <button onclick="clNav('history')" data-view="history">📜 History</button>
-      <button onclick="clNav('settings')" data-view="settings">⚙️ Settings</button>
-      <button onclick="clExit()" style="margin-left:auto;color:#f87171">✕ Exit</button>
-    </nav>
+        <button class="active" onclick="clNav('dash')" data-view="dash">📊 Dash</button>
+        <button onclick="clNav('mix')" data-view="mix">🧪 Mix</button>
+        <button onclick="clNav('consult')" data-view="consult">💬 Consult</button>
+        <button onclick="clNav('clients')" data-view="clients">👥 Clients</button>
+        <button onclick="clNav('formulas')" data-view="formulas">📋 Formulas</button>
+        <button onclick="clNav('calendar')" data-view="calendar">📅 Calendar</button>
+        <button onclick="clNav('checklist')" data-view="checklist">✅ Checklist</button>
+        <button onclick="clNav('inventory')" data-view="inventory">📦 Inventory</button>
+        <button onclick="clNav('history')" data-view="history">📜 History</button>
+        <button onclick="clNav('settings')" data-view="settings">⚙️ Settings</button>
+        <button onclick="clExit()" style="margin-left:auto;color:#f87171">✕ Exit</button>
+      </nav>
     <div class="cl-header">
       <h2 id="cl-page-title">📊 Dashboard</h2>
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
@@ -243,57 +245,67 @@ select.glass-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
     <div id="cl-views">
       <!-- DASHBOARD VIEW -->
       <div id="cl-v-dash" class="cl-view active">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px">
           <div class="cl-stat-card"><h3>💰 Revenue Today</h3><div class="value" id="cl-revenue">$0</div></div>
           <div class="cl-stat-card"><h3>🎨 Sessions</h3><div class="value" id="cl-sessions">0</div></div>
           <div class="cl-stat-card"><h3>📊 Avg Ticket</h3><div class="value" id="cl-avg-ticket">$0</div></div>
           <div class="cl-stat-card"><h3>⚗️ Product Used</h3><div class="value" id="cl-product-used">0g</div></div>
+          <div class="cl-stat-card"><h3>⭐ Loyalty Points</h3><div class="value" id="cl-loyalty-total">0</div></div>
         </div>
+        <div id="cl-low-stock-alert" style="display:none;padding:12px 16px;border-radius:12px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);margin-bottom:16px;font-size:0.85rem;color:#fca5a5"></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
           <div>
-            <button onclick="clNav('mix')" class="btn-primary btn-pill" style="width:100%;margin-bottom:20px;font-size:1rem;padding:16px"><span>🧪 Start New Mix Session →</span></button>
+            <button onclick="clNav('mix')" class="btn-primary btn-pill" style="width:100%;margin-bottom:16px;font-size:1rem;padding:16px"><span>🧪 Start New Mix Session →</span></button>
             <div class="cl-section"><div class="cl-section-title">⚡ Quick Actions</div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-                <button onclick="clShowAddClient()" class="btn-ghost btn-sm">+ New Client</button>
-                <button onclick="clShowBookAppt()" class="btn-ghost btn-sm">+ Book Appt</button>
-                <button onclick="clNav('formulas')" class="btn-ghost btn-sm">📋 Formulas</button>
-                <button onclick="clNav('inventory')" class="btn-ghost btn-sm">📦 Inventory</button>
-              </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+              <button onclick="clShowAddClient()" class="btn-ghost btn-sm">+ New Client</button>
+              <button onclick="clShowBookAppt()" class="btn-ghost btn-sm">+ Book Appt</button>
+              <button onclick="clNav('consult')" class="btn-ghost btn-sm">💬 Consult</button>
+              <button onclick="clNav('checklist')" class="btn-ghost btn-sm">✅ Checklist</button>
+              <button onclick="clNav('formulas')" class="btn-ghost btn-sm">📋 Formulas</button>
+              <button onclick="clNav('inventory')" class="btn-ghost btn-sm">📦 Inventory</button>
+            </div>
             </div>
             <div class="cl-section"><div class="cl-section-title">🔬 Active Processing</div>
-              <div style="overflow-x:auto"><table class="cl-table"><thead><tr><th>Client</th><th>Formula</th><th>Time</th><th>Status</th></tr></thead><tbody id="cl-active-tb"></tbody></table></div>
-              <p id="cl-no-active" style="text-align:center;color:var(--muted);font-size:0.85rem;padding:20px">No active processing sessions</p>
+            <div style="overflow-x:auto"><table class="cl-table"><thead><tr><th>Client</th><th>Formula</th><th>Time</th><th>Status</th></tr></thead><tbody id="cl-active-tb"></tbody></table></div>
+            <p id="cl-no-active" style="text-align:center;color:var(--muted);font-size:0.85rem;padding:20px">No active processing sessions</p>
             </div>
           </div>
           <div>
             <div class="cl-section"><div class="cl-section-title">📅 Today's Appointments</div><div id="cl-today-appts" style="font-size:0.85rem;color:var(--muted)"></div></div>
+            <div class="cl-section"><div class="cl-section-title">📋 Waitlist</div><div id="cl-dash-waitlist" style="font-size:0.85rem;color:var(--muted)">No clients waiting</div></div>
             <div class="cl-section" id="cl-env-card"><div class="cl-section-title">🌿 Environment</div><p id="cl-env-msg" style="font-size:0.85rem;color:var(--muted)">Optimal processing conditions — temperature and humidity within ideal range.</p></div>
           </div>
         </div>
-      </div>
-
-      <!-- MIX VIEW -->
+      </div><!-- MIX VIEW (Redken-Focused) -->
       <div id="cl-v-mix" class="cl-view">
         <div id="cl-mix-client" style="display:grid;grid-template-columns:2fr 1fr;gap:24px">
           <div>
             <div class="cl-section"><div class="cl-section-title">👤 Client Prep</div>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-                <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Client Name *</label><input id="cl-cname" class="glass-input" placeholder="Client name" autocomplete="off"></div>
-                <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Service Type</label><select id="cl-csvc" class="glass-input"><option>Balayage</option><option>Vivid Color</option><option>Root Touch-up</option><option>Full Highlight</option><option>Color Correction</option><option>Toner</option><option>Gloss</option></select></div>
-                <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Phone</label><input id="cl-cphone" class="glass-input" placeholder="(613) 555-0000" type="tel"></div>
-                <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Email</label><input id="cl-cemail" class="glass-input" placeholder="client@email.com" type="email"></div>
-              </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Client Name *</label><input id="cl-cname" class="glass-input" placeholder="Client name" autocomplete="off"></div>
+              <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Service Type</label><select id="cl-csvc" class="glass-input"><option>Balayage</option><option>Vivid Color</option><option>Root Touch-up</option><option>Full Highlight</option><option>Color Correction</option><option>Toner</option><option>Gloss</option></select></div>
+              <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Phone</label><input id="cl-cphone" class="glass-input" placeholder="(613) 555-0000" type="tel"></div>
+              <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Email</label><input id="cl-cemail" class="glass-input" placeholder="client@email.com" type="email"></div>
+            </div>
+            </div>
+            <div class="cl-section"><div class="cl-section-title">💇 Hair Assessment</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+              <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Hair Type</label><select id="cl-hair-type" class="glass-input"><option>Fine / Thin</option><option>Medium</option><option>Coarse / Thick</option><option>Curly</option><option>Virgin Hair</option></select></div>
+              <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Natural Level</label><select id="cl-hair-level" class="glass-input"><option>1 - Black</option><option>2 - Darkest Brown</option><option>3 - Dark Brown</option><option>4 - Medium Brown</option><option>5 - Light Brown</option><option>6 - Dark Blonde</option><option>7 - Medium Blonde</option><option>8 - Light Blonde</option><option>9 - Very Light Blonde</option><option>10 - Lightest Blonde</option></select></div>
+              <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Porosity</label><select id="cl-porosity" class="glass-input"><option>Low</option><option>Medium</option><option>High</option></select></div>
+            </div>
             </div>
             <div class="cl-section"><div class="cl-section-title">✅ Safety Checklist</div>
-              <div style="display:grid;gap:8px"><label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;cursor:pointer"><input type="checkbox" style="accent-color:var(--p500);width:18px;height:18px"> Cape & Towel Secure</label><label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;cursor:pointer"><input type="checkbox" style="accent-color:var(--p500);width:18px;height:18px"> Barrier Cream Applied</label><label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;cursor:pointer"><input type="checkbox" style="accent-color:var(--p500);width:18px;height:18px"> Scalp Analysis (No Abrasions)</label><label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;cursor:pointer"><input type="checkbox" style="accent-color:var(--p500);width:18px;height:18px"> Allergy / Patch Test Verified</label></div>
-              <button onclick="clNextStep()" class="btn-primary btn-sm" style="margin-top:16px"><span>Continue to Formulation →</span></button>
+            <div style="display:grid;gap:8px"><label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;cursor:pointer"><input type="checkbox" style="accent-color:var(--p500);width:18px;height:18px"> Cape & Towel Secure</label><label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;cursor:pointer"><input type="checkbox" style="accent-color:var(--p500);width:18px;height:18px"> Barrier Cream Applied</label><label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;cursor:pointer"><input type="checkbox" style="accent-color:var(--p500);width:18px;height:18px"> Scalp Analysis (No Abrasions)</label><label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;cursor:pointer"><input type="checkbox" style="accent-color:var(--p500);width:18px;height:18px"> Allergy / Patch Test Verified</label></div>
+            <button onclick="clNextStep()" class="btn-primary btn-sm" style="margin-top:16px"><span>Continue to Formulation →</span></button>
             </div>
           </div>
           <div>
             <div class="cl-section-title">🔄 Workflow</div>
             <div style="display:grid;gap:6px" id="cl-steps">
               <div class="workflow-step active" onclick="clStep(0)"><div class="workflow-num">1</div><div><strong style="font-size:0.85rem">Prep & Protect</strong><p style="font-size:0.7rem;color:var(--muted)">Client setup & safety</p></div></div>
-              <div class="workflow-step" onclick="clStep(1)"><div class="workflow-num">2</div><div><strong style="font-size:0.85rem">Formulate & Weigh</strong><p style="font-size:0.7rem;color:var(--muted)">Smart scale mixing</p></div></div>
+              <div class="workflow-step" onclick="clStep(1)"><div class="workflow-num">2</div><div><strong style="font-size:0.85rem">Formulate & Weigh</strong><p style="font-size:0.7rem;color:var(--muted)">Redken formulation</p></div></div>
               <div class="workflow-step" onclick="clStep(2)"><div class="workflow-num">3</div><div><strong style="font-size:0.85rem">Strand Test</strong><p style="font-size:0.7rem;color:var(--muted)">Quality verification</p></div></div>
               <div class="workflow-step" onclick="clStep(3)"><div class="workflow-num">4</div><div><strong style="font-size:0.85rem">Process & Time</strong><p style="font-size:0.7rem;color:var(--muted)">Precision timing</p></div></div>
               <div class="workflow-step" onclick="clStep(4)"><div class="workflow-num">5</div><div><strong style="font-size:0.85rem">Finish & Log</strong><p style="font-size:0.7rem;color:var(--muted)">Complete session</p></div></div>
@@ -301,20 +313,30 @@ select.glass-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
           </div>
         </div>
         <div id="cl-scale" style="display:none" class="cl-section">
-          <div class="cl-section-title">⚖️ Smart Scale</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-            <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Color Line</label><select id="cl-ratios" class="glass-input"><option>Joico Lumishine</option><option>Redken Shades EQ</option><option>Wella Koleston</option><option>Schwarzkopf Igora</option><option>Custom Mix</option></select></div>
-            <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Developer</label><select id="cl-dev" class="glass-input"><option>10 Vol</option><option>20 Vol</option><option>30 Vol</option><option>40 Vol</option></select></div>
+          <div class="cl-section-title">⚖️ Redken Smart Scale</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+            <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Redken Color Line</label><select id="cl-ratios" class="glass-input" onchange="clUpdateRatio()"><option value="seq">Shades EQ Gloss</option><option value="cgl">Color Gels Lacquers</option><option value="cgo">Color Gels Oils</option><option value="cf">Cover Fusion</option><option value="fl">Flash Lift Bonder Inside</option><option value="custom">Custom Mix</option></select></div>
+            <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Shade</label><input id="cl-shade" class="glass-input" placeholder="e.g. 06NB, 09V, 07RR"></div>
+            <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Developer</label><select id="cl-dev" class="glass-input"><option>Shades EQ Processing Solution</option><option>10 Vol (3%)</option><option>20 Vol (6%)</option><option>30 Vol (9%)</option><option>40 Vol (12%)</option></select></div>
           </div>
+          <div style="margin-top:12px;padding:10px;border-radius:8px;background:rgba(147,51,234,0.1);border:1px solid var(--border);font-size:0.8rem;color:var(--p300)" id="cl-ratio-info">Shades EQ Gloss: Mix 1:1 with Shades EQ Processing Solution. Process 20 min.</div>
           <div style="margin-top:16px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:0.8rem;color:var(--muted)">Pour Progress</span><span style="font-size:0.8rem;font-weight:600;color:var(--p300)">0g / 60g</span></div>
-            <div class="cl-progress"><div id="cl-pour-bar" class="cl-progress-bar" style="width:0%;background:linear-gradient(90deg,var(--p500),var(--p400))"></div></div>
-            <div style="display:flex;gap:8px;margin-top:12px"><button onclick="clPourStart()" class="btn-primary btn-sm"><span>▶ Start Pour</span></button><button onclick="clPourStop()" class="btn-ghost btn-sm">⏸ Stop</button><button onclick="clTare()" class="btn-ghost btn-sm">⚖ Tare</button></div>
+          <div class="cl-progress"><div id="cl-pour-bar" class="cl-progress-bar" style="width:0%;background:linear-gradient(90deg,var(--p500),var(--p400))"></div></div>
+          <div style="display:flex;gap:8px;margin-top:12px"><button onclick="clPourStart()" class="btn-primary btn-sm"><span>▶ Start Pour</span></button><button onclick="clPourStop()" class="btn-ghost btn-sm">⏸ Stop</button><button onclick="clTare()" class="btn-ghost btn-sm">⚖ Tare</button></div>
+          </div>
+          <div style="margin-top:16px;padding:12px;border-radius:12px;background:rgba(88,28,135,0.12);border:1px solid var(--border)">
+            <div class="cl-section-title" style="margin-bottom:8px">💰 Profit Calculator</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:0.85rem">
+              <div><label style="font-size:0.7rem;color:var(--muted);display:block;margin-bottom:4px">Service Price ($)</label><input id="cl-svc-price" class="glass-input" type="number" value="150" oninput="clCalcProfit()"></div>
+              <div><label style="font-size:0.7rem;color:var(--muted);display:block;margin-bottom:4px">Product Cost ($)</label><input id="cl-prod-cost" class="glass-input" type="number" value="18" oninput="clCalcProfit()"></div>
+              <div><label style="font-size:0.7rem;color:var(--muted);display:block;margin-bottom:4px">Margin</label><div id="cl-profit-display" style="padding:12px;border-radius:8px;background:rgba(34,197,94,0.15);color:#4ade80;font-weight:700;text-align:center">$132 (88%)</div></div>
+            </div>
           </div>
         </div>
         <div id="cl-timer-ring" style="display:none" class="cl-section">
           <div class="cl-section-title">⏱ Processing Timer</div>
           <div style="text-align:center;padding:20px"><div id="cl-timer-display" style="font-size:3rem;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--p300)">00:00</div>
-            <div style="display:flex;gap:8px;justify-content:center;margin-top:16px"><button onclick="clTimer(15)" class="btn-ghost btn-sm btn-pill">15 min</button><button onclick="clTimer(25)" class="btn-ghost btn-sm btn-pill">25 min</button><button onclick="clTimer(35)" class="btn-ghost btn-sm btn-pill">35 min</button><button onclick="clTimer(45)" class="btn-ghost btn-sm btn-pill">45 min</button><button onclick="clTimerStop()" class="btn-ghost btn-sm btn-pill" style="color:#f87171">■ Stop</button></div>
+          <div style="display:flex;gap:8px;justify-content:center;margin-top:16px"><button onclick="clTimer(15)" class="btn-ghost btn-sm btn-pill">15 min</button><button onclick="clTimer(20)" class="btn-ghost btn-sm btn-pill">20 min</button><button onclick="clTimer(25)" class="btn-ghost btn-sm btn-pill">25 min</button><button onclick="clTimer(35)" class="btn-ghost btn-sm btn-pill">35 min</button><button onclick="clTimer(45)" class="btn-ghost btn-sm btn-pill">45 min</button><button onclick="clTimerStop()" class="btn-ghost btn-sm btn-pill" style="color:#f87171">■ Stop</button></div>
           </div>
         </div>
         <div id="cl-finish" style="display:none" class="cl-section">
@@ -324,96 +346,139 @@ select.glass-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
             <div><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Session Cost ($)</label><input id="cl-cost" class="glass-input" type="number" value="0"></div>
           </div>
           <div style="margin-top:12px"><label style="font-size:0.75rem;color:var(--muted);display:block;margin-bottom:4px">Notes</label><textarea id="cl-notes" class="glass-input" rows="3" placeholder="Session notes, observations, aftercare..."></textarea></div>
-          <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+          <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;align-items:center">
             <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem;cursor:pointer"><input type="checkbox" id="cl-save-formula" style="accent-color:var(--p500);width:18px;height:18px" checked> Save to Formula Library</label>
+            <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem;cursor:pointer"><input type="checkbox" id="cl-add-loyalty" style="accent-color:var(--p500);width:18px;height:18px" checked> Award Loyalty Points</label>
           </div>
           <button onclick="clFinish()" class="btn-primary" style="margin-top:16px;width:100%"><span>✅ Complete & Log Session</span></button>
         </div>
+      </div><!-- CONSULTATION VIEW -->
+      <div id="cl-v-consult" class="cl-view">
+        <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+          <button onclick="clShowNewConsult()" class="btn-primary btn-sm"><span>+ New Consultation</span></button>
+          <input id="cl-consult-search" class="glass-input" placeholder="Search consultations..." style="max-width:300px" oninput="clSearchConsults()">
+        </div>
+        <div id="cl-consults-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px"></div>
+        <p id="cl-no-consults" style="text-align:center;color:var(--muted);padding:40px;font-size:0.9rem">No consultations yet. Start your first one!</p>
       </div>
       <!-- CLIENTS VIEW -->
       <div id="cl-v-clients" class="cl-view">
         <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
-          <input id="cl-client-search" class="glass-input" placeholder="🔍 Search clients..." style="max-width:300px" oninput="clSearchClients()">
+          <input id="cl-client-search" class="glass-input" placeholder="Search clients..." style="max-width:300px" oninput="clSearchClients()">
           <button onclick="clShowAddClient()" class="btn-primary btn-sm"><span>+ Add Client</span></button>
         </div>
-        <div style="overflow-x:auto"><table class="cl-table"><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Last Visit</th><th>Total Visits</th><th>Notes</th></tr></thead><tbody id="cl-clients-tb"></tbody></table></div>
+        <div style="overflow-x:auto"><table class="cl-table"><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Last Visit</th><th>Visits</th><th>⭐ Points</th><th>Notes</th></tr></thead><tbody id="cl-clients-tb"></tbody></table></div>
         <p id="cl-no-clients" style="text-align:center;color:var(--muted);padding:40px;font-size:0.9rem">No clients yet. Add your first client!</p>
       </div>
-
       <!-- FORMULAS VIEW -->
       <div id="cl-v-formulas" class="cl-view">
         <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
-          <input id="cl-formula-search" class="glass-input" placeholder="🔍 Search formulas..." style="max-width:300px" oninput="clSearchFormulas()">
+          <input id="cl-formula-search" class="glass-input" placeholder="Search formulas..." style="max-width:300px" oninput="clSearchFormulas()">
           <button onclick="clShowAddFormula()" class="btn-primary btn-sm"><span>+ Add Formula</span></button>
         </div>
         <div id="cl-formulas-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px"></div>
         <p id="cl-no-formulas" style="text-align:center;color:var(--muted);padding:40px;font-size:0.9rem">No saved formulas yet.</p>
       </div>
-
       <!-- CALENDAR VIEW -->
       <div id="cl-v-calendar" class="cl-view">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px">
           <div style="display:flex;align-items:center;gap:12px">
-            <button onclick="clCalPrev()" class="btn-ghost btn-sm">←</button>
+            <button onclick="clCalPrev()" class="btn-ghost btn-sm">&larr;</button>
             <h3 id="cl-cal-month" style="font-size:1.1rem;font-weight:600;color:var(--p300)"></h3>
-            <button onclick="clCalNext()" class="btn-ghost btn-sm">→</button>
+            <button onclick="clCalNext()" class="btn-ghost btn-sm">&rarr;</button>
           </div>
-          <button onclick="clShowBookAppt()" class="btn-primary btn-sm"><span>📅 Book</span></button>
+          <div style="display:flex;gap:8px">
+            <button onclick="clShowWaitlist()" class="btn-ghost btn-sm">📋 Waitlist</button>
+            <button onclick="clShowBookAppt()" class="btn-primary btn-sm"><span>📅 Book</span></button>
+          </div>
         </div>
         <div id="cl-cal-grid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;font-size:0.85rem"></div>
         <div style="margin-top:20px"><h4 style="font-size:0.95rem;color:var(--p300);margin-bottom:12px">Appointments for <span id="cl-cal-sel-date">Today</span></h4><div id="cl-cal-appts" style="font-size:0.85rem;color:var(--muted)"></div></div>
+      </div><!-- CHECKLIST VIEW -->
+      <div id="cl-v-checklist" class="cl-view">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+          <div style="display:flex;align-items:center;gap:8px"><span id="cl-check-date" style="font-size:0.9rem;color:var(--p300);font-weight:600"></span><span id="cl-check-progress" style="font-size:0.8rem;color:var(--muted)"></span></div>
+          <button onclick="clResetChecklist()" class="btn-ghost btn-sm" style="color:#f87171">↺ Reset Today</button>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="cl-section">
+            <div class="cl-section-title">🌅 Opening Duties</div>
+            <div id="cl-check-opening" style="display:grid;gap:6px"></div>
+          </div>
+          <div class="cl-section">
+            <div class="cl-section-title">💺 Station Prep</div>
+            <div id="cl-check-station" style="display:grid;gap:6px"></div>
+          </div>
+          <div class="cl-section">
+            <div class="cl-section-title">🧴 Redken Stock Check</div>
+            <div id="cl-check-stock" style="display:grid;gap:6px"></div>
+          </div>
+          <div class="cl-section">
+            <div class="cl-section-title">🧹 Sanitation Protocol</div>
+            <div id="cl-check-sanitation" style="display:grid;gap:6px"></div>
+          </div>
+          <div class="cl-section" style="grid-column:span 2">
+            <div class="cl-section-title">🌙 Closing Duties</div>
+            <div id="cl-check-closing" style="display:grid;grid-template-columns:1fr 1fr;gap:6px"></div>
+          </div>
+        </div>
       </div>
-
-      <!-- INVENTORY VIEW -->
+      <!-- INVENTORY VIEW (Redken-Focused) -->
       <div id="cl-v-inventory" class="cl-view">
-        <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
-          <input id="cl-inv-search" class="glass-input" placeholder="🔍 Search inventory..." style="max-width:300px" oninput="clSearchInv()">
+        <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
+          <input id="cl-inv-search" class="glass-input" placeholder="Search inventory..." style="max-width:250px" oninput="clSearchInv()">
+          <select id="cl-inv-cat" class="glass-input" style="max-width:200px" onchange="clFilterInv()"><option value="">All Categories</option><option value="color">Color</option><option value="developer">Developer</option><option value="lightener">Lightener</option><option value="treatment">Treatment</option><option value="styling">Styling</option><option value="tools">Tools & Supplies</option></select>
           <button onclick="clShowAddProduct()" class="btn-primary btn-sm"><span>+ Add Product</span></button>
         </div>
-        <div style="overflow-x:auto"><table class="cl-table"><thead><tr><th>Product</th><th>Brand</th><th>Stock Level</th><th>Cost/Unit</th><th>Reorder At</th><th>Actions</th></tr></thead><tbody id="cl-inv-tb"></tbody></table></div>
+        <div id="cl-inv-summary" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:16px"></div>
+        <div style="overflow-x:auto"><table class="cl-table"><thead><tr><th>Product</th><th>Brand</th><th>Category</th><th>Stock</th><th>Cost</th><th>Retail</th><th>Reorder</th><th>Actions</th></tr></thead><tbody id="cl-inv-tb"></tbody></table></div>
       </div>
-
       <!-- HISTORY VIEW -->
       <div id="cl-v-history" class="cl-view">
         <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
           <button onclick="clExportCSV()" class="btn-ghost btn-sm">📥 Export CSV</button>
           <span style="font-size:0.85rem;color:var(--muted);display:flex;align-items:center" id="cl-history-count"></span>
         </div>
-        <div style="overflow-x:auto"><table class="cl-table"><thead><tr><th>Date</th><th>Client</th><th>Stylist</th><th>Service</th><th>Formula</th><th>Time</th><th>Cost</th></tr></thead><tbody id="cl-history-tb"></tbody></table></div>
+        <div style="overflow-x:auto"><table class="cl-table"><thead><tr><th>Date</th><th>Client</th><th>Stylist</th><th>Service</th><th>Formula</th><th>Time</th><th>Cost</th><th>Profit</th></tr></thead><tbody id="cl-history-tb"></tbody></table></div>
         <p id="cl-no-history" style="text-align:center;color:var(--muted);padding:40px;font-size:0.9rem">No session history yet.</p>
       </div>
-
       <!-- SETTINGS VIEW -->
       <div id="cl-v-settings" class="cl-view">
         <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:20px">Settings</h3>
         <div class="cl-section"><div class="cl-section-title">⚙ Business Profile</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:500px">
-            <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Name</label><input id="cl-s-name" class="glass-input" value="Studio Salon Odessa"></div>
-            <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Phone</label><input id="cl-s-phone" class="glass-input" value="(613) 555-0123"></div>
-            <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Email</label><input id="cl-s-email" class="glass-input" value="jordanch14@gmail.com"></div>
-            <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Location</label><input id="cl-s-loc" class="glass-input" value="Odessa, Ontario"></div>
-          </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:500px">
+          <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Name</label><input id="cl-s-name" class="glass-input" value="Studio Salon Odessa"></div>
+          <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Phone</label><input id="cl-s-phone" class="glass-input" value="(613) 555-0123"></div>
+          <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Email</label><input id="cl-s-email" class="glass-input" value="jordanch14@gmail.com"></div>
+          <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Location</label><input id="cl-s-loc" class="glass-input" value="Odessa, Ontario"></div>
+        </div>
+        </div>
+        <div class="cl-section"><div class="cl-section-title">⭐ Loyalty Program</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:500px">
+          <div><label style="font-size:0.7rem;color:var(--muted)">POINTS PER VISIT</label><input id="cl-s-loyalty-pts" class="glass-input" type="number" value="10"></div>
+          <div><label style="font-size:0.7rem;color:var(--muted)">REWARD THRESHOLD</label><input id="cl-s-loyalty-thresh" class="glass-input" type="number" value="100"></div>
+          <div style="grid-column:span 2"><label style="font-size:0.7rem;color:var(--muted)">REWARD DESCRIPTION</label><input id="cl-s-loyalty-reward" class="glass-input" value="Free deep conditioning treatment"></div>
+        </div>
         </div>
         <div class="cl-section"><div class="cl-section-title">🔗 Social & Integrations</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:500px">
-            <div><label style="font-size:0.7rem;color:var(--muted)">📸 INSTAGRAM</label><input id="cl-s-ig" class="glass-input" value="@studiosalonodessa"></div>
-            <div><label style="font-size:0.7rem;color:var(--muted)">📘 FACEBOOK</label><input id="cl-s-fb" class="glass-input" value="studiosalonodessa"></div>
-            <div><label style="font-size:0.7rem;color:var(--muted)">🎵 TIKTOK</label><input id="cl-s-tt" class="glass-input" value="@studiosalonodessa"></div>
-            <div><label style="font-size:0.7rem;color:var(--muted)">🅶 GOOGLE BUSINESS ID</label><input id="cl-s-goog" class="glass-input" placeholder="Place ID"></div>
-            <div><label style="font-size:0.7rem;color:var(--muted)">✖ X / TWITTER</label><input id="cl-s-x" class="glass-input" value="@studiosalonodessa"></div>
-            <div><label style="font-size:0.7rem;color:var(--muted)">🟦 MICROSOFT BOOKING</label><input id="cl-s-msft" class="glass-input" placeholder="Booking page URL"></div>
-          </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:500px">
+          <div><label style="font-size:0.7rem;color:var(--muted)">INSTAGRAM</label><input id="cl-s-ig" class="glass-input" value="@studiosalonodessa"></div>
+          <div><label style="font-size:0.7rem;color:var(--muted)">FACEBOOK</label><input id="cl-s-fb" class="glass-input" value="studiosalonodessa"></div>
+          <div><label style="font-size:0.7rem;color:var(--muted)">TIKTOK</label><input id="cl-s-tt" class="glass-input" value="@studiosalonodessa"></div>
+          <div><label style="font-size:0.7rem;color:var(--muted)">GOOGLE BUSINESS</label><input id="cl-s-goog" class="glass-input" placeholder="Place ID"></div>
+          <div><label style="font-size:0.7rem;color:var(--muted)">X / TWITTER</label><input id="cl-s-x" class="glass-input" value="@studiosalonodessa"></div>
+          <div><label style="font-size:0.7rem;color:var(--muted)">MICROSOFT BOOKING</label><input id="cl-s-msft" class="glass-input" placeholder="Booking page URL"></div>
+        </div>
         </div>
         <div class="cl-section"><div class="cl-section-title">💾 Data Management</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;max-width:500px">
-            <button onclick="clSaveSettings()" class="btn-primary btn-sm"><span>💾 Save Settings</span></button>
-            <button onclick="clExportData()" class="btn-ghost btn-sm">📤 Export JSON</button>
-            <button onclick="if(confirm('Clear ALL ChromaLuxe data? This cannot be undone.')){localStorage.clear();clToast('All data cleared','info');}" class="btn-ghost btn-sm" style="color:#f87171">🗑 Clear All Data</button>
-          </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;max-width:500px">
+          <button onclick="clSaveSettings()" class="btn-primary btn-sm"><span>💾 Save Settings</span></button>
+          <button onclick="clExportData()" class="btn-ghost btn-sm">📤 Export JSON</button>
+          <button onclick="if(confirm('Clear ALL ChromaLuxe data? This cannot be undone.')){localStorage.clear();clToast('All data cleared','info');}" class="btn-ghost btn-sm" style="color:#f87171">🗑 Clear All Data</button>
+        </div>
         </div>
       </div>
     </div>
-  </div>
   <!-- Modal -->
   <div id="cl-modal" class="cl-modal" onclick="if(event.target===this)clModalClose()">
     <div class="cl-modal-body" id="cl-modal-content"></div>
@@ -427,145 +492,152 @@ let CU='',step=0,pourInt=null,pourAmt=0,timerInt=null,timerSec=0,calMonth=new Da
 const $=id=>document.getElementById(id);
 const LS=k=>{try{return JSON.parse(localStorage.getItem(k))||[]}catch(e){return[]}};
 const SS=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-
 function clToast(msg,type){const t=document.createElement('div');t.className='cl-toast '+(type||'info');t.innerHTML=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),3000)}
 
-// LOGIN
 function renderUsers(){const g=$('cl-users');if(!g)return;g.innerHTML=U.map(u=>'<div class="cl-user" onclick="clSel(\''+u.n+'\')"><div class="avatar">'+u.n[0]+'</div><span>'+u.n+'</span></div>').join('')}
-
 let pinCode='';
-function renderPinPad(){const g=$('cl-pin-grid');if(!g)return;g.innerHTML='';for(let i=1;i<=9;i++){const b=document.createElement('button');b.className='pin-btn';b.textContent=i;b.onclick=()=>pinDigit(i);g.appendChild(b)}
-const b0=document.createElement('button');b0.className='pin-btn';b0.textContent='⌫';b0.onclick=()=>pinDelete();g.appendChild(b0);
-const b1=document.createElement('button');b1.className='pin-btn';b1.textContent='0';b1.onclick=()=>pinDigit(0);g.appendChild(b1);
-const b2=document.createElement('button');b2.className='pin-btn';b2.textContent='✓';b2.onclick=()=>pinSubmit();g.appendChild(b2)}
-
+function renderPinPad(){const g=$('cl-pin-grid');if(!g)return;g.innerHTML='';for(let i=1;i<=9;i++){const b=document.createElement('button');b.className='pin-btn';b.textContent=i;b.onclick=()=>pinDigit(i);g.appendChild(b)}const b0=document.createElement('button');b0.className='pin-btn';b0.textContent='\u232b';b0.onclick=()=>pinDelete();g.appendChild(b0);const b1=document.createElement('button');b1.className='pin-btn';b1.textContent='0';b1.onclick=()=>pinDigit(0);g.appendChild(b1);const b2=document.createElement('button');b2.className='pin-btn';b2.textContent='\u2713';b2.onclick=()=>pinSubmit();g.appendChild(b2)}
 function updatePinDots(){const dots=document.querySelectorAll('.pin-dot');dots.forEach((d,i)=>{if(i<pinCode.length)d.classList.add('filled');else d.classList.remove('filled')})}
-
 function pinDigit(n){if(pinCode.length<4){pinCode+=n;updatePinDots();$('cl-pin-error').textContent='';if(pinCode.length===4)setTimeout(pinSubmit,200)}}
-
 function pinDelete(){if(pinCode.length>0){pinCode=pinCode.slice(0,-1);updatePinDots()}}
-
-function pinSubmit(){if(pinCode===PIN){CU=$('cl-sel-user').textContent;$('cl-login').style.display='none';$('cl-main').classList.add('active');$('cl-who').textContent='👤 '+CU;loadDash();clToast('Welcome, '+CU+'!','success')}else{$('cl-pin-error').textContent='Incorrect PIN. Try again.';pinCode='';updatePinDots();document.querySelector('.pin-grid').classList.add('shake');setTimeout(()=>document.querySelector('.pin-grid').classList.remove('shake'),500)}}
-
+function pinSubmit(){if(pinCode===PIN){CU=$('cl-sel-user').textContent;$('cl-login').style.display='none';$('cl-main').classList.add('active');$('cl-who').textContent='\ud83d\udc64 '+CU;loadDash();clToast('Welcome, '+CU+'!','success')}else{$('cl-pin-error').textContent='Incorrect PIN. Try again.';pinCode='';updatePinDots()}}
 window.clSel=function(name){$('cl-sel-user').textContent=name;$('cl-users').style.display='none';$('cl-pin-area').classList.add('active');pinCode='';updatePinDots();renderPinPad();$('cl-pin-error').textContent=''}
-
 window.clBack=function(){$('cl-users').style.display='flex';$('cl-pin-area').classList.remove('active');pinCode='';updatePinDots()}
-
-window.clLogin=function(){$('cl-login').style.display='none';$('cl-main').classList.add('active');loadDash()}
-
 window.clLogout=function(){CU='';$('cl-main').classList.remove('active');$('cl-login').style.display='flex';$('cl-users').style.display='flex';$('cl-pin-area').classList.remove('active');pinCode=''}
-
 window.clExit=function(){$('cl-app').classList.remove('active');clLogout()}
+window.clNav=function(view){document.querySelectorAll('.cl-view').forEach(v=>v.classList.remove('active'));document.querySelectorAll('.cl-nav button[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===view)});const v=$('cl-v-'+view);if(v)v.classList.add('active');const titles={dash:'\ud83d\udcca Dashboard',mix:'\ud83e\uddea New Mix Session',consult:'\ud83d\udcac Consultations',clients:'\ud83d\udc65 Client Database',formulas:'\ud83d\udccb Formula Library',calendar:'\ud83d\udcc5 Calendar',checklist:'\u2705 Studio Checklist',inventory:'\ud83d\udce6 Inventory Tracker',history:'\ud83d\udcdc Session History',settings:'\u2699\ufe0f Settings'};$('cl-page-title').textContent=titles[view]||view;if(view==='dash')loadDash();if(view==='clients')loadClients();if(view==='formulas')loadFormulas();if(view==='calendar')renderCal();if(view==='inventory')loadInv();if(view==='history')loadHistory();if(view==='consult')loadConsults();if(view==='checklist')loadChecklist()}
+function tick(){const n=new Date();const c=$('cl-clock');if(c)c.textContent=n.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})}
+function loadDash(){const h=LS('cl_history');let rev=0,prod=0;const today=new Date().toDateString();const todayH=h.filter(s=>new Date(s.date).toDateString()===today);todayH.forEach(s=>{rev+=parseFloat(s.cost)||0;prod+=parseFloat(s.product)||0});$('cl-revenue').textContent='$'+rev.toFixed(0);$('cl-sessions').textContent=todayH.length;$('cl-avg-ticket').textContent=todayH.length?'$'+(rev/todayH.length).toFixed(0):'$0';$('cl-product-used').textContent=prod+'g';
+const clients=LS('cl_clients');let totalPts=0;clients.forEach(c=>{totalPts+=(c.loyalty||0)});$('cl-loyalty-total').textContent=totalPts;
+const inv=LS('cl_inventory');const lowStock=inv.filter(p=>p.stock<=p.reorder);const lsa=$('cl-low-stock-alert');if(lowStock.length>0){lsa.style.display='block';lsa.innerHTML='\u26a0\ufe0f <strong>Low Stock Alert:</strong> '+lowStock.map(p=>p.name+' ('+p.stock+'%)').join(', ')}else{lsa.style.display='none'}
+const appts=LS('cl_appts');const todayAppts=appts.filter(a=>a.date===new Date().toISOString().slice(0,10));const ta=$('cl-today-appts');if(ta)ta.innerHTML=todayAppts.length?todayAppts.map(a=>'<div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span>'+a.client+'</span><span style="color:var(--p400)">'+a.time+' - '+a.service+'</span></div>').join(''):'<p style="color:var(--muted);font-size:0.85rem">No appointments today</p>';
+const wl=LS('cl_waitlist');const dwl=$('cl-dash-waitlist');if(dwl)dwl.innerHTML=wl.length?wl.map(w=>'<div style="padding:6px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;font-size:0.85rem"><span>'+w.client+'</span><span style="color:var(--muted)">'+w.service+'</span></div>').join(''):'No clients waiting'}
 
-// NAVIGATION
-window.clNav=function(view){document.querySelectorAll('.cl-view').forEach(v=>v.classList.remove('active'));document.querySelectorAll('.cl-nav button[data-view]').forEach(b=>{b.classList.toggle('active',b.dataset.view===view)});const v=$('cl-v-'+view);if(v)v.classList.add('active');
-const titles={dash:'📊 Dashboard',mix:'🧪 New Mix Session',clients:'👥 Client Database',formulas:'📋 Formula Library',calendar:'📅 Appointment Calendar',inventory:'📦 Inventory Tracker',history:'📜 Session History',settings:'⚙️ Settings'};
-$('cl-page-title').textContent=titles[view]||view;
-if(view==='dash')loadDash();if(view==='clients')loadClients();if(view==='formulas')loadFormulas();if(view==='calendar')renderCal();if(view==='inventory')loadInv();if(view==='history')loadHistory()}
-
-// CLOCK
-function tick(){const n=new Date();const c=$('cl-clock');if(c)c.textContent=n.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});const d=$('cl-date');if(d)d.textContent=n.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'})}
-
-// DASHBOARD
-function loadDash(){const h=LS('cl_history');let rev=0,prod=0;const today=new Date().toDateString();const todayH=h.filter(s=>new Date(s.date).toDateString()===today);todayH.forEach(s=>{rev+=parseFloat(s.cost)||0;prod+=parseFloat(s.product)||0});
-$('cl-revenue').textContent='$'+rev.toFixed(0);$('cl-sessions').textContent=todayH.length;$('cl-avg-ticket').textContent=todayH.length?'$'+(rev/todayH.length).toFixed(0):'$0';$('cl-product-used').textContent=prod+'g';
-// Today appts
-const appts=LS('cl_appts');const todayAppts=appts.filter(a=>a.date===new Date().toISOString().slice(0,10));
-const ta=$('cl-today-appts');if(ta)ta.innerHTML=todayAppts.length?todayAppts.map(a=>'<div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span>'+a.client+'</span><span style="color:var(--p400)">'+a.time+' - '+a.service+'</span></div>').join(''):'<p style="color:var(--muted);font-size:0.85rem">No appointments today</p>'}
-
-// MIX WORKFLOW
-window.clStep=function(s){step=s;const steps=document.querySelectorAll('#cl-steps .workflow-step');steps.forEach((el,i)=>{el.classList.remove('active','done');if(i<s)el.classList.add('done');if(i===s)el.classList.add('active')});
-$('cl-mix-client').style.display=s===0?'grid':'none';$('cl-scale').style.display=s===1?'block':'none';
-const strandArea=$('cl-timer-ring');if(strandArea)strandArea.style.display=(s===2||s===3)?'block':'none';
-$('cl-finish').style.display=s===4?'block':'none'}
-
+window.clStep=function(s){step=s;const steps=document.querySelectorAll('#cl-steps .workflow-step');steps.forEach((el,i)=>{el.classList.remove('active','done');if(i<s)el.classList.add('done');if(i===s)el.classList.add('active')});$('cl-mix-client').style.display=s===0?'grid':'none';$('cl-scale').style.display=s===1?'block':'none';const tr=$('cl-timer-ring');if(tr)tr.style.display=(s===2||s===3)?'block':'none';$('cl-finish').style.display=s===4?'block':'none'}
 window.clNextStep=function(){if(step<4){clStep(step+1)}}
-
 window.clPourStart=function(){pourInt=setInterval(()=>{pourAmt=Math.min(pourAmt+0.5,60);$('cl-pour-bar').style.width=(pourAmt/60*100)+'%';$('cl-pour-bar').parentElement.previousElementSibling.lastElementChild.textContent=pourAmt.toFixed(1)+'g / 60g'},100)}
 window.clPourStop=function(){clearInterval(pourInt)}
 window.clTare=function(){pourAmt=0;$('cl-pour-bar').style.width='0%';$('cl-pour-bar').parentElement.previousElementSibling.lastElementChild.textContent='0g / 60g'}
-window.clRatio=function(r){$('cl-ratios').value=r}
-
-window.clTimer=function(min){clearInterval(timerInt);timerSec=min*60;timerInt=setInterval(()=>{timerSec--;if(timerSec<=0){clearInterval(timerInt);clToast('⏰ Timer complete!','success');timerSec=0}const m=Math.floor(timerSec/60);const s=timerSec%60;$('cl-timer-display').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')},1000)}
+window.clUpdateRatio=function(){const v=$('cl-ratios').value;const info={seq:'Shades EQ Gloss: Mix 1:1 with Shades EQ Processing Solution. Process 20 min at room temp.',cgl:'Color Gels Lacquers: Mix 1:1 with developer. Process 20-45 min depending on lift.',cgo:'Color Gels Oils: Mix 1:1 with developer. Process 20 min. 100% grey coverage.',cf:'Cover Fusion: Mix 1:1 with 20 Vol developer. Process 20 min. Low-ammonia coverage.',fl:'Flash Lift Bonder Inside: Mix 1:2 with developer. Up to 8 levels of lift.',custom:'Custom mix ratio. Adjust as needed.'};const ri=$('cl-ratio-info');if(ri)ri.textContent=info[v]||''}
+window.clCalcProfit=function(){const price=parseFloat($('cl-svc-price').value)||0;const cost=parseFloat($('cl-prod-cost').value)||0;const profit=price-cost;const margin=price>0?(profit/price*100).toFixed(0):0;const d=$('cl-profit-display');if(d){d.textContent='$'+profit.toFixed(0)+' ('+margin+'%)';d.style.background=margin>=70?'rgba(34,197,94,0.15)':margin>=40?'rgba(234,179,8,0.15)':'rgba(239,68,68,0.15)';d.style.color=margin>=70?'#4ade80':margin>=40?'#facc15':'#f87171'}}
+window.clTimer=function(min){clearInterval(timerInt);timerSec=min*60;timerInt=setInterval(()=>{timerSec--;if(timerSec<=0){clearInterval(timerInt);clToast('Timer complete!','success');timerSec=0}const m=Math.floor(timerSec/60);const s=timerSec%60;$('cl-timer-display').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')},1000)}
 window.clTimerStop=function(){clearInterval(timerInt)}
-
-window.clFinish=function(){const name=$('cl-cname').value;if(!name)return clToast('Enter client name','error');const session={date:new Date().toISOString(),client:name,stylist:CU,service:$('cl-csvc').value,formula:$('cl-ratios')?$('cl-ratios').value:'',developer:$('cl-dev')?$('cl-dev').value:'',product:pourAmt,waste:$('cl-waste').value||0,cost:$('cl-cost').value||0,notes:$('cl-notes').value,time:timerSec>0?Math.ceil(timerSec/60):0};
+window.clFinish=function(){const name=$('cl-cname').value;if(!name)return clToast('Enter client name','error');const svcPrice=parseFloat($('cl-svc-price')?$('cl-svc-price').value:0)||0;const prodCost=parseFloat($('cl-prod-cost')?$('cl-prod-cost').value:0)||0;const session={date:new Date().toISOString(),client:name,stylist:CU,service:$('cl-csvc').value,formula:($('cl-ratios')?$('cl-ratios').value:'')+($('cl-shade')?' '+$('cl-shade').value:''),developer:$('cl-dev')?$('cl-dev').value:'',product:pourAmt,waste:$('cl-waste').value||0,cost:$('cl-cost').value||0,profit:(parseFloat($('cl-cost').value)||0)-prodCost,notes:$('cl-notes').value,hairType:$('cl-hair-type')?$('cl-hair-type').value:'',hairLevel:$('cl-hair-level')?$('cl-hair-level').value:'',porosity:$('cl-porosity')?$('cl-porosity').value:'',time:timerSec>0?Math.ceil(timerSec/60):0};
 const h=LS('cl_history');h.unshift(session);SS('cl_history',h);
-if($('cl-save-formula')&&$('cl-save-formula').checked){const f=LS('cl_formulas');f.push({name:name+' - '+session.service,line:session.formula,dev:session.developer,ratio:'1:1',notes:session.notes,date:session.date});SS('cl_formulas',f)}
-// Auto-save client
-const clients=LS('cl_clients');const existing=clients.find(c=>c.name.toLowerCase()===name.toLowerCase());if(existing){existing.visits=(existing.visits||0)+1;existing.lastVisit=new Date().toISOString().slice(0,10)}else{clients.push({name:name,phone:$('cl-cphone').value,email:$('cl-cemail').value,visits:1,lastVisit:new Date().toISOString().slice(0,10),notes:''})}
-SS('cl_clients',clients);
-clToast('✅ Session saved!','success');step=0;pourAmt=0;clearInterval(timerInt);clNav('dash')}
-// CLIENTS
+if($('cl-save-formula')&&$('cl-save-formula').checked){const f=LS('cl_formulas');f.push({name:name+' - '+session.service,line:session.formula,dev:session.developer,ratio:'1:1',notes:session.notes,date:session.date,hairType:session.hairType,hairLevel:session.hairLevel});SS('cl_formulas',f)}
+const clients=LS('cl_clients');const existing=clients.find(c=>c.name.toLowerCase()===name.toLowerCase());if(existing){existing.visits=(existing.visits||0)+1;existing.lastVisit=new Date().toISOString().slice(0,10);if($('cl-add-loyalty')&&$('cl-add-loyalty').checked){existing.loyalty=(existing.loyalty||0)+10}}else{clients.push({name:name,phone:$('cl-cphone').value,email:$('cl-cemail').value,visits:1,lastVisit:new Date().toISOString().slice(0,10),notes:'',loyalty:$('cl-add-loyalty')&&$('cl-add-loyalty').checked?10:0})}
+SS('cl_clients',clients);clToast('Session saved!','success');step=0;pourAmt=0;clearInterval(timerInt);clNav('dash')}
+
 function loadClients(){const c=LS('cl_clients');const tb=$('cl-clients-tb');const nc=$('cl-no-clients');if(!tb)return;if(!c.length){tb.innerHTML='';nc.style.display='block';return}nc.style.display='none';
-tb.innerHTML=c.map(cl=>'<tr><td style="font-weight:600;color:white">'+cl.name+'</td><td>'+( cl.phone||'—')+'</td><td>'+(cl.email||'—')+'</td><td>'+(cl.lastVisit||'—')+'</td><td>'+(cl.visits||0)+'</td><td class="line-clamp-2">'+(cl.notes||'—')+'</td></tr>').join('')}
-
-window.clSearchClients=function(){const q=$('cl-client-search').value.toLowerCase();const rows=document.querySelectorAll('#cl-clients-tb tr');rows.forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q)?'':'none'})}
-
+tb.innerHTML=c.map(cl=>'<tr><td style="font-weight:600;color:white">'+cl.name+'</td><td>'+(cl.phone||'\u2014')+'</td><td>'+(cl.email||'\u2014')+'</td><td>'+(cl.lastVisit||'\u2014')+'</td><td>'+(cl.visits||0)+'</td><td style="color:#facc15;font-weight:600">'+(cl.loyalty||0)+'</td><td class="line-clamp-2">'+(cl.notes||'\u2014')+'</td></tr>').join('')}
+window.clSearchClients=function(){const q=$('cl-client-search').value.toLowerCase();document.querySelectorAll('#cl-clients-tb tr').forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q)?'':'none'})}
 window.clShowAddClient=function(){$('cl-modal-content').innerHTML='<h3 style="font-size:1.1rem;font-weight:600;margin-bottom:16px">Add New Client</h3><div style="display:grid;gap:12px"><input id="m-cname" class="glass-input" placeholder="Full Name *"><input id="m-cphone" class="glass-input" placeholder="Phone" type="tel"><input id="m-cemail" class="glass-input" placeholder="Email" type="email"><textarea id="m-cnotes" class="glass-input" placeholder="Notes" rows="2"></textarea><div style="display:flex;gap:8px"><button onclick="clAddClient()" class="btn-primary btn-sm"><span>Save Client</span></button><button onclick="clModalClose()" class="btn-ghost btn-sm">Cancel</button></div></div>';$('cl-modal').classList.add('active')}
+window.clAddClient=function(){const name=$('m-cname').value;if(!name)return clToast('Enter client name','error');const c=LS('cl_clients');c.push({name:name,phone:$('m-cphone').value,email:$('m-cemail').value,visits:0,lastVisit:'',notes:$('m-cnotes').value,loyalty:0});SS('cl_clients',c);clModalClose();loadClients();clToast('Client added!','success')}
 
-window.clAddClient=function(){const name=$('m-cname').value;if(!name)return clToast('Enter client name','error');const c=LS('cl_clients');c.push({name:name,phone:$('m-cphone').value,email:$('m-cemail').value,visits:0,lastVisit:'',notes:$('m-cnotes').value});SS('cl_clients',c);clModalClose();loadClients();clToast('Client added!','success')}
-
-// FORMULAS
 function loadFormulas(){const f=LS('cl_formulas');const g=$('cl-formulas-grid');const nf=$('cl-no-formulas');if(!g)return;if(!f.length){g.innerHTML='';nf.style.display='block';return}nf.style.display='none';
-g.innerHTML=f.map((fm,i)=>'<div class="glass-card" style="padding:16px"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px"><strong style="color:white;font-size:0.95rem">'+(fm.name||'Untitled')+'</strong><button onclick="clDeleteFormula('+i+')" style="background:none;border:none;color:#f87171;cursor:pointer;font-size:0.8rem">✕</button></div><div style="font-size:0.8rem;color:var(--muted)"><p>Line: '+(fm.line||'—')+'</p><p>Developer: '+(fm.dev||'—')+'</p><p>Ratio: '+(fm.ratio||'—')+'</p>'+(fm.notes?'<p style="margin-top:6px;color:var(--p300)">'+fm.notes+'</p>':'')+'</div></div>').join('')}
-
+g.innerHTML=f.map((fm,i)=>'<div class="glass-card" style="padding:16px"><div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:8px"><strong style="color:white;font-size:0.95rem">'+(fm.name||'Untitled')+'</strong><button onclick="clDeleteFormula('+i+')" style="background:none;border:none;color:#f87171;cursor:pointer;font-size:0.8rem">\u2715</button></div><div style="font-size:0.8rem;color:var(--muted)"><p>Line: '+(fm.line||'\u2014')+'</p><p>Developer: '+(fm.dev||'\u2014')+'</p><p>Ratio: '+(fm.ratio||'\u2014')+'</p>'+(fm.hairType?'<p>Hair: '+fm.hairType+(fm.hairLevel?' / '+fm.hairLevel:'')+'</p>':'')+(fm.notes?'<p style="margin-top:6px;color:var(--p300)">'+fm.notes+'</p>':'')+'</div></div>').join('')}
 window.clSearchFormulas=function(){const q=$('cl-formula-search').value.toLowerCase();document.querySelectorAll('#cl-formulas-grid .glass-card').forEach(c=>{c.style.display=c.textContent.toLowerCase().includes(q)?'':'none'})}
-
 window.clDeleteFormula=function(i){const f=LS('cl_formulas');f.splice(i,1);SS('cl_formulas',f);loadFormulas();clToast('Formula deleted','info')}
-
 window.clShowAddFormula=function(){$('cl-modal-content').innerHTML='<h3 style="font-size:1.1rem;font-weight:600;margin-bottom:16px">Add Formula</h3><div style="display:grid;gap:12px"><input id="m-fname" class="glass-input" placeholder="Formula Name *"><input id="m-fline" class="glass-input" placeholder="Color Line"><input id="m-fdev" class="glass-input" placeholder="Developer"><input id="m-fratio" class="glass-input" placeholder="Ratio (e.g. 1:1.5)"><textarea id="m-fnotes" class="glass-input" placeholder="Notes" rows="2"></textarea><div style="display:flex;gap:8px"><button onclick="clAddFormula()" class="btn-primary btn-sm"><span>Save Formula</span></button><button onclick="clModalClose()" class="btn-ghost btn-sm">Cancel</button></div></div>';$('cl-modal').classList.add('active')}
-
 window.clAddFormula=function(){const name=$('m-fname').value;if(!name)return clToast('Enter formula name','error');const f=LS('cl_formulas');f.push({name:name,line:$('m-fline').value,dev:$('m-fdev').value,ratio:$('m-fratio').value,notes:$('m-fnotes').value,date:new Date().toISOString()});SS('cl_formulas',f);clModalClose();loadFormulas();clToast('Formula saved!','success')}
 
-// CALENDAR
+function loadConsults(){const c=LS('cl_consults');const g=$('cl-consults-grid');const nc=$('cl-no-consults');if(!g)return;if(!c.length){g.innerHTML='';nc.style.display='block';return}nc.style.display='none';
+g.innerHTML=c.map((cn,i)=>'<div class="glass-card" style="padding:16px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><strong style="color:white">'+cn.client+'</strong><button onclick="clDeleteConsult('+i+')" style="background:none;border:none;color:#f87171;cursor:pointer;font-size:0.8rem">\u2715</button></div><div style="font-size:0.8rem;color:var(--muted)"><p><strong style="color:var(--p300)">Goal:</strong> '+cn.goal+'</p><p><strong style="color:var(--p300)">Current:</strong> '+cn.current+'</p><p><strong style="color:var(--p300)">Redken Rx:</strong> '+(cn.treatment||'\u2014')+'</p>'+(cn.timeline?'<p><strong style="color:var(--p300)">Timeline:</strong> '+cn.timeline+'</p>':'')+(cn.estimate?'<p><strong style="color:var(--p300)">Est Cost:</strong> $'+cn.estimate+'</p>':'')+(cn.notes?'<p style="margin-top:6px;font-style:italic">'+cn.notes+'</p>':'')+'<p style="font-size:0.7rem;color:var(--muted);margin-top:6px">'+new Date(cn.date).toLocaleDateString()+'</p></div></div>').join('')}
+window.clSearchConsults=function(){const q=$('cl-consult-search').value.toLowerCase();document.querySelectorAll('#cl-consults-grid .glass-card').forEach(c=>{c.style.display=c.textContent.toLowerCase().includes(q)?'':'none'})}
+window.clDeleteConsult=function(i){const c=LS('cl_consults');c.splice(i,1);SS('cl_consults',c);loadConsults();clToast('Consultation deleted','info')}
+window.clShowNewConsult=function(){$('cl-modal-content').innerHTML='<h3 style="font-size:1.1rem;font-weight:600;margin-bottom:16px">New Consultation</h3><div style="display:grid;gap:12px"><input id="m-con-client" class="glass-input" placeholder="Client Name *"><textarea id="m-con-goal" class="glass-input" rows="2" placeholder="Hair Goal *"></textarea><textarea id="m-con-current" class="glass-input" rows="2" placeholder="Current hair condition"></textarea><input id="m-con-treatment" class="glass-input" placeholder="Recommended Redken Treatment"><input id="m-con-timeline" class="glass-input" placeholder="Timeline (e.g. 2-3 sessions)"><input id="m-con-estimate" class="glass-input" type="number" placeholder="Estimated Total Cost ($)"><textarea id="m-con-notes" class="glass-input" rows="2" placeholder="Additional notes"></textarea><div style="display:flex;gap:8px"><button onclick="clAddConsult()" class="btn-primary btn-sm"><span>Save Consultation</span></button><button onclick="clModalClose()" class="btn-ghost btn-sm">Cancel</button></div></div>';$('cl-modal').classList.add('active')}
+window.clAddConsult=function(){const client=$('m-con-client').value;const goal=$('m-con-goal').value;if(!client||!goal)return clToast('Enter client name and goal','error');const c=LS('cl_consults');c.unshift({client:client,goal:goal,current:$('m-con-current').value,treatment:$('m-con-treatment').value,timeline:$('m-con-timeline').value,estimate:$('m-con-estimate').value,notes:$('m-con-notes').value,date:new Date().toISOString(),stylist:CU});SS('cl_consults',c);clModalClose();loadConsults();clToast('Consultation saved!','success')}
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-
 function renderCal(){$('cl-cal-month').textContent=MONTHS[calMonth]+' '+calYear;const g=$('cl-cal-grid');if(!g)return;g.innerHTML=DAYS.map(d=>'<div style="text-align:center;padding:8px;font-size:0.7rem;color:var(--muted);font-weight:600;text-transform:uppercase">'+d+'</div>').join('');
 const first=new Date(calYear,calMonth,1).getDay();const days=new Date(calYear,calMonth+1,0).getDate();const today=new Date();
 for(let i=0;i<first;i++)g.innerHTML+='<div></div>';
 const appts=LS('cl_appts');
 for(let d=1;d<=days;d++){const dateStr=calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');const isToday=d===today.getDate()&&calMonth===today.getMonth()&&calYear===today.getFullYear();const hasAppt=appts.some(a=>a.date===dateStr);
-g.innerHTML+='<div onclick="clCalDay(\''+dateStr+'\')" style="text-align:center;padding:10px;border-radius:10px;cursor:pointer;transition:all 0.2s;'+(isToday?'background:var(--p700);color:white;font-weight:700;':'')+(hasAppt?'border:1px solid var(--p500);':'')+'" onmouseenter="this.style.background=\'rgba(147,51,234,0.2)\'" onmouseleave="this.style.background=\''+(isToday?'var(--p700)':'')+'\'">'+(hasAppt?'<div style="width:5px;height:5px;border-radius:50%;background:var(--p400);margin:0 auto 3px"></div>':'')+d+'</div>'}}
-
+g.innerHTML+='<div onclick="clCalDay(\''+dateStr+'\')" style="text-align:center;padding:10px;border-radius:10px;cursor:pointer;transition:all 0.2s;'+(isToday?'background:var(--p700);color:white;font-weight:700;':'')+(hasAppt?'border:1px solid var(--p500);':'')+'">'+(hasAppt?'<div style="width:5px;height:5px;border-radius:50%;background:var(--p400);margin:0 auto 3px"></div>':'')+d+'</div>'}}
 window.clCalPrev=function(){calMonth--;if(calMonth<0){calMonth=11;calYear--}renderCal()}
 window.clCalNext=function(){calMonth++;if(calMonth>11){calMonth=0;calYear++}renderCal()}
-
-window.clCalDay=function(dateStr){$('cl-cal-sel-date').textContent=dateStr;const appts=LS('cl_appts').filter(a=>a.date===dateStr);$('cl-cal-appts').innerHTML=appts.length?appts.map(a=>'<div style="padding:8px 12px;margin-bottom:6px;border-radius:8px;background:rgba(88,28,135,0.15);border:1px solid var(--border)"><strong style="color:white">'+a.client+'</strong> <span style="color:var(--p400)">'+a.time+'</span><br><span style="font-size:0.8rem;color:var(--muted)">'+a.service+(a.stylist?' — '+a.stylist:'')+'</span></div>').join(''):'<p style="color:var(--muted)">No appointments for this date</p>'}
-
-window.clShowBookAppt=function(){$('cl-modal-content').innerHTML='<h3 style="font-size:1.1rem;font-weight:600;margin-bottom:16px">📅 Book Appointment</h3><div style="display:grid;gap:12px"><input id="m-aname" class="glass-input" placeholder="Client Name *"><input id="m-adate" class="glass-input" type="date" value="'+new Date().toISOString().slice(0,10)+'"><input id="m-atime" class="glass-input" type="time" value="10:00"><select id="m-asvc" class="glass-input"><option>Balayage</option><option>Vivid Color</option><option>Cut & Style</option><option>Root Touch-up</option><option>Keratin Treatment</option><option>Head Spa</option><option>Color Correction</option><option>Consultation</option></select><input id="m-astylist" class="glass-input" placeholder="Stylist" value="'+(CU||'')+'"><textarea id="m-anotes" class="glass-input" placeholder="Notes" rows="2"></textarea><div style="display:flex;gap:8px"><button onclick="clBookAppt()" class="btn-primary btn-sm"><span>Book Appointment</span></button><button onclick="clModalClose()" class="btn-ghost btn-sm">Cancel</button></div></div>';$('cl-modal').classList.add('active')}
-
+window.clCalDay=function(dateStr){$('cl-cal-sel-date').textContent=dateStr;const appts=LS('cl_appts').filter(a=>a.date===dateStr);$('cl-cal-appts').innerHTML=appts.length?appts.map(a=>'<div style="padding:8px 12px;margin-bottom:6px;border-radius:8px;background:rgba(88,28,135,0.15);border:1px solid var(--border)"><strong style="color:white">'+a.client+'</strong> <span style="color:var(--p400)">'+a.time+'</span><br><span style="font-size:0.8rem;color:var(--muted)">'+a.service+(a.stylist?' \u2014 '+a.stylist:'')+'</span></div>').join(''):'<p style="color:var(--muted)">No appointments for this date</p>'}
+window.clShowBookAppt=function(){$('cl-modal-content').innerHTML='<h3 style="font-size:1.1rem;font-weight:600;margin-bottom:16px">Book Appointment</h3><div style="display:grid;gap:12px"><input id="m-aname" class="glass-input" placeholder="Client Name *"><input id="m-adate" class="glass-input" type="date" value="'+new Date().toISOString().slice(0,10)+'"><input id="m-atime" class="glass-input" type="time" value="10:00"><select id="m-asvc" class="glass-input"><option>Balayage</option><option>Vivid Color</option><option>Cut & Style</option><option>Root Touch-up</option><option>Keratin Treatment</option><option>Head Spa</option><option>Color Correction</option><option>Consultation</option></select><input id="m-astylist" class="glass-input" placeholder="Stylist" value="'+(CU||'')+'"><textarea id="m-anotes" class="glass-input" placeholder="Notes" rows="2"></textarea><div style="display:flex;gap:8px"><button onclick="clBookAppt()" class="btn-primary btn-sm"><span>Book Appointment</span></button><button onclick="clModalClose()" class="btn-ghost btn-sm">Cancel</button></div></div>';$('cl-modal').classList.add('active')}
 window.clBookAppt=function(){const name=$('m-aname').value;if(!name)return clToast('Enter client name','error');const a=LS('cl_appts');a.push({client:name,date:$('m-adate').value,time:$('m-atime').value,service:$('m-asvc').value,stylist:$('m-astylist').value,notes:$('m-anotes').value});SS('cl_appts',a);clModalClose();renderCal();loadDash();clToast('Appointment booked!','success')}
-// INVENTORY
-const defaultInv=[{name:'20 Vol Developer',brand:'Joico',stock:85,cost:'$12',reorder:20},{name:'30 Vol Developer',brand:'Joico',stock:60,cost:'$12',reorder:20},{name:'Olaplex No.1',brand:'Olaplex',stock:45,cost:'$28',reorder:15},{name:'Purple Shampoo',brand:'Redken',stock:70,cost:'$18',reorder:25},{name:'Foils (500ct)',brand:'Framar',stock:40,cost:'$25',reorder:10},{name:'Balayage Clay',brand:`L'Oreal`,stock:55,cost:'$22',reorder:15},{name:'Keratin Treatment',brand:'GKhair',stock:30,cost:'$45',reorder:10},{name:'Toner 9V',brand:'Redken',stock:65,cost:'$9',reorder:20}];
+
+window.clShowWaitlist=function(){const wl=LS('cl_waitlist');let html='<h3 style="font-size:1.1rem;font-weight:600;margin-bottom:16px">Waitlist</h3>';if(wl.length){html+='<div style="display:grid;gap:8px">'+wl.map((w,i)=>'<div style="display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:8px;background:rgba(88,28,135,0.12);border:1px solid var(--border)"><div><strong style="color:white;font-size:0.9rem">'+w.client+'</strong><br><span style="font-size:0.8rem;color:var(--muted)">'+w.service+' \u2014 '+w.pref+'</span></div><button onclick="clRemoveWaitlist('+i+')" class="btn-ghost btn-sm" style="font-size:0.75rem;color:#f87171">Remove</button></div>').join('')+'</div>'}else{html+='<p style="color:var(--muted);font-size:0.9rem;padding:20px;text-align:center">Waitlist is empty</p>'}
+html+='<div style="margin-top:16px;border-top:1px solid var(--border);padding-top:16px"><h4 style="font-size:0.9rem;font-weight:600;margin-bottom:12px">Add to Waitlist</h4><div style="display:grid;gap:10px"><input id="m-wl-client" class="glass-input" placeholder="Client Name *"><select id="m-wl-svc" class="glass-input"><option>Balayage</option><option>Vivid Color</option><option>Cut & Style</option><option>Root Touch-up</option><option>Color Correction</option><option>Any Available</option></select><input id="m-wl-pref" class="glass-input" placeholder="Preferred date/time"><div style="display:flex;gap:8px"><button onclick="clAddWaitlist()" class="btn-primary btn-sm"><span>Add to Waitlist</span></button><button onclick="clModalClose()" class="btn-ghost btn-sm">Close</button></div></div></div>';
+$('cl-modal-content').innerHTML=html;$('cl-modal').classList.add('active')}
+window.clAddWaitlist=function(){const client=$('m-wl-client').value;if(!client)return clToast('Enter client name','error');const wl=LS('cl_waitlist');wl.push({client:client,service:$('m-wl-svc').value,pref:$('m-wl-pref').value||'Flexible',date:new Date().toISOString()});SS('cl_waitlist',wl);clShowWaitlist();clToast('Added to waitlist','success')}
+window.clRemoveWaitlist=function(i){const wl=LS('cl_waitlist');wl.splice(i,1);SS('cl_waitlist',wl);clShowWaitlist();clToast('Removed from waitlist','info')}
+
+const CHECKLIST={opening:['Turn on lights & music','Set thermostat to 22\u00b0C','Check appointment schedule','Review client notes for today','Prepare coffee/tea station','Enable POS system'],station:['Sanitize styling chair','Organize tools & clips','Check mirror & lighting','Restock foils at station','Lay out fresh cape & towels','Test water temperature'],stock:['Check Shades EQ levels','Check Color Gels stock','Verify developer supply','Count Olaplex treatments','Check Flash Lift supply','Verify retail product display'],sanitation:['Disinfect all surfaces','Sterilize combs & brushes','Restock sanitizer stations','Check towel inventory','Empty color waste bins','Replace glove supply'],closing:['Sweep & mop floors','Clean all mirrors','Sanitize all stations','Secure retail display','Empty trash & recycle','Lock up & set alarm','Count cash drawer','Restock for tomorrow']};
+function loadChecklist(){const today=new Date().toISOString().slice(0,10);$('cl-check-date').textContent=today;const saved=LS('cl_checklist_'+today);let total=0,done=0;
+Object.keys(CHECKLIST).forEach(cat=>{const el=$('cl-check-'+cat);if(!el)return;el.innerHTML=CHECKLIST[cat].map((item,i)=>{total++;const key=cat+'-'+i;const checked=saved.includes(key);if(checked)done++;return '<label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;cursor:pointer;padding:6px 8px;border-radius:8px;transition:all 0.2s;'+(checked?'opacity:0.5;text-decoration:line-through;':'')+'"><input type="checkbox" '+(checked?'checked':'')+' onchange="clCheckItem(\''+key+'\',this.checked)" style="accent-color:var(--p500);width:18px;height:18px;flex-shrink:0"> '+item+'</label>'}).join('')});
+$('cl-check-progress').textContent=done+'/'+total+' complete ('+Math.round(done/total*100)+'%)'}
+window.clCheckItem=function(key,checked){const today=new Date().toISOString().slice(0,10);const saved=LS('cl_checklist_'+today);if(checked&&!saved.includes(key)){saved.push(key)}else if(!checked){const idx=saved.indexOf(key);if(idx>-1)saved.splice(idx,1)}SS('cl_checklist_'+today,saved);loadChecklist()}
+window.clResetChecklist=function(){const today=new Date().toISOString().slice(0,10);SS('cl_checklist_'+today,[]);loadChecklist();clToast('Checklist reset','info')}
+const defaultInv=[
+{name:'Shades EQ 06N',brand:'Redken',cat:'color',stock:80,cost:'$9',retail:'$15',reorder:20},
+{name:'Shades EQ 06NB',brand:'Redken',cat:'color',stock:75,cost:'$9',retail:'$15',reorder:20},
+{name:'Shades EQ 07V',brand:'Redken',cat:'color',stock:65,cost:'$9',retail:'$15',reorder:20},
+{name:'Shades EQ 09V',brand:'Redken',cat:'color',stock:70,cost:'$9',retail:'$15',reorder:20},
+{name:'Shades EQ 09T',brand:'Redken',cat:'color',stock:60,cost:'$9',retail:'$15',reorder:20},
+{name:'Shades EQ 09P',brand:'Redken',cat:'color',stock:55,cost:'$9',retail:'$15',reorder:20},
+{name:'Shades EQ 05N',brand:'Redken',cat:'color',stock:85,cost:'$9',retail:'$15',reorder:20},
+{name:'Shades EQ 08GI',brand:'Redken',cat:'color',stock:45,cost:'$9',retail:'$15',reorder:20},
+{name:'Shades EQ 07RR',brand:'Redken',cat:'color',stock:40,cost:'$9',retail:'$15',reorder:20},
+{name:'Shades EQ 010VV',brand:'Redken',cat:'color',stock:50,cost:'$9',retail:'$15',reorder:20},
+{name:'Color Gels Lacquers 6NN',brand:'Redken',cat:'color',stock:60,cost:'$10',retail:'$16',reorder:20},
+{name:'Color Gels Lacquers 4N',brand:'Redken',cat:'color',stock:70,cost:'$10',retail:'$16',reorder:20},
+{name:'Color Gels Lacquers 5RR',brand:'Redken',cat:'color',stock:45,cost:'$10',retail:'$16',reorder:20},
+{name:'Color Gels Lacquers 8NW',brand:'Redken',cat:'color',stock:55,cost:'$10',retail:'$16',reorder:20},
+{name:'Color Gels Lacquers 7NB',brand:'Redken',cat:'color',stock:50,cost:'$10',retail:'$16',reorder:20},
+{name:'Color Gels Oils 6NCh',brand:'Redken',cat:'color',stock:65,cost:'$11',retail:'$17',reorder:20},
+{name:'Color Gels Oils 7NG',brand:'Redken',cat:'color',stock:55,cost:'$11',retail:'$17',reorder:20},
+{name:'Color Gels Oils 5NW',brand:'Redken',cat:'color',stock:50,cost:'$11',retail:'$17',reorder:20},
+{name:'Cover Fusion 6NA',brand:'Redken',cat:'color',stock:60,cost:'$11',retail:'$17',reorder:20},
+{name:'Cover Fusion 7NN',brand:'Redken',cat:'color',stock:55,cost:'$11',retail:'$17',reorder:20},
+{name:'Cover Fusion 5NAn',brand:'Redken',cat:'color',stock:45,cost:'$11',retail:'$17',reorder:20},
+{name:'Flash Lift Bonder Inside',brand:'Redken',cat:'lightener',stock:70,cost:'$28',retail:'$42',reorder:25},
+{name:'Flash Lift (900g)',brand:'Redken',cat:'lightener',stock:55,cost:'$45',retail:'$65',reorder:20},
+{name:'Blonde Idol Blue Oil Lightener',brand:'Redken',cat:'lightener',stock:40,cost:'$32',retail:'$48',reorder:15},
+{name:'Shades EQ Processing Solution',brand:'Redken',cat:'developer',stock:80,cost:'$14',retail:'$20',reorder:25},
+{name:'10 Vol Pro-Oxide Developer',brand:'Redken',cat:'developer',stock:75,cost:'$12',retail:'$18',reorder:25},
+{name:'20 Vol Pro-Oxide Developer',brand:'Redken',cat:'developer',stock:85,cost:'$12',retail:'$18',reorder:25},
+{name:'30 Vol Pro-Oxide Developer',brand:'Redken',cat:'developer',stock:65,cost:'$12',retail:'$18',reorder:25},
+{name:'40 Vol Pro-Oxide Developer',brand:'Redken',cat:'developer',stock:50,cost:'$12',retail:'$18',reorder:20},
+{name:'Extreme Bleach Recovery Shampoo',brand:'Redken',cat:'treatment',stock:60,cost:'$18',retail:'$32',reorder:15},
+{name:'Extreme Bleach Recovery Lamellar',brand:'Redken',cat:'treatment',stock:50,cost:'$22',retail:'$38',reorder:15},
+{name:'Acidic Bonding Concentrate Shampoo',brand:'Redken',cat:'treatment',stock:70,cost:'$20',retail:'$35',reorder:20},
+{name:'Acidic Bonding Concentrate Conditioner',brand:'Redken',cat:'treatment',stock:65,cost:'$20',retail:'$35',reorder:20},
+{name:'Acidic Bonding Leave-In Treatment',brand:'Redken',cat:'treatment',stock:55,cost:'$24',retail:'$40',reorder:15},
+{name:'All Soft Shampoo',brand:'Redken',cat:'treatment',stock:75,cost:'$18',retail:'$30',reorder:20},
+{name:'All Soft Conditioner',brand:'Redken',cat:'treatment',stock:70,cost:'$18',retail:'$30',reorder:20},
+{name:'Color Extend Magnetics Shampoo',brand:'Redken',cat:'treatment',stock:60,cost:'$18',retail:'$30',reorder:20},
+{name:'Color Extend Magnetics Conditioner',brand:'Redken',cat:'treatment',stock:55,cost:'$18',retail:'$30',reorder:20},
+{name:'Iron Shape 11 Thermal Spray',brand:'Redken',cat:'styling',stock:45,cost:'$16',retail:'$28',reorder:15},
+{name:'Wax Blast 10 Finishing Spray',brand:'Redken',cat:'styling',stock:40,cost:'$18',retail:'$30',reorder:15},
+{name:'Guts 10 Volume Spray Foam',brand:'Redken',cat:'styling',stock:50,cost:'$16',retail:'$28',reorder:15},
+{name:'Triple Take 32 Hairspray',brand:'Redken',cat:'styling',stock:55,cost:'$18',retail:'$30',reorder:15},
+{name:'One United Multi-Benefit Spray',brand:'Redken',cat:'styling',stock:60,cost:'$20',retail:'$34',reorder:20},
+{name:'Olaplex No.1 Bond Multiplier',brand:'Olaplex',cat:'treatment',stock:45,cost:'$28',retail:'$45',reorder:15},
+{name:'Foils 500ct',brand:'Framar',cat:'tools',stock:40,cost:'$25',retail:'$0',reorder:10},
+{name:'Disposable Gloves (box)',brand:'Generic',cat:'tools',stock:70,cost:'$12',retail:'$0',reorder:25}
+];
 function loadInv(){let inv=LS('cl_inventory');if(!inv.length){inv=defaultInv;SS('cl_inventory',inv)}
-const tb=$('cl-inv-tb');if(!tb)return;tb.innerHTML=inv.map((p,i)=>{const pct=p.stock;const color=pct<=p.reorder?'bg-red-500':pct<=40?'bg-amber-500':'bg-green-500';
-return '<tr><td style="font-weight:600;color:white">'+p.name+'</td><td>'+p.brand+'</td><td><div class="cl-progress" style="width:120px;display:inline-block;vertical-align:middle;margin-right:8px"><div class="cl-progress-bar '+color+'" style="width:'+pct+'%"></div></div>'+pct+'%</td><td>'+p.cost+'</td><td>'+p.reorder+'%</td><td><button onclick="clRestock('+i+')" class="btn-ghost btn-sm" style="font-size:0.75rem">Restock</button></td></tr>'}).join('')}
-
+const catFilter=$('cl-inv-cat')?$('cl-inv-cat').value:'';const filtered=catFilter?inv.filter(p=>p.cat===catFilter):inv;
+const summary=$('cl-inv-summary');if(summary){const cats={};inv.forEach(p=>{const c=p.cat||'other';if(!cats[c])cats[c]={count:0,low:0};cats[c].count++;if(p.stock<=p.reorder)cats[c].low++});summary.innerHTML=Object.keys(cats).map(c=>'<div style="padding:8px 12px;border-radius:8px;background:rgba(88,28,135,0.12);border:1px solid var(--border);text-align:center"><div style="font-size:0.7rem;color:var(--muted);text-transform:uppercase">'+c+'</div><div style="font-size:1.1rem;font-weight:700;color:white">'+cats[c].count+'</div>'+(cats[c].low?'<div style="font-size:0.7rem;color:#f87171">'+cats[c].low+' low</div>':'')+'</div>').join('')}
+const tb=$('cl-inv-tb');if(!tb)return;tb.innerHTML=filtered.map((p,i)=>{const idx=inv.indexOf(p);const pct=p.stock;const color=pct<=p.reorder?'bg-red-500':pct<=40?'bg-amber-500':'bg-green-500';
+return '<tr><td style="font-weight:600;color:white">'+p.name+'</td><td>'+p.brand+'</td><td><span style="font-size:0.75rem;padding:2px 8px;border-radius:4px;background:rgba(147,51,234,0.15);color:var(--p300)">'+(p.cat||'other')+'</span></td><td><div class="cl-progress" style="width:80px;display:inline-block;vertical-align:middle;margin-right:8px"><div class="cl-progress-bar '+color+'" style="width:'+pct+'%"></div></div>'+pct+'%</td><td>'+p.cost+'</td><td>'+(p.retail||'\u2014')+'</td><td>'+p.reorder+'%</td><td><button onclick="clRestock('+idx+')" class="btn-ghost btn-sm" style="font-size:0.75rem">Restock</button></td></tr>'}).join('')}
 window.clRestock=function(i){const inv=LS('cl_inventory');inv[i].stock=Math.min(100,inv[i].stock+25);SS('cl_inventory',inv);loadInv();clToast('Restocked '+inv[i].name,'success')}
-
 window.clSearchInv=function(){const q=$('cl-inv-search').value.toLowerCase();document.querySelectorAll('#cl-inv-tb tr').forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q)?'':'none'})}
-
-window.clShowAddProduct=function(){$('cl-modal-content').innerHTML='<h3 style="font-size:1.1rem;font-weight:600;margin-bottom:16px">Add Product</h3><div style="display:grid;gap:12px"><input id="m-pname" class="glass-input" placeholder="Product Name *"><input id="m-pbrand" class="glass-input" placeholder="Brand"><input id="m-pstock" class="glass-input" type="number" placeholder="Stock Level (0-100)" value="100"><input id="m-pcost" class="glass-input" placeholder="Cost per unit (e.g. $15)"><input id="m-preorder" class="glass-input" type="number" placeholder="Reorder at %" value="20"><div style="display:flex;gap:8px"><button onclick="clAddProduct()" class="btn-primary btn-sm"><span>Add Product</span></button><button onclick="clModalClose()" class="btn-ghost btn-sm">Cancel</button></div></div>';$('cl-modal').classList.add('active')}
-
-window.clAddProduct=function(){const name=$('m-pname').value;if(!name)return clToast('Enter product name','error');const inv=LS('cl_inventory');inv.push({name:name,brand:$('m-pbrand').value,stock:parseInt($('m-pstock').value)||100,cost:$('m-pcost').value||'$0',reorder:parseInt($('m-preorder').value)||20});SS('cl_inventory',inv);clModalClose();loadInv();clToast('Product added!','success')}
-
-// HISTORY
+window.clFilterInv=function(){loadInv()}
+window.clShowAddProduct=function(){$('cl-modal-content').innerHTML='<h3 style="font-size:1.1rem;font-weight:600;margin-bottom:16px">Add Product</h3><div style="display:grid;gap:12px"><input id="m-pname" class="glass-input" placeholder="Product Name *"><input id="m-pbrand" class="glass-input" placeholder="Brand" value="Redken"><select id="m-pcat" class="glass-input"><option value="color">Color</option><option value="developer">Developer</option><option value="lightener">Lightener</option><option value="treatment">Treatment</option><option value="styling">Styling</option><option value="tools">Tools & Supplies</option></select><input id="m-pstock" class="glass-input" type="number" placeholder="Stock Level (0-100)" value="100"><input id="m-pcost" class="glass-input" placeholder="Cost per unit (e.g. $15)"><input id="m-pretail" class="glass-input" placeholder="Retail price (e.g. $25)"><input id="m-preorder" class="glass-input" type="number" placeholder="Reorder at %" value="20"><div style="display:flex;gap:8px"><button onclick="clAddProduct()" class="btn-primary btn-sm"><span>Add Product</span></button><button onclick="clModalClose()" class="btn-ghost btn-sm">Cancel</button></div></div>';$('cl-modal').classList.add('active')}
+window.clAddProduct=function(){const name=$('m-pname').value;if(!name)return clToast('Enter product name','error');const inv=LS('cl_inventory');inv.push({name:name,brand:$('m-pbrand').value,cat:$('m-pcat').value,stock:parseInt($('m-pstock').value)||100,cost:$('m-pcost').value||'$0',retail:$('m-pretail').value||'$0',reorder:parseInt($('m-preorder').value)||20});SS('cl_inventory',inv);clModalClose();loadInv();clToast('Product added!','success')}
 function loadHistory(){const h=LS('cl_history');const tb=$('cl-history-tb');const nh=$('cl-no-history');const hc=$('cl-history-count');if(!tb)return;if(hc)hc.textContent=h.length+' sessions';if(!h.length){tb.innerHTML='';if(nh)nh.style.display='block';return}if(nh)nh.style.display='none';
-tb.innerHTML=h.map(s=>'<tr><td>'+new Date(s.date).toLocaleDateString()+'</td><td style="font-weight:600;color:white">'+s.client+'</td><td>'+s.stylist+'</td><td>'+s.service+'</td><td>'+(s.formula||'—')+'</td><td>'+(s.time?s.time+'m':'—')+'</td><td style="color:#4ade80;font-weight:600">$'+s.cost+'</td></tr>').join('')}
-
-window.clExportCSV=function(){const h=LS('cl_history');if(!h.length)return clToast('No history to export','error');let csv='Date,Client,Stylist,Service,Formula,Time(min),Cost\n';h.forEach(s=>{csv+=new Date(s.date).toLocaleDateString()+','+s.client+','+s.stylist+','+s.service+','+(s.formula||'')+','+(s.time||'')+','+s.cost+'\n'});
+tb.innerHTML=h.map(s=>'<tr><td>'+new Date(s.date).toLocaleDateString()+'</td><td style="font-weight:600;color:white">'+s.client+'</td><td>'+s.stylist+'</td><td>'+s.service+'</td><td>'+(s.formula||'\u2014')+'</td><td>'+(s.time?s.time+'m':'\u2014')+'</td><td style="color:#4ade80;font-weight:600">$'+s.cost+'</td><td style="color:'+(parseFloat(s.profit)>=0?'#4ade80':'#f87171')+'">$'+(s.profit||0)+'</td></tr>').join('')}
+window.clExportCSV=function(){const h=LS('cl_history');if(!h.length)return clToast('No history to export','error');let csv='Date,Client,Stylist,Service,Formula,Time(min),Cost,Profit\n';h.forEach(s=>{csv+=new Date(s.date).toLocaleDateString()+','+s.client+','+s.stylist+','+s.service+','+(s.formula||'')+','+(s.time||'')+','+s.cost+','+(s.profit||0)+'\n'});
 const blob=new Blob([csv],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='chromaluxe-history-'+new Date().toISOString().slice(0,10)+'.csv';a.click();clToast('CSV exported!','success')}
-
-// SETTINGS
-window.clSaveSettings=function(){const s={name:$('cl-s-name').value,phone:$('cl-s-phone').value,email:$('cl-s-email').value,location:$('cl-s-loc').value,ig:$('cl-s-ig').value,fb:$('cl-s-fb').value,tt:$('cl-s-tt').value,goog:$('cl-s-goog').value,x:$('cl-s-x').value,msft:$('cl-s-msft').value};SS('cl_settings',s);clToast('Settings saved!','success')}
-
-window.clExportData=function(){const data={settings:LS('cl_settings'),clients:LS('cl_clients'),formulas:LS('cl_formulas'),history:LS('cl_history'),inventory:LS('cl_inventory'),appointments:LS('cl_appts')};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='chromaluxe-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();clToast('Data exported!','success')}
-
+window.clSaveSettings=function(){const s={name:$('cl-s-name').value,phone:$('cl-s-phone').value,email:$('cl-s-email').value,location:$('cl-s-loc').value,ig:$('cl-s-ig').value,fb:$('cl-s-fb').value,tt:$('cl-s-tt').value,goog:$('cl-s-goog').value,x:$('cl-s-x').value,msft:$('cl-s-msft').value,loyaltyPts:$('cl-s-loyalty-pts')?$('cl-s-loyalty-pts').value:10,loyaltyThresh:$('cl-s-loyalty-thresh')?$('cl-s-loyalty-thresh').value:100,loyaltyReward:$('cl-s-loyalty-reward')?$('cl-s-loyalty-reward').value:''};SS('cl_settings',s);clToast('Settings saved!','success')}
+window.clExportData=function(){const data={settings:LS('cl_settings'),clients:LS('cl_clients'),formulas:LS('cl_formulas'),history:LS('cl_history'),inventory:LS('cl_inventory'),appointments:LS('cl_appts'),consults:LS('cl_consults'),waitlist:LS('cl_waitlist')};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='chromaluxe-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();clToast('Data exported!','success')}
 window.clModalClose=function(){$('cl-modal').classList.remove('active')}
-
-// INIT
 function init(){renderUsers();tick();setInterval(tick,30000);loadHistory()}
 if(location.search.includes('staff=1')||location.hash==='#staff'){setTimeout(function(){document.getElementById('cl-app').classList.add('active')},500)}
 init();
