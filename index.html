@@ -32,37 +32,47 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiU3R1ZGlvIFNhbG9uIE9kZXNzYSIsInNob3J0X25hbWUiOiJTdHVkaW8iLCJzdGFydF91cmwiOiIuLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxYTBhMmUiLCJ0aGVtZV9jb2xvciI6IiM1ODFjODcifQ==">
 <style>
-:root{--p50:#faf5ff;--p100:#f3e8ff;--p200:#e9d5ff;--p300:#d8b4fe;--p400:#c084fc;--p500:#a855f7;--p600:#9333ea;--p700:#7e22ce;--p800:#6b21a8;--p900:#581c87;--p950:#1a0a2e;--bg:#0f0517;--surface:rgba(26,10,46,0.6);--border:rgba(168,85,247,0.15);--muted:#a78bfa;--text:#f3e8ff;--glow:0 0 30px rgba(147,51,234,0.3)}
+:root{--p50:#faf5ff;--p100:#f3e8ff;--p200:#e9d5ff;--p300:#d8b4fe;--p400:#c084fc;--p500:#a855f7;--p600:#9333ea;--p700:#7e22ce;--p800:#6b21a8;--p900:#581c87;--p950:#1a0a2e;--bg:#0a0312;--surface:rgba(20,8,38,0.65);--border:rgba(168,85,247,0.12);--muted:#a78bfa;--text:#f3e8ff;--glow:0 0 30px rgba(147,51,234,0.3);--ambient:rgba(147,51,234,0.04);--warm:rgba(168,85,247,0.06)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background:
+  radial-gradient(ellipse 80% 60% at 50% 0%,rgba(88,28,135,0.15),transparent 70%),
+  radial-gradient(ellipse 60% 50% at 80% 100%,rgba(126,34,206,0.08),transparent 60%),
+  radial-gradient(ellipse 40% 40% at 10% 60%,rgba(147,51,234,0.06),transparent 50%),
+  radial-gradient(circle at 50% 50%,rgba(20,8,38,0.9),transparent);
+  opacity:1}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:0.4}
 ::selection{background:var(--p600);color:white}
 :focus-visible{outline:2px solid var(--p500);outline-offset:2px;border-radius:4px}
 .font-display{font-family:'Playfair Display',Georgia,serif}
 .font-mono{font-family:'JetBrains Mono','Fira Code',monospace}
 
 /* === GLASS MORPHISM === */
-.glass{background:var(--surface);backdrop-filter:blur(20px) saturate(1.8);-webkit-backdrop-filter:blur(20px) saturate(1.8);border:1px solid var(--border);border-radius:16px}
-.glass-card{background:rgba(30,20,45,0.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(168,85,247,0.12);border-radius:20px;transition:all 0.4s cubic-bezier(0.4,0,0.2,1)}
-.glass-card:hover{border-color:rgba(168,85,247,0.3);transform:translateY(-4px);box-shadow:var(--glow)}
-.glass-input{background:rgba(88,28,135,0.15);border:1px solid rgba(168,85,247,0.2);border-radius:12px;padding:12px 16px;color:var(--text);font-size:0.95rem;width:100%;transition:all 0.3s}
-.glass-input:focus{border-color:var(--p500);box-shadow:0 0 0 3px rgba(168,85,247,0.15);outline:none}
-.glass-input::placeholder{color:var(--muted);opacity:0.6}
+.glass{background:rgba(20,8,38,0.55);backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border:1px solid rgba(168,85,247,0.1);border-radius:16px}
+.glass-card{background:rgba(20,10,40,0.45);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(168,85,247,0.08);border-radius:20px;transition:all 0.5s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+.glass-card::before{content:'';position:absolute;inset:0;border-radius:20px;padding:1px;background:linear-gradient(135deg,rgba(168,85,247,0.15),transparent 40%,transparent 60%,rgba(147,51,234,0.1));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;transition:opacity 0.5s;opacity:0}
+.glass-card:hover{border-color:rgba(168,85,247,0.2);transform:translateY(-6px);box-shadow:0 20px 60px rgba(88,28,135,0.2),0 0 40px rgba(147,51,234,0.08)}
+.glass-card:hover::before{opacity:1}
+.glass-input{background:rgba(88,28,135,0.1);border:1px solid rgba(168,85,247,0.15);border-radius:12px;padding:12px 16px;color:var(--text);font-size:0.95rem;width:100%;transition:all 0.3s}
+.glass-input:focus{border-color:var(--p500);box-shadow:0 0 0 3px rgba(168,85,247,0.1),0 0 20px rgba(147,51,234,0.05);outline:none}
+.glass-input::placeholder{color:var(--muted);opacity:0.5}
 select.glass-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a78bfa' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px}
-
 /* === BUTTONS === */
-.btn-primary{background:linear-gradient(135deg,var(--p600),var(--p700));color:white;padding:14px 32px;border-radius:12px;font-weight:600;font-size:0.95rem;letter-spacing:0.5px;border:none;cursor:pointer;transition:all 0.3s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
-.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--p500),var(--p600));opacity:0;transition:opacity 0.3s}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(147,51,234,0.4)}
+.btn-primary{background:linear-gradient(135deg,var(--p600),var(--p700));color:white;padding:14px 32px;border-radius:12px;font-weight:600;font-size:0.95rem;letter-spacing:0.5px;border:none;cursor:pointer;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);position:relative;overflow:hidden}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--p500),var(--p600));opacity:0;transition:opacity 0.4s}
+.btn-primary::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,0.15);border-radius:50%;transform:translate(-50%,-50%);transition:width 0.6s,height 0.6s}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(147,51,234,0.4),0 0 60px rgba(147,51,234,0.15)}
 .btn-primary:hover::before{opacity:1}
+.btn-primary:hover::after{width:300px;height:300px;opacity:0}
 .btn-primary:active{transform:translateY(0)}
 .btn-primary span{position:relative;z-index:1}
-.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted);padding:14px 32px;border-radius:12px;font-weight:500;cursor:pointer;transition:all 0.3s}
-.btn-ghost:hover{background:rgba(168,85,247,0.1);border-color:var(--p500);color:var(--p300)}
+.btn-ghost{background:transparent;border:1px solid rgba(168,85,247,0.15);color:var(--muted);padding:14px 32px;border-radius:12px;font-weight:500;cursor:pointer;transition:all 0.4s}
+.btn-ghost:hover{background:rgba(168,85,247,0.08);border-color:var(--p500);color:var(--p300);box-shadow:0 0 30px rgba(147,51,234,0.08)}
 .btn-sm{padding:8px 18px;font-size:0.85rem;border-radius:8px}
 .btn-pill{border-radius:9999px}
 
-/* === ANIMATIONS === */
+/* === ANIMATIONS — IMMERSIVE PURPLE FLASHES === */
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
 @keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(147,51,234,0.2)}50%{box-shadow:0 0 40px rgba(147,51,234,0.5)}}
 @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
@@ -74,6 +84,11 @@ select.glass-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 @keyframes gradient-shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @keyframes sparkle{0%,100%{opacity:0;transform:scale(0)}50%{opacity:1;transform:scale(1)}}
 @keyframes spin-slow{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes purple-flash{0%,100%{opacity:0}15%{opacity:1}30%{opacity:0}}
+@keyframes ambient-breathe{0%,100%{opacity:0.03;transform:scale(1)}50%{opacity:0.08;transform:scale(1.05)}}
+@keyframes aurora-drift{0%{transform:translate(0,0) rotate(0deg)}25%{transform:translate(30px,-20px) rotate(2deg)}50%{transform:translate(-10px,15px) rotate(-1deg)}75%{transform:translate(-30px,-10px) rotate(1deg)}100%{transform:translate(0,0) rotate(0deg)}}
+@keyframes text-glow{0%,100%{text-shadow:0 0 20px rgba(147,51,234,0.2)}50%{text-shadow:0 0 40px rgba(168,85,247,0.4),0 0 80px rgba(147,51,234,0.15)}}
+@keyframes border-glow{0%,100%{border-color:rgba(168,85,247,0.08)}50%{border-color:rgba(168,85,247,0.25)}}
 .animate-fade-up{animation:fadeUp 0.8s cubic-bezier(0.4,0,0.2,1) forwards}
 .animate-fade-in{animation:fadeIn 0.6s ease forwards}
 .animate-scale-in{animation:scaleIn 0.5s cubic-bezier(0.4,0,0.2,1) forwards}
@@ -82,37 +97,41 @@ select.glass-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .anim-delay-3{animation-delay:0.3s;opacity:0}
 .anim-delay-4{animation-delay:0.4s;opacity:0}
 .anim-delay-5{animation-delay:0.5s;opacity:0}
-
+/* === PURPLE FLASH OVERLAYS === */
+.purple-flash{position:fixed;pointer-events:none;z-index:1;border-radius:50%;filter:blur(100px);animation:purple-flash 8s ease-in-out infinite}
+.pf-1{width:300px;height:300px;background:rgba(147,51,234,0.12);top:10%;right:-5%;animation-delay:0s;animation-duration:12s}
+.pf-2{width:250px;height:250px;background:rgba(126,34,206,0.1);bottom:20%;left:-5%;animation-delay:4s;animation-duration:15s}
+.pf-3{width:200px;height:200px;background:rgba(168,85,247,0.08);top:50%;left:40%;animation-delay:7s;animation-duration:18s}
 /* Scroll reveal */
-.reveal{opacity:0;transform:translateY(40px);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+.reveal{opacity:0;transform:translateY(40px);transition:all 0.9s cubic-bezier(0.25,0.46,0.45,0.94)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-left{opacity:0;transform:translateX(-40px);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:all 0.9s cubic-bezier(0.25,0.46,0.45,0.94)}
 .reveal-left.visible{opacity:1;transform:translateX(0)}
-.reveal-right{opacity:0;transform:translateX(40px);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:all 0.9s cubic-bezier(0.25,0.46,0.45,0.94)}
 .reveal-right.visible{opacity:1;transform:translateX(0)}
-.reveal-scale{opacity:0;transform:scale(0.85);transition:all 0.8s cubic-bezier(0.4,0,0.2,1)}
+.reveal-scale{opacity:0;transform:scale(0.85);transition:all 0.9s cubic-bezier(0.25,0.46,0.45,0.94)}
 .reveal-scale.visible{opacity:1;transform:scale(1)}
-
 @media(prefers-reduced-motion:reduce){
-  *{animation-duration:0.001s !important;transition-duration:0.001s !important}
-  .reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1;transform:none}
+*{animation-duration:0.001s !important;transition-duration:0.001s !important}
+.reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1;transform:none}
+.purple-flash{display:none}
 }
 
 /* === NAVIGATION === */
-.nav-blur{backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);transition:all 0.4s}
-.nav-scrolled{background:rgba(15,5,23,0.85);border-bottom:1px solid rgba(168,85,247,0.1);box-shadow:0 4px 30px rgba(0,0,0,0.3)}
-
+.nav-blur{backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);transition:all 0.5s}
+.nav-scrolled{background:rgba(10,3,18,0.88);border-bottom:1px solid rgba(168,85,247,0.08);box-shadow:0 4px 30px rgba(0,0,0,0.4)}
 /* === GRADIENT TEXT === */
 .gradient-text{background:linear-gradient(135deg,var(--p300),var(--p500),var(--p300));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradient-shift 4s ease infinite}
 .gradient-text-gold{background:linear-gradient(135deg,#fbbf24,#f59e0b,#d97706);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-
 /* === AURORA BACKGROUND === */
 .aurora-bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.aurora-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.12;animation:float 20s ease-in-out infinite}
-
+.aurora-orb{position:absolute;border-radius:50%;filter:blur(100px);animation:aurora-drift 25s ease-in-out infinite}
 /* === SCROLL PROGRESS === */
-.scroll-progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--p600),var(--p400),var(--p600));background-size:200% 100%;animation:gradient-shift 3s linear infinite;z-index:9999;transition:width 0.15s}
-
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--p700),var(--p500),var(--p400),var(--p500),var(--p700));background-size:300% 100%;animation:gradient-shift 3s linear infinite;z-index:9999;transition:width 0.15s;box-shadow:0 0 10px rgba(147,51,234,0.5)}
+/* === COSY AMBIENT SECTIONS === */
+.cosy-section{position:relative}
+.cosy-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 40% at 50% 0%,rgba(88,28,135,0.06),transparent);pointer-events:none}
+.section-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(168,85,247,0.15),rgba(147,51,234,0.25),rgba(168,85,247,0.15),transparent);margin:0 auto;max-width:600px}
 /* === CHROMALUXE STAFF PORTAL === */
 #cl-app{position:fixed;inset:0;z-index:10000;background:var(--bg);display:none;overflow-y:auto;overflow-x:hidden}
 #cl-app.active{display:block;animation:fadeIn 0.3s ease}
@@ -195,7 +214,8 @@ select.glass-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 .line-clamp-2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .shimmer{background:linear-gradient(90deg,transparent,rgba(168,85,247,0.1),transparent);background-size:200% 100%;animation:shimmer 2s infinite}
 .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
-</style>
+
+ </style>
 <body class="bg-[#0f0517]">
 <div class="scroll-progress" id="scroll-progress" style="width:0%"></div>
 <div id="root"></div>
@@ -646,6 +666,16 @@ init();
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"HairSalon","name":"Studio Salon Odessa","description":"Official Redken salon in Loyalist Township. Premium hair artistry: balayage, Shades EQ color, precision cuts & luxury spa treatments.","url":"https://cxzyr9hm2t-del.github.io/studio-salon-odessa/","telephone":"(613) 555-0123","email":"jordanch14@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Odessa","addressRegion":"Ontario","addressCountry":"CA"},"geo":{"@type":"GeoCoordinates","latitude":"44.2581","longitude":"-76.7383"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"18:00"}],"priceRange":"$$","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"48","bestRating":"5"},"sameAs":["https://instagram.com/studiosalonodessa","https://facebook.com/studiosalonodessa","https://tiktok.com/@studiosalonodessa"],"brand":{"@type":"Brand","name":"Redken","url":"https://www.redken.com"},"knowsAbout":["Redken Shades EQ","Redken Color Gels Lacquers","Balayage","Hair Color","Professional Hair Care"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Signature Cut","description":"Precision cutting tailored to your features"},"price":"65.00","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Balayage","description":"Hand-painted highlights for natural color"},"price":"180.00","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Vivid Color","description":"Bold, vibrant fashion colors"},"price":"150.00","priceCurrency":"CAD"}]}}
 </script>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Do I need a consultation before my first appointment?","acceptedAnswer":{"@type":"Answer","text":"We offer a complimentary consultation for all new clients to assess hair, discuss goals, and create a personalized plan."}},
+{"@type":"Question","name":"What Redken products do you use?","acceptedAnswer":{"@type":"Answer","text":"We exclusively use Redken professional products including Shades EQ Gloss, Color Gels Lacquers, Flash Lift, and Acidic Bonding Concentrate."}},
+{"@type":"Question","name":"How far in advance should I book?","acceptedAnswer":{"@type":"Answer","text":"We recommend 1-2 weeks for regular services and 3-4 weeks for color corrections or complex transformations."}},
+{"@type":"Question","name":"What is your cancellation policy?","acceptedAnswer":{"@type":"Answer","text":"We require 48 hours notice for cancellations or rescheduling. Late cancellations may result in forfeiture of deposit."}},
+{"@type":"Question","name":"What payment methods do you accept?","acceptedAnswer":{"@type":"Answer","text":"We accept all major credit and debit cards, Interac e-Transfer, Apple Pay, and cash."}}
+]}
+</script>
 <script type="text/babel">
 const {useState,useEffect,useRef,useCallback,useMemo} = React;
 
@@ -669,8 +699,18 @@ function useReveal(){
 
 /* ════════ AURORA ORB ════════ */
 const AuroraOrb=({size,color,top,left,delay})=>(
-  <div className="aurora-orb" style={{width:size,height:size,background:color,top,left,animationDelay:delay+'s',animationDuration:(18+Math.random()*10)+'s'}}/>
-);
+    <div className="aurora-orb" style={{width:size,height:size,background:color,top,left,animationDelay:delay+'s',animationDuration:(20+Math.random()*15)+'s',opacity:0.1}}/>
+  );
+
+  /* ════════ PURPLE FLASH OVERLAY ════════ */
+  const PurpleFlashes=()=>(
+    <div className="fixed inset-0 pointer-events-none z-[1]" aria-hidden="true">
+      <div className="purple-flash pf-1"/>
+      <div className="purple-flash pf-2"/>
+      <div className="purple-flash pf-3"/>
+      <div className="absolute inset-0" style={{background:'radial-gradient(ellipse 100% 50% at 50% -10%,rgba(88,28,135,0.12),transparent 70%)'}}/>
+    </div>
+  )
 
 /* ════════ SPARKLE FIELD ════════ */
 const SparkleField=()=>{
@@ -835,11 +875,13 @@ const App=()=>{
 
   return (
     <div className="relative min-h-screen">
-      {/* Aurora Background */}
+      {/* Immersive Purple Atmosphere */}
+      <PurpleFlashes/>
       <div className="aurora-bg">
-        <AuroraOrb size="600px" color="radial-gradient(circle,rgba(147,51,234,0.3),transparent)" top="-10%" left="-5%" delay={0}/>
-        <AuroraOrb size="500px" color="radial-gradient(circle,rgba(88,28,135,0.25),transparent)" top="40%" left="60%" delay={3}/>
-        <AuroraOrb size="450px" color="radial-gradient(circle,rgba(168,85,247,0.2),transparent)" top="70%" left="10%" delay={6}/>
+        <AuroraOrb size="700px" color="radial-gradient(circle,rgba(147,51,234,0.2),rgba(88,28,135,0.05),transparent)" top="-15%" left="-10%" delay={0}/>
+        <AuroraOrb size="600px" color="radial-gradient(circle,rgba(126,34,206,0.15),rgba(88,28,135,0.04),transparent)" top="35%" left="55%" delay={4}/>
+        <AuroraOrb size="500px" color="radial-gradient(circle,rgba(168,85,247,0.12),transparent)" top="65%" left="5%" delay={8}/>
+        <AuroraOrb size="400px" color="radial-gradient(circle,rgba(147,51,234,0.1),transparent)" top="80%" left="70%" delay={12}/>
       </div>
       {/* ═══ NAVIGATION ═══ */}
       <nav className={`fixed top-0 w-full z-50 nav-blur transition-all duration-500 ${scrolled?'nav-scrolled py-3':'py-5'}`} role="navigation" aria-label="Main navigation">
@@ -881,7 +923,7 @@ const App=()=>{
               Now accepting new clients in Odessa
             </div>
           </div>
-          <h1 className="font-display text-6xl md:text-8xl font-bold text-white mb-6 animate-fade-up anim-delay-1 leading-tight" style={{textShadow:'0 0 60px rgba(147,51,234,0.3)'}}>
+          <h1 className="font-display text-6xl md:text-8xl font-bold text-white mb-6 animate-fade-up anim-delay-1 leading-tight" style={{textShadow:'0 0 60px rgba(147,51,234,0.3)',animation:'text-glow 6s ease-in-out infinite'}}>
             Where Art<br/>Meets Beauty
           </h1>
           <p className="text-lg md:text-xl text-purple-200/60 max-w-2xl mx-auto mb-10 animate-fade-up anim-delay-2 text-balance">
