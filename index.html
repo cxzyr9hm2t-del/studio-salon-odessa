@@ -852,6 +852,8 @@ const App=()=>{
             <NavLink href="#redken">Redken</NavLink>
                 <NavLink href="#reviews">Reviews</NavLink>
             <NavLink href="#gallery">Gallery</NavLink>
+            <NavLink href="#booking">Booking</NavLink>
+            <NavLink href="#faq">FAQ</NavLink>
             <NavLink href="#about">About</NavLink>
             <a href="mailto:jordanch14@gmail.com?subject=Appointment%20Request" className="btn-primary btn-pill btn-sm px-6" style={{fontSize:'0.85rem'}}><span>BOOK NOW</span></a>
           </div>
@@ -860,7 +862,7 @@ const App=()=>{
         {mobileMenu&&(
           <div className="md:hidden glass mx-4 mt-2 rounded-2xl p-6 animate-scale-in">
             <div className="flex flex-col gap-4">
-              {['Home','Services','Pricing','Redken','Reviews','Gallery','About'].map(s=>(
+              {['Home','Services','Pricing','Redken','Reviews','Gallery','Booking','FAQ','About'].map(s=>(
                 <a key={s} href={'#'+s.toLowerCase()} className="text-purple-200 hover:text-white transition-colors py-2" onClick={()=>setMobileMenu(false)}>{s}</a>
               ))}
               <a href="mailto:jordanch14@gmail.com?subject=Appointment%20Request" className="btn-primary btn-pill text-center mt-2"><span>BOOK NOW</span></a>
@@ -1018,14 +1020,112 @@ const App=()=>{
           </div>
         </div>
       </section>
-      {/* ═══ GALLERY ═══ */}
-      <section id="gallery" className="relative py-28 overflow-hidden">
-        <div className="relative" style={{background:'linear-gradient(135deg,rgba(88,28,135,0.4),rgba(147,51,234,0.2),rgba(88,28,135,0.4))',padding:'80px 24px'}}>
-          <div className="text-center relative z-10">
-            <h2 className="font-display text-5xl md:text-7xl font-bold text-white/20 mb-4">Gallery</h2>
-            <div className="text-5xl mb-4">🧑‍🎨</div>
-            <p className="text-purple-200/60 text-sm mb-6">Follow our artistry journey</p>
-            <a href="https://instagram.com/studiosalonodessa" target="_blank" rel="noopener noreferrer" className="btn-primary btn-pill px-8 py-3 no-underline inline-block"><span>📸 Follow @studiosalonodessa</span></a>
+      {/* ═══ ONLINE BOOKING ═══ */}
+      <section id="booking" className="relative py-28 px-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="reveal text-sm font-medium text-purple-400 uppercase tracking-[0.2em] mb-4">Schedule Your Visit</p>
+            <h2 className="reveal font-display text-5xl md:text-6xl font-bold text-white mb-4">Book Online</h2>
+            <p className="reveal text-purple-200/50 max-w-2xl mx-auto">Choose your preferred way to book — we make it easy to reserve your session</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {[
+              {icon:'📧',title:'Email Booking',desc:'Send us your preferred date, time, and service. We will confirm within 24 hours.',action:'mailto:jordanch14@gmail.com?subject=Appointment%20Request&body=Hi%2C%20I%27d%20like%20to%20book%20an%20appointment.%0A%0AName%3A%0APreferred%20Date%3A%0AService%3A%0APhone%3A',btn:'Send Request',color:'from-purple-600 to-purple-700'},
+              {icon:'📱',title:'Call or Text',desc:'Reach out directly for same-day availability or quick questions about services.',action:'tel:+16135839977',btn:'(613) 583-9977',color:'from-purple-700 to-purple-800'},
+              {icon:'💬',title:'Instagram DM',desc:'Send us a direct message on Instagram for booking or consultation inquiries.',action:'https://instagram.com/studiosalonodessa',btn:'@studiosalonodessa',color:'from-pink-600 to-purple-600'}
+            ].map((b,i)=>(
+              <a key={i} href={b.action} target={b.action.startsWith('http')?'_blank':undefined} rel={b.action.startsWith('http')?'noopener noreferrer':undefined} className="reveal glass-card p-8 text-center group cursor-pointer no-underline block" style={{transitionDelay:i*0.15+'s'}}>
+                <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">{b.icon}</div>
+                <h3 className="text-xl font-semibold text-white mb-3">{b.title}</h3>
+                <p className="text-purple-200/60 text-sm leading-relaxed mb-6">{b.desc}</p>
+                <div className={"inline-flex items-center gap-2 bg-gradient-to-r "+b.color+" text-white px-6 py-3 rounded-full text-sm font-semibold transition-transform group-hover:scale-105"}>
+                  {b.btn}
+                </div>
+              </a>
+            ))}
+          </div>
+          <div className="reveal glass-card p-8 md:p-10" style={{borderColor:'rgba(168,85,247,0.25)'}}>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h3 className="text-2xl font-semibold text-white mb-4">What to Know Before Booking</h3>
+                <div className="space-y-3 text-sm text-purple-200/60">
+                  <div className="flex items-start gap-3"><span className="text-purple-400 mt-0.5">✓</span><span><strong className="text-purple-200">Consultation First</strong> — New clients receive a complimentary consultation to discuss goals and expectations</span></div>
+                  <div className="flex items-start gap-3"><span className="text-purple-400 mt-0.5">✓</span><span><strong className="text-purple-200">Deposit Required</strong> — A $50 deposit secures your booking and applies toward your service</span></div>
+                  <div className="flex items-start gap-3"><span className="text-purple-400 mt-0.5">✓</span><span><strong className="text-purple-200">Cancellation Policy</strong> — 48-hour notice required for rescheduling or cancellation</span></div>
+                  <div className="flex items-start gap-3"><span className="text-purple-400 mt-0.5">✓</span><span><strong className="text-purple-200">Payment Options</strong> — We accept all major cards, e-transfer, and cash</span></div>
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="inline-block p-6 rounded-2xl" style={{background:'rgba(88,28,135,0.2)',border:'1px solid var(--border)'}}>
+                  <div className="text-4xl mb-3">📅</div>
+                  <p className="text-white font-semibold text-lg mb-1">Hours of Operation</p>
+                  <div className="text-sm text-purple-200/60 space-y-1">
+                    <p>Tuesday – Friday: 9:00 AM – 6:00 PM</p>
+                    <p>Saturday: 9:00 AM – 4:00 PM</p>
+                    <p className="text-purple-400/50">Sunday & Monday: Closed</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ GALLERY — BEFORE & AFTER ═══ */}
+      <section id="gallery" className="relative py-28 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="reveal text-sm font-medium text-purple-400 uppercase tracking-[0.2em] mb-4">Our Work</p>
+            <h2 className="reveal font-display text-5xl md:text-6xl font-bold text-white mb-4">Before & After</h2>
+            <p className="reveal text-purple-200/50">Real transformations, real results — powered by Redken</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {[
+              {before:'Level 4 Brown',after:'Platinum Blonde Balayage',service:'Balayage + Toner',time:'4 hrs',products:'Flash Lift + Shades EQ 09V',emoji:'🌟'},
+              {before:'Grown-out Highlights',after:'Seamless Vivid Purple',service:'Vivid Color',time:'3 hrs',products:'Color Gels Lacquers + Shades EQ',emoji:'💜'},
+              {before:'Brassy Orange Tones',after:'Cool Ash Blonde',service:'Color Correction',time:'5 hrs',products:'Flash Lift + Shades EQ 09T',emoji:'✨'},
+              {before:'Virgin Dark Brown',after:'Rich Auburn Dimension',service:'Full Highlight',time:'3.5 hrs',products:'Color Gels Lacquers 5RR + 7NB',emoji:'🔥'},
+              {before:'Damaged Bleached Hair',after:'Healthy Glossy Brunette',service:'Repair + Color',time:'3 hrs',products:'Acidic Bonding + Cover Fusion',emoji:'🌿'},
+              {before:'Flat Single-Process',after:'Multi-Dimensional Blend',service:'Balayage + Gloss',time:'3.5 hrs',products:'Flash Lift + Shades EQ 06NB',emoji:'🎨'}
+            ].map((t,i)=>(
+              <div key={i} className="reveal glass-card overflow-hidden group" style={{transitionDelay:i*0.1+'s'}}>
+                <div className="relative">
+                  <div className="grid grid-cols-2 h-48">
+                    <div className="flex items-center justify-center" style={{background:'linear-gradient(135deg,rgba(88,28,135,0.4),rgba(30,20,45,0.8))'}}>
+                      <div className="text-center p-4">
+                        <div className="text-3xl mb-2 opacity-50">🔄</div>
+                        <p className="text-xs text-purple-300/60 uppercase tracking-wider">Before</p>
+                        <p className="text-sm text-purple-200/80 mt-1">{t.before}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-center" style={{background:'linear-gradient(135deg,rgba(147,51,234,0.3),rgba(88,28,135,0.5))'}}>
+                      <div className="text-center p-4">
+                        <div className="text-3xl mb-2">{t.emoji}</div>
+                        <p className="text-xs text-purple-300 uppercase tracking-wider font-semibold">After</p>
+                        <p className="text-sm text-white mt-1 font-medium">{t.after}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-purple-600 border-2 border-white flex items-center justify-center z-10">
+                    <span className="text-white text-xs">→</span>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm font-semibold text-white">{t.service}</span>
+                    <span className="text-xs text-purple-400/60">{t.time}</span>
+                  </div>
+                  <p className="text-xs text-purple-300/50">Products: {t.products}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <p className="reveal text-sm text-purple-300/50 mb-4">Follow us for daily transformation posts</p>
+            <div className="flex items-center justify-center gap-4">
+              <a href="https://instagram.com/studiosalonodessa" target="_blank" rel="noopener noreferrer" className="reveal btn-primary btn-pill px-8 py-3 no-underline inline-block"><span>📸 Follow @studiosalonodessa</span></a>
+              <a href="#booking" className="reveal btn-ghost btn-pill px-8 py-3 no-underline inline-block">Book Your Transformation</a>
+            </div>
           </div>
         </div>
       </section>
@@ -1063,6 +1163,43 @@ const App=()=>{
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ FAQ ═══ */}
+      <section id="faq" className="relative py-28 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="reveal text-sm font-medium text-purple-400 uppercase tracking-[0.2em] mb-4">Common Questions</p>
+            <h2 className="reveal font-display text-5xl md:text-6xl font-bold text-white mb-4">FAQ</h2>
+            <p className="reveal text-purple-200/50">Everything you need to know before your visit</p>
+          </div>
+          <div className="space-y-4">
+            {[
+              {q:'Do I need a consultation before my first appointment?',a:'We offer a complimentary consultation for all new clients. This allows us to assess your hair, discuss your goals, and create a personalized plan. You can book a standalone consultation or combine it with your first service.'},
+              {q:'What Redken products do you use and recommend?',a:'We exclusively use Redken professional products including Shades EQ Gloss, Color Gels Lacquers, Flash Lift, and Acidic Bonding Concentrate. We can recommend take-home products tailored to your specific hair needs.'},
+              {q:'How far in advance should I book?',a:'We recommend booking 1-2 weeks in advance for regular services and 3-4 weeks for color corrections or complex transformations. Same-day appointments may be available — reach out to check.'},
+              {q:'What is your cancellation policy?',a:'We require 48 hours notice for cancellations or rescheduling. Late cancellations or no-shows may result in forfeiture of your deposit. We understand emergencies happen and handle each situation with care.'},
+              {q:'Do you offer bridal or special event packages?',a:'Absolutely! We offer bridal and special event styling packages including trials, day-of styling, and group bookings. Contact us at least 4-6 weeks before your event for best availability.'},
+              {q:'How do I maintain my color between appointments?',a:'We provide personalized aftercare instructions and can recommend Redken products for at-home maintenance. Our Acidic Bonding Concentrate and Color Extend Magnetics lines are excellent for preserving color vibrancy.'},
+              {q:'What payment methods do you accept?',a:'We accept all major credit and debit cards, Interac e-Transfer, Apple Pay, and cash. A $50 deposit is required at booking and is applied toward your service total.'},
+              {q:'Is parking available?',a:'Yes! We have free parking directly at our studio location in Odessa. Our intimate setting means you will never have to worry about finding a spot.'}
+            ].map((item,i)=>(
+              <div key={i} className="reveal glass-card overflow-hidden" style={{transitionDelay:i*0.05+'s'}}>
+                <details className="group">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <span className="text-white font-semibold pr-4">{item.q}</span>
+                    <span className="text-purple-400 text-xl flex-shrink-0 transition-transform duration-300 group-open:rotate-45">+</span>
+                  </summary>
+                  <div className="px-6 pb-6 text-sm text-purple-200/60 leading-relaxed border-t border-purple-500/10 pt-4">{item.a}</div>
+                </details>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <p className="reveal text-sm text-purple-300/50 mb-4">Still have questions? We are happy to help.</p>
+            <a href="mailto:jordanch14@gmail.com?subject=Question%20About%20Services" className="reveal btn-ghost btn-pill px-8 py-3 no-underline inline-block">ASK US ANYTHING</a>
           </div>
         </div>
       </section>
