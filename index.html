@@ -1,915 +1,608 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Studio Salon Odessa - A sanctuary of style featuring the latest hair color trends in a luxurious, boutique setting.">
-    <meta name="keywords" content="hair salon, Odessa, Ontario, purple hair, balayage, vivid color, Loyalist Township, ChromaLuxe">
-    <meta property="og:title" content="Studio Salon Odessa | Where Art Meets Beauty">
-    <meta property="og:description" content="Experience bespoke hair artistry in an intimate, boutique setting.">
-    <title>Studio Salon Odessa | Where Art Meets Beauty</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Studio Salon Odessa - A sanctuary of style featuring the latest hair color trends in a luxurious, boutique setting. Book online today.">
+<meta name="keywords" content="hair salon, Odessa, Ontario, purple hair, balayage, vivid color, Loyalist Township, color correction, keratin, head spa">
+<meta property="og:title" content="Studio Salon Odessa | Where Art Meets Beauty">
+<meta property="og:description" content="Experience bespoke hair artistry in an intimate, boutique setting in Odessa, Ontario.">
+<meta property="og:type" content="business.business">
+<meta property="og:url" content="https://cxzyr9hm2t-del.github.io/studio-salon-odessa/">
+<meta property="og:image" content="https://cxzyr9hm2t-del.github.io/studio-salon-odessa/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Studio Salon Odessa | Where Art Meets Beauty">
+<meta name="twitter:description" content="Bespoke hair artistry in Odessa, Ontario. Book your appointment today.">
+<meta name="theme-color" content="#6A0DAD">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="data:application/json,%7B%22name%22%3A%22Studio%20Salon%20Odessa%22%2C%22short_name%22%3A%22Studio%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230a0612%22%2C%22theme_color%22%3A%22%236A0DAD%22%7D">
+<title>Studio Salon Odessa | Where Art Meets Beauty</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>\u{1F49C}</text></svg>">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{purple:{50:'#faf5ff',100:'#f3e8ff',200:'#e9d5ff',300:'#d8b4fe',400:'#c084fc',500:'#a855f7',600:'#9333ea',700:'#7e22ce',800:'#6b21a8',900:'#581c87',950:'#3b0764'}}}}}</script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--p50:#faf5ff;--p100:#f3e8ff;--p200:#e9d5ff;--p300:#d8b4fe;--p400:#c084fc;--p500:#a855f7;--p600:#9333ea;--p700:#7e22ce;--p800:#6b21a8;--p900:#581c87;--p950:#3b0764;--bg:#0a0612;--surface:rgba(30,20,45,0.6);--border:rgba(168,85,247,0.15);--text:#f3e8ff;--muted:rgba(216,180,254,0.5)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+.font-display{font-family:'Playfair Display',serif}.font-mono{font-family:'JetBrains Mono',monospace}
 
-        :root {
-            --electric-amethyst: #9966CC;
-            --violet: #8F00FF;
-            --lavender: #D6CADD;
-            --true-purple: #6A0DAD;
-            --plasma-lavender: #6600CA;
-            --neon-violet: #B23BEE;
-            --deep-plum: #3D1A5C;
-            --iris: #5A4FCF;
-            --orchid: #DA70D6;
-            --mauve: #E0B0FF;
-            --neon-purple: #a855f7;
-            --deep-bg: #0f0f13;
-            --glass: rgba(30, 30, 35, 0.7);
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
+/* Glass Morphism */
+.glass{background:var(--surface);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);border:1px solid var(--border);border-radius:20px}
+.glass-sm{background:rgba(30,20,45,0.4);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(168,85,247,0.1);border-radius:14px}
+.glass-input{background:rgba(88,28,135,0.15);border:1px solid rgba(168,85,247,0.25);border-radius:12px;color:var(--text);padding:12px 16px;outline:none;transition:all .3s;width:100%}
+.glass-input:focus{border-color:var(--p500);box-shadow:0 0 0 3px rgba(168,85,247,0.15);background:rgba(88,28,135,0.25)}
+.glass-input::placeholder{color:var(--muted)}
+select.glass-input{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a855f7' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+select.glass-input option{background:#1a0a2e;color:var(--p200)}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0612; overflow-x: hidden; }
-        .font-display { font-family: 'Playfair Display', serif; }
-        .font-body { font-family: 'Inter', sans-serif; }
+/* Buttons */
+.btn-primary{background:linear-gradient(135deg,var(--p600),var(--p700));color:white;border:none;border-radius:12px;padding:12px 24px;font-weight:600;cursor:pointer;transition:all .3s;font-size:14px}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 8px 25px rgba(147,51,234,0.4)}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--p300);border-radius:12px;padding:12px 24px;cursor:pointer;transition:all .3s;font-size:14px}
+.btn-ghost:hover{background:rgba(168,85,247,0.1);border-color:var(--p500);color:white}
+.btn-pill{border-radius:9999px}
 
-        /* Aurora Background Animation */
-        @keyframes aurora { 0%, 100% { background-position: 0% 50%; filter: hue-rotate(0deg); } 25% { background-position: 50% 100%; } 50% { background-position: 100% 50%; filter: hue-rotate(15deg); } 75% { background-position: 50% 0%; } }
-        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(3deg); } }
-        @keyframes pulse-glow { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.05); } }
-        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-        @keyframes ripple { 0% { transform: scale(1); opacity: 0.4; } 100% { transform: scale(1.5); opacity: 0; } }
-        @keyframes prism { 0%, 100% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(30deg); } }
-        @keyframes liquid-flow { 0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; } }
-        @keyframes specular { 0%, 100% { opacity: 0.3; transform: translateX(-100%) rotate(45deg); } 50% { opacity: 0.6; transform: translateX(100%) rotate(45deg); } }
-        @keyframes glow-pulse { 0%, 100% { box-shadow: 0 0 20px rgba(138, 43, 226, 0.4), 0 0 40px rgba(138, 43, 226, 0.2); } 50% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.6), 0 0 60px rgba(138, 43, 226, 0.3), 0 0 80px rgba(138, 43, 226, 0.1); } }
-        @keyframes text-glow { 0%, 100% { text-shadow: 0 0 20px rgba(178, 59, 238, 0.5); } 50% { text-shadow: 0 0 40px rgba(178, 59, 238, 0.8), 0 0 60px rgba(138, 43, 226, 0.4); } }
-        @keyframes border-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+/* Gradient Text */
+.grad-text{background:linear-gradient(135deg,var(--p200),var(--p400),var(--p300));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-text-glow{background:linear-gradient(135deg,var(--p100),var(--p400),var(--p200));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 20px rgba(168,85,247,0.4))}
 
-        .animate-float { animation: float 6s ease-in-out infinite; }
-        .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
-        .animate-shimmer { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); background-size: 200% 100%; animation: shimmer 3s infinite; }
-        .animate-prism { animation: prism 8s ease-in-out infinite; }
-        .animate-liquid { animation: liquid-flow 8s ease-in-out infinite; }
-        .animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
-        .animate-text-glow { animation: text-glow 3s ease-in-out infinite; }
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+/* Animations */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+@keyframes pulse-glow{0%,100%{opacity:.4}50%{opacity:.7}}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes border-flow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.anim-float{animation:float 6s ease-in-out infinite}
+.anim-glow{animation:pulse-glow 4s ease-in-out infinite}
+.anim-fade-up{animation:fadeUp .6s ease-out both}
 
-        /* Liquid Glass Effect */
-        .liquid-glass { position: relative; background: linear-gradient(135deg, rgba(138, 43, 226, 0.15) 0%, rgba(75, 0, 130, 0.1) 50%, rgba(148, 0, 211, 0.15) 100%); backdrop-filter: blur(20px) saturate(180%) brightness(1.1); -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1); border: 1px solid rgba(178, 59, 238, 0.2); border-radius: 24px; overflow: hidden; }
-        .liquid-glass::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%); pointer-events: none; }
-        .liquid-glass::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 55%, transparent 60%); animation: specular 6s ease-in-out infinite; pointer-events: none; }
+/* Scrollbar */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:rgba(10,6,18,0.5)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--p700),var(--p900));border-radius:3px}
+.no-scrollbar::-webkit-scrollbar{display:none}.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none}
 
-        .liquid-glass-pro { position: relative; background: linear-gradient(145deg, rgba(106, 13, 173, 0.2) 0%, rgba(90, 79, 207, 0.15) 50%, rgba(138, 43, 226, 0.2) 100%); backdrop-filter: blur(24px) saturate(200%) brightness(1.05) contrast(1.1); -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.05) contrast(1.1); border: 1px solid; border-image: linear-gradient(135deg, rgba(178, 59, 238, 0.4), rgba(218, 112, 214, 0.2), rgba(178, 59, 238, 0.4)) 1; border-radius: 28px; box-shadow: 0 8px 32px rgba(138, 43, 226, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); overflow: hidden; }
-        .liquid-glass-pro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%); pointer-events: none; border-radius: 28px 28px 0 0; }
+/* Staff Portal */
+#cl-app{display:none;position:fixed;inset:0;z-index:9999;background:var(--bg);flex-direction:column}
+#cl-app.active{display:flex}
+.cl-sidebar{width:72px;background:rgba(15,10,25,0.9);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;padding:20px 0;gap:8px;z-index:10}
+.cl-nav-btn{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;transition:all .2s;border:none;background:transparent;font-size:16px}
+.cl-nav-btn:hover,.cl-nav-btn.active{background:rgba(168,85,247,0.15);color:var(--p400)}
+.cl-nav-btn.active{color:var(--p300);box-shadow:inset 3px 0 0 var(--p500)}
+.cl-main{flex:1;overflow-y:auto;padding:24px 32px}
+.cl-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:20px;transition:all .3s}
+.cl-card:hover{border-color:rgba(168,85,247,0.3)}
+.cl-stat{text-align:center;padding:16px}
+.cl-stat .value{font-size:28px;font-weight:700;color:white;font-family:'JetBrains Mono',monospace}
+.cl-stat .label{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-top:4px}
+.cl-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:9999px;font-size:11px;font-weight:600}
+.cl-badge-green{background:rgba(34,197,94,0.15);color:#4ade80;border:1px solid rgba(34,197,94,0.2)}
+.cl-badge-blue{background:rgba(59,130,246,0.15);color:#60a5fa;border:1px solid rgba(59,130,246,0.2)}
+.cl-badge-amber{background:rgba(245,158,11,0.15);color:#fbbf24;border:1px solid rgba(245,158,11,0.2)}
+.cl-badge-purple{background:rgba(168,85,247,0.15);color:var(--p400);border:1px solid rgba(168,85,247,0.2)}
+.cl-badge-red{background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.2)}
+.cl-table{width:100%;text-align:left;font-size:13px}
+.cl-table th{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:1px;padding:8px 12px;border-bottom:1px solid var(--border)}
+.cl-table td{padding:10px 12px;border-bottom:1px solid rgba(168,85,247,0.06);color:var(--p200)}
+.cl-table tr:hover td{background:rgba(168,85,247,0.04)}
+.cl-tab{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s}
+.cl-tab.active{background:rgba(168,85,247,0.15);color:var(--p300)}
+.cl-tab:hover{color:var(--p300)}
 
-        .gradient-border { position: relative; background: linear-gradient(135deg, rgba(10, 6, 18, 0.9), rgba(20, 10, 35, 0.9)); border-radius: 24px; }
-        .gradient-border::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, #8F00FF, #B23BEE, #DA70D6, #6A0DAD, #8F00FF); background-size: 300% 300%; animation: border-flow 4s ease infinite; border-radius: 26px; z-index: -1; }
+/* Staff Entry Button */
+.staff-btn{position:fixed;bottom:20px;left:20px;z-index:40;width:48px;height:48px;border-radius:14px;background:rgba(88,28,135,0.3);backdrop-filter:blur(12px);border:1px solid rgba(168,85,247,0.2);color:var(--p400);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;font-size:18px}
+.staff-btn:hover{background:rgba(88,28,135,0.5);color:white;box-shadow:0 0 30px rgba(168,85,247,0.3);transform:scale(1.05)}
 
-        .glass-input { background: rgba(138, 43, 226, 0.1); border: 1px solid rgba(178, 59, 238, 0.3); backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .glass-input:focus { background: rgba(138, 43, 226, 0.2); border-color: rgba(178, 59, 238, 0.6); outline: none; box-shadow: 0 0 30px rgba(138, 43, 226, 0.3), 0 0 60px rgba(178, 59, 238, 0.1); }
-
-        .gradient-text-purple { background: linear-gradient(135deg, #E0B0FF 0%, #B23BEE 25%, #8F00FF 50%, #6A0DAD 75%, #B23BEE 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 4s linear infinite; }
-        .neon-text { color: #E0B0FF; text-shadow: 0 0 7px #B23BEE, 0 0 10px #B23BEE, 0 0 21px #B23BEE, 0 0 42px #8F00FF, 0 0 82px #8F00FF; }
-
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: rgba(10, 6, 18, 0.5); }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8F00FF, #6A0DAD); border-radius: 4px; }
-        select option { background: #1a0a2e; color: #E0B0FF; }
-        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* ============================================ */
-        /* ChromaLuxe OS - Internal Staff Dashboard     */
-        /* ============================================ */
-        #chromaluxe-app { display: none; position: fixed; inset: 0; z-index: 9999; background: var(--deep-bg); }
-        #chromaluxe-app.active { display: flex; flex-direction: column; }
-
-        .cl-glass-panel {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-        }
-        .cl-glow-text { text-shadow: 0 0 20px rgba(168, 85, 247, 0.6); }
-        .cl-digital-clock {
-            font-family: 'JetBrains Mono', monospace;
-            background: -webkit-linear-gradient(#d8b4fe, #a855f7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .cl-active-step { border-left: 4px solid var(--neon-purple); background: rgba(168, 85, 247, 0.1); }
-
-        /* ChromaLuxe custom scrollbar */
-        #chromaluxe-app ::-webkit-scrollbar { width: 6px; }
-        #chromaluxe-app ::-webkit-scrollbar-track { background: #1a1a20; }
-        #chromaluxe-app ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-
-        /* Staff Portal Button */
-        .staff-portal-btn {
-            position: fixed;
-            bottom: 24px;
-            left: 24px;
-            z-index: 40;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(75, 0, 130, 0.5));
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(178, 59, 238, 0.3);
-            color: rgba(178, 59, 238, 0.7);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            font-size: 20px;
-        }
-        .staff-portal-btn:hover {
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.5), rgba(75, 0, 130, 0.7));
-            color: white;
-            box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
-            transform: scale(1.1);
-        }
-    </style>
+/* Timeless card hover */
+.hover-lift{transition:all .4s cubic-bezier(.4,0,.2,1)}
+.hover-lift:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(88,28,135,0.2)}
+</style>
 </head>
 <body>
-    <!-- SVG Filters for Liquid Glass Effect -->
-    <svg style="position: absolute; width: 0; height: 0;">
-        <defs>
-            <filter id="liquid-distortion" x="-20%" y="-20%" width="140%" height="140%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="2" seed="5" result="noise"/>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
-            </filter>
-            <filter id="glow">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-            <linearGradient id="purple-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#8F00FF"/>
-                <stop offset="50%" style="stop-color:#B23BEE"/>
-                <stop offset="100%" style="stop-color:#6A0DAD"/>
-            </linearGradient>
-        </defs>
-    </svg>
-
-    <!-- Staff Portal Button -->
-    <button class="staff-portal-btn" onclick="document.getElementById('chromaluxe-app').classList.add('active')" title="Staff Portal">
-        <i class="fa-solid fa-flask"></i>
-    </button>
-
-    <!-- Main Salon Website -->
-    <div id="root"></div>
-
-    <!-- ============================================ -->
-    <!-- ChromaLuxe OS - Staff Dashboard              -->
-    <!-- ============================================ -->
-    <div id="chromaluxe-app" class="text-white" style="font-family: 'Inter', sans-serif;">
-
-        <!-- Login Screen -->
-        <div id="cl-loginScreen" class="absolute inset-0 z-50 bg-black/90 flex items-center justify-center fade-in">
-            <div class="cl-glass-panel p-10 rounded-2xl w-[420px] text-center">
-                <div class="mb-6">
-                    <span class="text-purple-500 text-4xl"><i class="fa-solid fa-flask"></i></span>
-                </div>
-                <h1 class="text-3xl font-bold mb-2 tracking-wider">CHROMALUXE</h1>
-                <p class="text-gray-400 mb-2 text-sm">PRECISION MIXOLOGY OS v2.4</p>
-                <p class="text-purple-400/50 mb-8 text-xs">Studio Salon Odessa · Internal Staff Tool</p>
-
-                <div id="cl-userGridWrap">
-                    <div id="cl-userGrid" class="grid grid-cols-5 gap-2 mb-4"></div>
-                </div>
-
-                <div id="cl-passcodeArea" class="hidden">
-                    <p id="cl-selectedUser" class="text-purple-400 font-bold mb-4">Stylist Name</p>
-                    <input type="password" id="cl-pinInput" placeholder="ENTER PIN" class="w-full bg-black/50 border border-gray-700 rounded p-3 text-center text-xl tracking-widest mb-4 focus:outline-none focus:border-purple-500 text-white transition-all">
-                    <div class="grid grid-cols-3 gap-2">
-                        <button onclick="clAddPin(1)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">1</button>
-                        <button onclick="clAddPin(2)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">2</button>
-                        <button onclick="clAddPin(3)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">3</button>
-                        <button onclick="clAddPin(4)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">4</button>
-                        <button onclick="clAddPin(5)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">5</button>
-                        <button onclick="clAddPin(6)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">6</button>
-                        <button onclick="clAddPin(7)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">7</button>
-                        <button onclick="clAddPin(8)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">8</button>
-                        <button onclick="clAddPin(9)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">9</button>
-                        <button onclick="clCancelLogin()" class="p-3 bg-red-900/50 rounded hover:bg-red-900 text-xs text-white">BACK</button>
-                        <button onclick="clAddPin(0)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">0</button>
-                        <button onclick="clSubmitLogin()" class="p-3 bg-purple-600 rounded hover:bg-purple-500 font-bold text-white"><i class="fa-solid fa-arrow-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main App Layout -->
-        <nav class="w-20 bg-black/40 border-r border-white/10 flex flex-col items-center py-8 gap-8 z-10 shrink-0" style="position:absolute;left:0;top:0;bottom:0;">
-            <div class="text-purple-500 text-2xl font-bold"><i class="fa-solid fa-flask"></i></div>
-            <button onclick="clSwitchView('dashboard')" class="cl-nav-btn text-white/70 hover:text-white p-3 rounded-xl transition" title="Dashboard"><i class="fa-solid fa-table-columns"></i></button>
-            <button onclick="clSwitchView('mixology')" class="cl-nav-btn text-white/50 hover:text-white p-3 rounded-xl transition" title="Mixology"><i class="fa-solid fa-flask-vial"></i></button>
-            <button onclick="clSwitchView('history')" class="cl-nav-btn text-white/50 hover:text-white p-3 rounded-xl transition" title="History"><i class="fa-solid fa-clock-rotate-left"></i></button>
-            <div class="flex-grow"></div>
-            <button onclick="clExitToSite()" class="text-blue-400/50 hover:text-blue-400 p-3" title="Back to Website"><i class="fa-solid fa-globe"></i></button>
-            <button onclick="clLogout()" class="text-red-500/50 hover:text-red-500 p-3" title="Logout"><i class="fa-solid fa-power-off"></i></button>
-        </nav>
-
-        <main class="flex-grow p-8 relative overflow-y-auto overflow-x-hidden" style="margin-left:80px;">
-            <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[100px] pointer-events-none"></div>
-
-            <!-- Header with Environment Sensors -->
-            <header class="flex justify-between items-end mb-10 border-b border-white/10 pb-6">
-                <div>
-                    <h2 class="text-gray-400 text-sm tracking-widest mb-1">SALON ENVIRONMENT</h2>
-                    <div class="flex gap-6 text-sm">
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-droplet text-blue-400"></i>
-                            <span id="cl-humidityDisplay">45%</span> <span class="text-gray-400">Humidity</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <i class="fa-solid fa-temperature-half text-orange-400"></i>
-                            <span id="cl-tempDisplay">21°C</span> <span class="text-gray-400">Temp</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-green-400">
-                            <i class="fa-solid fa-wind"></i>
-                            <span>AQI: 12 (Excellent)</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="text-right">
-                    <div id="cl-digitalClock" class="cl-digital-clock text-5xl font-bold cl-glow-text" style="font-family:'JetBrains Mono',monospace;">12:00:00</div>
-                    <div id="cl-currentDate" class="text-gray-400 text-sm">Monday, Jan 01</div>
-                </div>
-            </header>
-
-            <!-- Dashboard View -->
-            <div id="cl-view-dashboard" class="cl-view-section fade-in">
-                <div class="grid grid-cols-12 gap-6">
-                    <div class="col-span-12 md:col-span-3 cl-glass-panel p-6 rounded-2xl">
-                        <h3 class="text-gray-400 text-xs uppercase mb-4">Daily Formula Cost</h3>
-                        <div class="text-4xl font-bold text-white mb-2" id="cl-dailyCost">$0.00</div>
-                        <div class="text-xs text-green-400"><i class="fa-solid fa-arrow-trend-down"></i> Track with each session</div>
-                    </div>
-                    <div class="col-span-12 md:col-span-3 cl-glass-panel p-6 rounded-2xl">
-                        <h3 class="text-gray-400 text-xs uppercase mb-4">Sessions Today</h3>
-                        <div class="text-4xl font-bold text-white mb-2" id="cl-sessionCount">0</div>
-                        <div class="text-xs text-purple-400">Precision tracking active</div>
-                    </div>
-                    <div class="col-span-12 md:col-span-6 cl-glass-panel p-6 rounded-2xl flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="clSwitchView('mixology')">
-                        <div>
-                            <h3 class="text-xl font-bold text-white">Start New Mix</h3>
-                            <p class="text-gray-400 text-sm">Launch the guided mixology wizard</p>
-                        </div>
-                        <div class="h-12 w-12 bg-purple-600 rounded-full flex items-center justify-center shadow-lg shadow-purple-500/30">
-                            <i class="fa-solid fa-plus text-white"></i>
-                        </div>
-                    </div>
-
-                    <div class="col-span-12 md:col-span-8 cl-glass-panel p-6 rounded-2xl" style="max-height:400px;overflow-y:auto;">
-                        <h3 class="mb-4 font-bold border-b border-white/10 pb-2">Active Processing</h3>
-                        <table class="w-full text-left text-sm text-gray-400">
-                            <thead>
-                                <tr class="text-xs uppercase tracking-wider">
-                                    <th class="pb-3">Client</th>
-                                    <th class="pb-3">Stylist</th>
-                                    <th class="pb-3">Service</th>
-                                    <th class="pb-3">Timer</th>
-                                    <th class="pb-3">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="cl-activeClientsTable"></tbody>
-                        </table>
-                        <div id="cl-noActiveMsg" class="text-center py-8 text-gray-500">
-                            <i class="fa-solid fa-flask-vial text-3xl mb-3 text-gray-600 block"></i>
-                            No active processing. Start a new mix!
-                        </div>
-                    </div>
-
-                    <div class="col-span-12 md:col-span-4 space-y-4">
-                        <div class="cl-glass-panel p-5 rounded-2xl">
-                            <h3 class="text-white font-bold mb-2"><i class="fa-solid fa-link text-purple-400 mr-2"></i>Client Quick Link</h3>
-                            <p class="text-xs text-gray-400 mb-4">Generate a live status link for clients.</p>
-                            <div class="flex gap-2">
-                                <input type="text" id="cl-clientLink" value="Start a session to generate link" readonly class="w-full bg-black/30 border border-white/10 rounded px-3 py-2 text-xs text-purple-300">
-                                <button onclick="clCopyLink()" class="bg-white/10 hover:bg-white/20 p-2 rounded text-white"><i class="fa-solid fa-copy"></i></button>
-                            </div>
-                        </div>
-
-                        <div class="cl-glass-panel p-5 rounded-2xl border-l-4 border-green-500">
-                            <h3 class="text-green-400 font-bold mb-1 text-sm"><i class="fa-solid fa-shield-halved mr-1"></i> Environment Status</h3>
-                            <p class="text-xs text-gray-400" id="cl-envStatus">Optimal processing zone: 40-50% humidity, 20-22°C</p>
-                        </div>
-
-                        <div class="cl-glass-panel p-5 rounded-2xl border-l-4 border-yellow-500 hidden" id="cl-lowInventory">
-                            <h3 class="text-yellow-500 font-bold mb-1 text-sm"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Low Inventory</h3>
-                            <p class="text-xs text-gray-400">Warning: 20vol Developer is below 15%.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mixology Wizard View -->
-            <div id="cl-view-mixology" class="cl-view-section hidden fade-in flex gap-6" style="height:calc(100vh - 200px);">
-                <div class="w-1/4 cl-glass-panel rounded-2xl p-0 overflow-hidden flex flex-col" style="min-width:220px;">
-                    <div class="p-6 bg-purple-900/20 border-b border-white/10">
-                        <h3 class="font-bold text-white">Mix Workflow</h3>
-                        <p class="text-xs text-gray-400" id="cl-currentClientNameDisplay">New Client</p>
-                    </div>
-                    <div class="flex-grow overflow-y-auto">
-                        <button onclick="clSetStep(1)" id="cl-stepBtn1" class="w-full text-left p-4 border-b border-white/5 hover:bg-white/5 cl-active-step text-white">
-                            <div class="text-xs text-gray-500 uppercase">Step 1</div>
-                            <div class="font-bold">Prep & Protect</div>
-                        </button>
-                        <button onclick="clSetStep(2)" id="cl-stepBtn2" class="w-full text-left p-4 border-b border-white/5 hover:bg-white/5 text-white">
-                            <div class="text-xs text-gray-500 uppercase">Step 2</div>
-                            <div class="font-bold">Formulate & Weigh</div>
-                        </button>
-                        <button onclick="clSetStep(3)" id="cl-stepBtn3" class="w-full text-left p-4 border-b border-white/5 hover:bg-white/5 text-white">
-                            <div class="text-xs text-gray-500 uppercase">Step 3</div>
-                            <div class="font-bold">Test Strand</div>
-                        </button>
-                        <button onclick="clSetStep(4)" id="cl-stepBtn4" class="w-full text-left p-4 border-b border-white/5 hover:bg-white/5 text-white">
-                            <div class="text-xs text-gray-500 uppercase">Step 4</div>
-                            <div class="font-bold">Deploy & Process</div>
-                        </button>
-                        <button onclick="clSetStep(5)" id="cl-stepBtn5" class="w-full text-left p-4 border-b border-white/5 hover:bg-white/5 text-white">
-                            <div class="text-xs text-gray-500 uppercase">Step 5</div>
-                            <div class="font-bold">Cleanup & Waste</div>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="w-3/4 cl-glass-panel rounded-2xl p-8 relative overflow-y-auto">
-                    <!-- Step 1: Client Prep -->
-                    <div id="cl-stepContent1" class="cl-step-content">
-                        <h2 class="text-2xl font-bold mb-6 text-white">Client Prep</h2>
-                        <div class="grid grid-cols-2 gap-4">
-                            <input type="text" id="cl-clientNameInput" placeholder="Client Name" class="bg-black/30 border border-white/20 p-4 rounded-xl text-white focus:border-purple-500 outline-none">
-                            <select id="cl-serviceSelect" class="bg-black/30 border border-white/20 p-4 rounded-xl text-white focus:border-purple-500 outline-none">
-                                <option value="">Select Service Type</option>
-                                <option value="Root Touch Up">Root Touch Up</option>
-                                <option value="Full Balayage">Full Balayage</option>
-                                <option value="Toner/Gloss">Toner/Gloss</option>
-                                <option value="Vivid Color">Vivid Color</option>
-                                <option value="Color Correction">Color Correction</option>
-                                <option value="Highlights">Highlights</option>
-                            </select>
-                        </div>
-                        <div class="mt-8">
-                            <h3 class="text-sm font-bold text-gray-400 mb-3">SAFETY CHECKLIST</h3>
-                            <label class="flex items-center gap-3 p-3 bg-white/5 rounded-lg mb-2 cursor-pointer text-white">
-                                <input type="checkbox" class="w-5 h-5 accent-purple-500">
-                                <span>Cape & Towel Secure</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-3 bg-white/5 rounded-lg mb-2 cursor-pointer text-white">
-                                <input type="checkbox" class="w-5 h-5 accent-purple-500">
-                                <span>Barrier Cream Applied</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-3 bg-white/5 rounded-lg mb-2 cursor-pointer text-white">
-                                <input type="checkbox" class="w-5 h-5 accent-purple-500">
-                                <span>Scalp Analysis Complete (No Abrasions)</span>
-                            </label>
-                            <label class="flex items-center gap-3 p-3 bg-white/5 rounded-lg mb-2 cursor-pointer text-white">
-                                <input type="checkbox" class="w-5 h-5 accent-purple-500">
-                                <span>Allergy / Patch Test Verified</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Scale Interface -->
-                    <div id="cl-stepContent2" class="cl-step-content hidden">
-                        <h2 class="text-2xl font-bold mb-6 text-white">Smart Scale Interface</h2>
-                        <div class="flex justify-between items-center mb-6">
-                            <div class="text-6xl text-purple-400 font-bold" id="cl-scaleDisplay" style="font-family:'JetBrains Mono',monospace;">0.0g</div>
-                            <button onclick="clTareScale()" class="bg-gray-700 hover:bg-gray-600 px-6 py-2 rounded-lg text-sm text-white">TARE</button>
-                        </div>
-
-                        <div class="grid grid-cols-2 gap-4 mb-6">
-                            <div class="bg-black/20 p-4 rounded-xl border border-white/10">
-                                <h4 class="text-xs text-gray-500 uppercase mb-2">Target Ratio</h4>
-                                <div class="flex gap-2" id="cl-ratioButtons">
-                                    <button onclick="clSetRatio(this,'1:1')" class="flex-1 bg-purple-600/50 p-2 rounded text-sm border border-purple-500 text-white">1:1</button>
-                                    <button onclick="clSetRatio(this,'1:1.5')" class="flex-1 bg-gray-800 p-2 rounded text-sm text-white">1:1.5</button>
-                                    <button onclick="clSetRatio(this,'1:2')" class="flex-1 bg-gray-800 p-2 rounded text-sm text-white">1:2</button>
-                                </div>
-                            </div>
-                            <div class="bg-black/20 p-4 rounded-xl border border-white/10">
-                                <h4 class="text-xs text-gray-500 uppercase mb-2">Developer</h4>
-                                <select id="cl-devSelect" class="w-full bg-transparent text-white border-none outline-none">
-                                    <option value="10vol">10 Volume (3%)</option>
-                                    <option value="20vol" selected>20 Volume (6%)</option>
-                                    <option value="30vol">30 Volume (9%)</option>
-                                    <option value="40vol">40 Volume (12%)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
-                            <div class="h-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all" id="cl-pourBar" style="width:0%"></div>
-                        </div>
-                        <p class="text-center text-xs text-gray-500 mt-2"><i class="fa-solid fa-bluetooth text-blue-400 mr-1"></i> Bluetooth Scale Connected</p>
-
-                        <button onmousedown="clSimulatePour()" onmouseup="clStopPour()" ontouchstart="clSimulatePour()" ontouchend="clStopPour()" class="w-full mt-6 bg-purple-600 hover:bg-purple-500 p-4 rounded-xl font-bold transition text-white">HOLD TO POUR (SIMULATE)</button>
-                    </div>
-
-                    <!-- Step 3: Strand Test -->
-                    <div id="cl-stepContent3" class="cl-step-content hidden">
-                        <h2 class="text-2xl font-bold mb-4 text-white">Strand Test Verification</h2>
-                        <p class="text-gray-400 mb-6">Recommended for drastic changes or compromised hair integrity.</p>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="cl-glass-panel p-6 rounded-xl text-center cursor-pointer hover:bg-green-900/30 border border-transparent hover:border-green-500 transition" onclick="clSetStep(4)">
-                                <i class="fa-solid fa-check text-5xl text-green-500 mb-3"></i>
-                                <h3 class="font-bold text-white text-lg">Passed</h3>
-                                <p class="text-xs text-gray-500 mt-1">Integrity held, color true.</p>
-                            </div>
-                            <div class="cl-glass-panel p-6 rounded-xl text-center cursor-pointer hover:bg-red-900/30 border border-transparent hover:border-red-500 transition">
-                                <i class="fa-solid fa-xmark text-5xl text-red-500 mb-3"></i>
-                                <h3 class="font-bold text-white text-lg">Failed</h3>
-                                <p class="text-xs text-gray-500 mt-1">Breakage or uneven lift. Reformulate.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 4: Processing Timer -->
-                    <div id="cl-stepContent4" class="cl-step-content hidden">
-                        <h2 class="text-2xl font-bold mb-6 text-white">Processing Tracker</h2>
-                        <div class="text-center py-8">
-                            <div class="inline-block relative">
-                                <svg class="w-64 h-64 transform -rotate-90">
-                                    <circle cx="128" cy="128" r="120" stroke="currentColor" stroke-width="8" fill="transparent" class="text-gray-800" />
-                                    <circle cx="128" cy="128" r="120" stroke="currentColor" stroke-width="8" fill="transparent" class="text-purple-500" stroke-dasharray="753" stroke-dashoffset="753" id="cl-timerCircle" />
-                                </svg>
-                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-white" id="cl-processingTimer" style="font-family:'JetBrains Mono',monospace;">00:00</div>
-                            </div>
-                        </div>
-                        <div class="flex justify-center gap-4 flex-wrap">
-                            <button onclick="clStartTimer(20)" class="bg-white/10 px-6 py-3 rounded-xl hover:bg-white/20 text-white">20 Min (Toner)</button>
-                            <button onclick="clStartTimer(35)" class="bg-white/10 px-6 py-3 rounded-xl hover:bg-white/20 text-white">35 Min (Standard)</button>
-                            <button onclick="clStartTimer(45)" class="bg-white/10 px-6 py-3 rounded-xl hover:bg-white/20 text-white">45 Min (Grey Cov)</button>
-                            <button onclick="clStopTimer()" class="bg-red-900/30 px-6 py-3 rounded-xl hover:bg-red-900/50 text-red-300">Stop</button>
-                        </div>
-                    </div>
-
-                    <!-- Step 5: Cleanup -->
-                    <div id="cl-stepContent5" class="cl-step-content hidden">
-                        <h2 class="text-2xl font-bold mb-6 text-white">Cleanup & Data Entry</h2>
-                        <div class="bg-red-900/20 border border-red-500/30 p-6 rounded-xl mb-6">
-                            <h3 class="text-red-400 font-bold mb-2"><i class="fa-solid fa-scale-balanced mr-2"></i>Waste Check</h3>
-                            <p class="mb-4 text-sm text-gray-300">Place bowl back on scale to measure waste.</p>
-                            <div class="text-3xl text-white" style="font-family:'JetBrains Mono',monospace;" id="cl-wasteDisplay">0.0g <span class="text-sm text-gray-400">Unused Product</span></div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 mb-6">
-                            <div class="bg-black/20 p-4 rounded-xl border border-white/10">
-                                <h4 class="text-xs text-gray-500 uppercase mb-2">Formula Cost</h4>
-                                <input type="text" id="cl-formulaCost" value="$45.00" class="w-full bg-transparent text-white text-xl font-bold outline-none">
-                            </div>
-                            <div class="bg-black/20 p-4 rounded-xl border border-white/10">
-                                <h4 class="text-xs text-gray-500 uppercase mb-2">Notes</h4>
-                                <input type="text" id="cl-sessionNotes" placeholder="Optional notes..." class="w-full bg-transparent text-white outline-none text-sm">
-                            </div>
-                        </div>
-                        <button onclick="clFinishSession()" class="w-full bg-green-600 hover:bg-green-500 p-4 rounded-xl font-bold text-white transition"><i class="fa-solid fa-check-double mr-2"></i>LOG SESSION & FINISH</button>
-                    </div>
-
-                    <!-- Next Button -->
-                    <div class="absolute bottom-8 right-8 flex gap-4">
-                        <button onclick="clNextStep()" class="bg-white text-black px-8 py-3 rounded-full font-bold hover:scale-105 transition">Next Step <i class="fa-solid fa-arrow-right ml-2"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- History View -->
-            <div id="cl-view-history" class="cl-view-section hidden fade-in">
-                <h2 class="text-2xl font-bold mb-6 text-white">Session Logs</h2>
-                <div class="cl-glass-panel rounded-2xl overflow-hidden">
-                    <table class="w-full text-left">
-                        <thead class="bg-white/5 text-gray-400 text-xs uppercase">
-                            <tr>
-                                <th class="p-4">Date/Time</th>
-                                <th class="p-4">Stylist</th>
-                                <th class="p-4">Client</th>
-                                <th class="p-4">Service</th>
-                                <th class="p-4">Formula Cost</th>
-                                <th class="p-4">Waste</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cl-historyTableBody" class="divide-y divide-white/10 text-sm"></tbody>
-                    </table>
-                    <div id="cl-noHistoryMsg" class="text-center py-8 text-gray-500">
-                        <i class="fa-solid fa-clock-rotate-left text-3xl mb-3 text-gray-600 block"></i>
-                        No sessions logged yet.
-                    </div>
-                </div>
-            </div>
-
-        </main>
-    </div>
-
-    <!-- ChromaLuxe OS JavaScript -->
-    <script>
-    (function() {
-        // ====== CONFIGURATION ======
-        const clUsers = [
-            {name:'Jordan'},{name:'Mia'},{name:'Sophie'},{name:'Ava'},{name:'Emma'},
-            {name:'Liam'},{name:'Noah'},{name:'Olivia'},{name:'Ella'},{name:'Luna'},
-            {name:'Chloe'},{name:'Zoe'},{name:'Harper'},{name:'Aria'},{name:'Guest'}
-        ];
-
-        let clCurrentUser = null;
-        let clCurrentStep = 1;
-        let clCurrentWeight = 0;
-        let clPourInterval = null;
-        let clTimerInterval = null;
-        let clActiveClients = [];
-        let clSelectedRatio = '1:1';
-
-        // ====== INIT ======
-        function clInit() {
-            clRenderUserGrid();
-            clStartClock();
-            clUpdateEnvSensors();
-            clLoadHistory();
-            clUpdateDashboardStats();
-        }
-
-        // ====== LOGIN SYSTEM ======
-        function clRenderUserGrid() {
-            const grid = document.getElementById('cl-userGrid');
-            if (!grid) return;
-            grid.innerHTML = clUsers.map(u =>
-                `<div onclick="clSelectUser('${u.name}')" class="bg-gray-800 hover:bg-purple-600 p-2 rounded cursor-pointer transition text-xs font-bold text-center border border-white/5 flex flex-col justify-center items-center" style="aspect-ratio:1;">
-                    <div class="w-8 h-8 rounded-full bg-white/10 mb-1 flex items-center justify-center text-sm">${u.name.charAt(0)}</div>
-                    <span class="text-[10px]">${u.name}</span>
-                </div>`
-            ).join('');
-        }
-
-        window.clSelectUser = function(name) {
-            document.getElementById('cl-userGridWrap').classList.add('hidden');
-            document.getElementById('cl-passcodeArea').classList.remove('hidden');
-            document.getElementById('cl-selectedUser').innerText = name;
-            document.getElementById('cl-pinInput').value = '';
-        };
-
-        window.clAddPin = function(num) {
-            const input = document.getElementById('cl-pinInput');
-            if (input.value.length < 4) input.value += num;
-        };
-
-        window.clCancelLogin = function() {
-            document.getElementById('cl-passcodeArea').classList.add('hidden');
-            document.getElementById('cl-userGridWrap').classList.remove('hidden');
-        };
-
-        window.clSubmitLogin = function() {
-            const pin = document.getElementById('cl-pinInput').value;
-            if (pin === '1234') {
-                clCurrentUser = document.getElementById('cl-selectedUser').innerText;
-                document.getElementById('cl-loginScreen').classList.add('hidden');
-                clLogHistory(clCurrentUser, 'System Login', '-', '-', '-');
-            } else {
-                document.getElementById('cl-pinInput').value = '';
-                document.getElementById('cl-pinInput').style.borderColor = '#ef4444';
-                setTimeout(() => { document.getElementById('cl-pinInput').style.borderColor = ''; }, 1000);
-            }
-        };
-
-        window.clLogout = function() {
-            clCurrentUser = null;
-            document.getElementById('cl-loginScreen').classList.remove('hidden');
-            clCancelLogin();
-        };
-
-        window.clExitToSite = function() {
-            document.getElementById('chromaluxe-app').classList.remove('active');
-        };
-
-        // ====== NAVIGATION ======
-        window.clSwitchView = function(viewName) {
-            document.querySelectorAll('.cl-view-section').forEach(el => el.classList.add('hidden'));
-            const target = document.getElementById('cl-view-' + viewName);
-            if (target) target.classList.remove('hidden');
-
-            document.querySelectorAll('.cl-nav-btn').forEach(btn => {
-                btn.classList.remove('text-white/70');
-                btn.classList.add('text-white/50');
-            });
-        };
-
-        // ====== CLOCK & SENSORS ======
-        function clStartClock() {
-            setInterval(() => {
-                const now = new Date();
-                const clockEl = document.getElementById('cl-digitalClock');
-                const dateEl = document.getElementById('cl-currentDate');
-                if (clockEl) clockEl.innerText = now.toLocaleTimeString('en-US', {hour12: false});
-                if (dateEl) dateEl.innerText = now.toLocaleDateString('en-US', {weekday:'long', month:'short', day:'numeric'});
-            }, 1000);
-        }
-
-        function clUpdateEnvSensors() {
-            setInterval(() => {
-                const temp = (21 + (Math.random() * 0.5 - 0.25)).toFixed(1);
-                const hum = (45 + (Math.random() * 2 - 1)).toFixed(0);
-                const tempEl = document.getElementById('cl-tempDisplay');
-                const humEl = document.getElementById('cl-humidityDisplay');
-                if (tempEl) tempEl.innerText = temp + '\u00B0C';
-                if (humEl) humEl.innerText = hum + '%';
-
-                // Environment alert
-                const envEl = document.getElementById('cl-envStatus');
-                if (envEl) {
-                    const h = parseFloat(hum);
-                    const t = parseFloat(temp);
-                    if (h < 40 || h > 50 || t < 20 || t > 22) {
-                        envEl.innerHTML = '<span class=\"text-yellow-400\">\u26A0 Conditions drifting from optimal zone</span>';
-                        envEl.parentElement.classList.remove('border-green-500');
-                        envEl.parentElement.classList.add('border-yellow-500');
-                    } else {
-                        envEl.innerHTML = '\u2705 Optimal processing zone active';
-                        envEl.parentElement.classList.remove('border-yellow-500');
-                        envEl.parentElement.classList.add('border-green-500');
-                    }
-                }
-            }, 5000);
-        }
-
-        // ====== MIXOLOGY WIZARD ======
-        window.clSetStep = function(step) {
-            clCurrentStep = step;
-            document.querySelectorAll('.cl-step-content').forEach(el => el.classList.add('hidden'));
-            const target = document.getElementById('cl-stepContent' + step);
-            if (target) target.classList.remove('hidden');
-
-            for (let i = 1; i <= 5; i++) {
-                const btn = document.getElementById('cl-stepBtn' + i);
-                if (btn) {
-                    if (i === step) btn.classList.add('cl-active-step');
-                    else btn.classList.remove('cl-active-step');
-                }
-            }
-
-            // Update client name display
-            const nameInput = document.getElementById('cl-clientNameInput');
-            const nameDisplay = document.getElementById('cl-currentClientNameDisplay');
-            if (nameInput && nameDisplay && nameInput.value) {
-                nameDisplay.innerText = nameInput.value;
-            }
-        };
-
-        window.clNextStep = function() {
-            if (clCurrentStep < 5) clSetStep(clCurrentStep + 1);
-        };
-
-        // ====== SCALE SIMULATION ======
-        window.clSimulatePour = function() {
-            clPourInterval = setInterval(() => {
-                clCurrentWeight += 0.5;
-                const display = document.getElementById('cl-scaleDisplay');
-                if (display) display.innerText = clCurrentWeight.toFixed(1) + 'g';
-                let pct = Math.min((clCurrentWeight / 100) * 100, 100);
-                const bar = document.getElementById('cl-pourBar');
-                if (bar) bar.style.width = pct + '%';
-            }, 50);
-        };
-
-        window.clStopPour = function() {
-            clearInterval(clPourInterval);
-        };
-
-        window.clTareScale = function() {
-            clCurrentWeight = 0;
-            const display = document.getElementById('cl-scaleDisplay');
-            if (display) display.innerText = '0.0g';
-            const bar = document.getElementById('cl-pourBar');
-            if (bar) bar.style.width = '0%';
-        };
-
-        window.clSetRatio = function(btn, ratio) {
-            clSelectedRatio = ratio;
-            const container = document.getElementById('cl-ratioButtons');
-            if (container) {
-                container.querySelectorAll('button').forEach(b => {
-                    b.className = 'flex-1 bg-gray-800 p-2 rounded text-sm text-white';
-                });
-                btn.className = 'flex-1 bg-purple-600/50 p-2 rounded text-sm border border-purple-500 text-white';
-            }
-        };
-
-        // ====== TIMER ======
-        window.clStartTimer = function(minutes) {
-            if (clTimerInterval) clearInterval(clTimerInterval);
-            let seconds = minutes * 60;
-            const totalSeconds = seconds;
-            const display = document.getElementById('cl-processingTimer');
-            const circle = document.getElementById('cl-timerCircle');
-            const totalDash = 753;
-
-            // Add to active clients
-            const clientName = document.getElementById('cl-clientNameInput')?.value || 'Walk-In';
-            const service = document.getElementById('cl-serviceSelect')?.value || 'Color Service';
-            clActiveClients = [{
-                name: clientName,
-                stylist: clCurrentUser || 'Staff',
-                service: service,
-                time: seconds,
-                status: 'Processing'
-            }];
-            clRenderActiveClients();
-
-            // Generate client link
-            const linkEl = document.getElementById('cl-clientLink');
-            const code = Math.random().toString(36).substring(2, 8);
-            if (linkEl) linkEl.value = 'https://studiosalonodessa.com/live/' + code;
-
-            clTimerInterval = setInterval(() => {
-                seconds--;
-                let m = Math.floor(seconds / 60);
-                let s = seconds % 60;
-                if (display) display.innerText = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
-
-                let offset = totalDash - (seconds / totalSeconds * totalDash);
-                if (circle) circle.style.strokeDashoffset = offset;
-
-                // Update active client time
-                if (clActiveClients[0]) clActiveClients[0].time = seconds;
-
-                if (seconds <= 0) {
-                    clearInterval(clTimerInterval);
-                    clTimerInterval = null;
-                    if (clActiveClients[0]) clActiveClients[0].status = 'Complete';
-                    clRenderActiveClients();
-                    // Visual alert
-                    if (display) {
-                        display.style.color = '#22c55e';
-                        display.innerText = 'DONE!';
-                    }
-                }
-            }, 1000);
-        };
-
-        window.clStopTimer = function() {
-            if (clTimerInterval) {
-                clearInterval(clTimerInterval);
-                clTimerInterval = null;
-            }
-        };
-
-        // ====== ACTIVE CLIENTS ======
-        function clRenderActiveClients() {
-            const tbody = document.getElementById('cl-activeClientsTable');
-            const noMsg = document.getElementById('cl-noActiveMsg');
-            if (!tbody) return;
-
-            if (clActiveClients.length === 0) {
-                tbody.innerHTML = '';
-                if (noMsg) noMsg.classList.remove('hidden');
-                return;
-            }
-            if (noMsg) noMsg.classList.add('hidden');
-
-            tbody.innerHTML = clActiveClients.map(c => {
-                const mins = Math.floor(c.time / 60);
-                const secs = c.time % 60;
-                const statusColor = c.status === 'Complete' ? 'bg-green-900 text-green-300' : 'bg-blue-900 text-blue-300';
-                return `<tr class="border-b border-white/5">
-                    <td class="py-3 font-bold text-white">${c.name}</td>
-                    <td class="py-3 text-gray-400">${c.stylist}</td>
-                    <td class="py-3 text-purple-300">${c.service}</td>
-                    <td class="py-3 font-mono text-white">${mins}m ${secs < 10 ? '0' + secs : secs}s</td>
-                    <td class="py-3"><span class="${statusColor} px-2 py-1 rounded text-xs">${c.status}</span></td>
-                </tr>`;
-            }).join('');
-        }
-
-        // ====== SESSION FINISH ======
-        window.clFinishSession = function() {
-            const client = document.getElementById('cl-clientNameInput')?.value || 'Walk-In';
-            const service = document.getElementById('cl-serviceSelect')?.value || 'Color Service';
-            const cost = document.getElementById('cl-formulaCost')?.value || '$45.00';
-            const waste = clCurrentWeight > 0 ? clCurrentWeight.toFixed(1) + 'g' : '0.0g';
-
-            clLogHistory(clCurrentUser || 'Staff', client, service, cost, waste);
-
-            // Reset state
-            clActiveClients = [];
-            clRenderActiveClients();
-            clCurrentWeight = 0;
-            clCurrentStep = 1;
-            if (clTimerInterval) { clearInterval(clTimerInterval); clTimerInterval = null; }
-
-            // Reset form
-            const nameInput = document.getElementById('cl-clientNameInput');
-            if (nameInput) nameInput.value = '';
-            const serviceSelect = document.getElementById('cl-serviceSelect');
-            if (serviceSelect) serviceSelect.value = '';
-            const display = document.getElementById('cl-currentClientNameDisplay');
-            if (display) display.innerText = 'New Client';
-
-            clUpdateDashboardStats();
-            clSetStep(1);
-            clSwitchView('dashboard');
-        };
-
-        // ====== HISTORY & DATA ======
-        function clLogHistory(stylist, client, service, cost, waste) {
-            const history = JSON.parse(localStorage.getItem('chromaHistory') || '[]');
-            const entry = {
-                date: new Date().toLocaleString(),
-                stylist: stylist,
-                client: client,
-                service: service,
-                cost: cost,
-                waste: waste
-            };
-            history.unshift(entry);
-            if (history.length > 100) history.length = 100; // Keep last 100
-            localStorage.setItem('chromaHistory', JSON.stringify(history));
-            clLoadHistory();
-        }
-
-        function clLoadHistory() {
-            const history = JSON.parse(localStorage.getItem('chromaHistory') || '[]');
-            const tbody = document.getElementById('cl-historyTableBody');
-            const noMsg = document.getElementById('cl-noHistoryMsg');
-            if (!tbody) return;
-
-            if (history.length === 0) {
-                tbody.innerHTML = '';
-                if (noMsg) noMsg.classList.remove('hidden');
-                return;
-            }
-            if (noMsg) noMsg.classList.add('hidden');
-
-            tbody.innerHTML = history.map(h =>
-                `<tr class="hover:bg-white/5 transition">
-                    <td class="p-4 text-gray-400">${h.date}</td>
-                    <td class="p-4 font-bold text-purple-400">${h.stylist}</td>
-                    <td class="p-4 text-white">${h.client}</td>
-                    <td class="p-4 text-blue-300">${h.service || '-'}</td>
-                    <td class="p-4 text-green-400">${h.cost}</td>
-                    <td class="p-4 text-red-400">${h.waste}</td>
-                </tr>`
-            ).join('');
-        }
-
-        // ====== DASHBOARD STATS ======
-        function clUpdateDashboardStats() {
-            const history = JSON.parse(localStorage.getItem('chromaHistory') || '[]');
-            const today = new Date().toLocaleDateString();
-            const todaySessions = history.filter(h =>
-                h.date && h.date.includes(today) && h.client !== 'System Login'
-            );
-
-            const countEl = document.getElementById('cl-sessionCount');
-            if (countEl) countEl.innerText = todaySessions.length;
-
-            let totalCost = 0;
-            todaySessions.forEach(s => {
-                const match = (s.cost || '').match(/[\d.]+/);
-                if (match) totalCost += parseFloat(match[0]);
-            });
-            const costEl = document.getElementById('cl-dailyCost');
-            if (costEl) costEl.innerText = '$' + totalCost.toFixed(2);
-        }
-
-        // ====== COPY LINK ======
-        window.clCopyLink = function() {
-            const linkEl = document.getElementById('cl-clientLink');
-            if (linkEl && linkEl.value) {
-                navigator.clipboard.writeText(linkEl.value).then(() => {
-                    const originalValue = linkEl.value;
-                    linkEl.value = '\u2705 Copied!';
-                    setTimeout(() => { linkEl.value = originalValue; }, 2000);
-                });
-            }
-        };
-
-        // ====== URL PARAMETER CHECK ======
-        // Allow ?staff=1 to auto-open ChromaLuxe
-        if (window.location.search.includes('staff=1') || window.location.hash === '#staff') {
-            setTimeout(() => {
-                document.getElementById('chromaluxe-app')?.classList.add('active');
-            }, 500);
-        }
-
-        // ====== RUN ======
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', clInit);
-        } else {
-            clInit();
-        }
-    })();
-    </script>
-
-    <!-- Main Salon Website React App -->
+<svg style="position:absolute;width:0;height:0"><defs><linearGradient id="pg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#a855f7"/><stop offset="100%" style="stop-color:#7e22ce"/></linearGradient></defs></svg>
+<button class="staff-btn" onclick="document.getElementById('cl-app').classList.add('active')" title="Staff Portal"><i class="fa-solid fa-flask-vial"></i></button>
+<div id="root"></div>
+
+<!-- ====== CHROMALUXE OS v3.0 ====== -->
+<div id="cl-app" class="text-white" style="font-family:'Inter',sans-serif">
+<!-- Login -->
+<div id="cl-login" class="absolute inset-0 z-50 flex items-center justify-center" style="background:radial-gradient(ellipse at 50% 40%,rgba(88,28,135,0.3),var(--bg) 70%)">
+<div class="glass p-10 w-[400px] text-center anim-fade-up">
+<div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-2xl shadow-lg shadow-purple-500/30"><i class="fa-solid fa-flask-vial"></i></div>
+<h1 class="text-2xl font-bold tracking-wide mb-1">CHROMALUXE</h1>
+<p class="text-xs text-purple-400/60 mb-1">PRECISION MIXOLOGY OS v3.0</p>
+<p class="text-[10px] text-purple-500/40 mb-8">Studio Salon Odessa</p>
+<div id="cl-users" class="grid grid-cols-5 gap-2 mb-6"></div>
+<div id="cl-pin-area" class="hidden">
+<p id="cl-sel-user" class="text-purple-400 font-bold mb-3 text-sm"></p>
+<input type="password" id="cl-pin" placeholder="\u2022 \u2022 \u2022 \u2022" class="glass-input text-center text-xl tracking-[8px] mb-4 font-mono" maxlength="4">
+<div class="grid grid-cols-3 gap-2">
+<button onclick="clPin(1)" class="p-3 glass-sm text-white hover:bg-purple-600/20 transition font-mono">1</button>
+<button onclick="clPin(2)" class="p-3 glass-sm text-white hover:bg-purple-600/20 transition font-mono">2</button>
+<button onclick="clPin(3)" class="p-3 glass-sm text-white hover:bg-purple-600/20 transition font-mono">3</button>
+<button onclick="clPin(4)" class="p-3 glass-sm text-white hover:bg-purple-600/20 transition font-mono">4</button>
+<button onclick="clPin(5)" class="p-3 glass-sm text-white hover:bg-purple-600/20 transition font-mono">5</button>
+<button onclick="clPin(6)" class="p-3 glass-sm text-white hover:bg-purple-600/20 transition font-mono">6</button>
+<button onclick="clPin(7)" class="p-3 glass-sm text-white hover:bg-purple-600/20 transition font-mono">7</button>
+<button onclick="clPin(8)" class="p-3 glass-sm text-white hover:bg-purple-600/20 transition font-mono">8</button>
+<button onclick="clPin(9)" class="p-3 glass-sm text-white hover:bg-purple-600/20 transition font-mono">9</button>
+<button onclick="clBack()" class="p-3 text-red-400 text-xs hover:bg-red-500/10 rounded-xl transition">BACK</button>
+<button onclick="clPin(0)" class="p-3 glass-sm text-white hover:bg-purple-600/20 transition font-mono">0</button>
+<button onclick="clLogin()" class="p-3 bg-purple-600 rounded-xl text-white hover:bg-purple-500 transition font-bold"><i class="fa-solid fa-arrow-right"></i></button>
+</div>
+</div>
+</div>
+</div>
+
+<!-- App Shell -->
+<div class="flex h-full">
+<nav class="cl-sidebar shrink-0">
+<div class="text-purple-500 text-xl mb-6 font-bold"><i class="fa-solid fa-flask-vial"></i></div>
+<button onclick="clNav('dash')" class="cl-nav-btn active" data-nav="dash" title="Dashboard"><i class="fa-solid fa-chart-line"></i></button>
+<button onclick="clNav('mix')" class="cl-nav-btn" data-nav="mix" title="New Mix"><i class="fa-solid fa-flask"></i></button>
+<button onclick="clNav('clients')" class="cl-nav-btn" data-nav="clients" title="Clients"><i class="fa-solid fa-users"></i></button>
+<button onclick="clNav('formulas')" class="cl-nav-btn" data-nav="formulas" title="Formula Library"><i class="fa-solid fa-book"></i></button>
+<button onclick="clNav('calendar')" class="cl-nav-btn" data-nav="calendar" title="Calendar"><i class="fa-solid fa-calendar-days"></i></button>
+<button onclick="clNav('inventory')" class="cl-nav-btn" data-nav="inventory" title="Inventory"><i class="fa-solid fa-boxes-stacked"></i></button>
+<button onclick="clNav('history')" class="cl-nav-btn" data-nav="history" title="History"><i class="fa-solid fa-clock-rotate-left"></i></button>
+<div class="flex-grow"></div>
+<button onclick="clNav('settings')" class="cl-nav-btn" data-nav="settings" title="Settings"><i class="fa-solid fa-gear"></i></button>
+<button onclick="clExit()" class="cl-nav-btn" title="Back to Site"><i class="fa-solid fa-globe text-blue-400"></i></button>
+<button onclick="clLogout()" class="cl-nav-btn" title="Logout"><i class="fa-solid fa-power-off text-red-400"></i></button>
+</nav>
+<main class="cl-main" id="cl-main">
+<!-- Header -->
+<div class="flex justify-between items-start mb-8">
+<div>
+<div class="flex items-center gap-3 mb-1">
+<h1 class="text-lg font-bold text-white" id="cl-page-title">Dashboard</h1>
+<span class="cl-badge cl-badge-green" id="cl-env-badge"><i class="fa-solid fa-leaf mr-1"></i>Optimal</span>
+</div>
+<div class="flex gap-5 text-xs text-purple-300/50">
+<span><i class="fa-solid fa-droplet text-blue-400 mr-1"></i><span id="cl-hum">45%</span></span>
+<span><i class="fa-solid fa-temperature-half text-orange-400 mr-1"></i><span id="cl-temp">21.0\u00B0C</span></span>
+<span><i class="fa-solid fa-wind text-green-400 mr-1"></i>AQI 12</span>
+<span><i class="fa-solid fa-user-circle text-purple-400 mr-1"></i><span id="cl-who">Staff</span></span>
+</div>
+</div>
+<div class="text-right">
+<div id="cl-clock" class="text-3xl font-bold font-mono grad-text">00:00:00</div>
+<div id="cl-date" class="text-xs text-purple-400/40"></div>
+</div>
+</div>
+
+<!-- Views Container -->
+<div id="cl-views">
+
+<!-- DASHBOARD -->
+<div id="cl-v-dash" class="cl-view">
+<div class="grid grid-cols-4 gap-4 mb-6">
+<div class="cl-card cl-stat"><div class="value" id="cl-revenue">$0</div><div class="label">Today's Revenue</div></div>
+<div class="cl-card cl-stat"><div class="value" id="cl-sessions">0</div><div class="label">Sessions</div></div>
+<div class="cl-card cl-stat"><div class="value" id="cl-avg-ticket">$0</div><div class="label">Avg Ticket</div></div>
+<div class="cl-card cl-stat"><div class="value" id="cl-product-used">0g</div><div class="label">Product Used</div></div>
+</div>
+<div class="grid grid-cols-3 gap-4 mb-6">
+<div class="col-span-2 cl-card cursor-pointer hover:border-purple-500/40 transition" onclick="clNav('mix')">
+<div class="flex justify-between items-center">
+<div><h3 class="font-bold text-white mb-1"><i class="fa-solid fa-plus text-purple-400 mr-2"></i>Start New Mix</h3><p class="text-xs text-purple-300/40">Launch the precision mixology wizard</p></div>
+<div class="w-10 h-10 rounded-xl bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-500/20"><i class="fa-solid fa-arrow-right text-white text-sm"></i></div>
+</div>
+</div>
+<div class="cl-card">
+<h3 class="text-xs text-purple-400/50 uppercase tracking-wider mb-3">Quick Actions</h3>
+<div class="grid grid-cols-2 gap-2">
+<button onclick="clNav('clients')" class="btn-ghost text-xs py-2 px-3"><i class="fa-solid fa-user-plus mr-1"></i>New Client</button>
+<button onclick="clNav('calendar')" class="btn-ghost text-xs py-2 px-3"><i class="fa-solid fa-calendar-plus mr-1"></i>Book Appt</button>
+<button onclick="clNav('formulas')" class="btn-ghost text-xs py-2 px-3"><i class="fa-solid fa-flask mr-1"></i>Formulas</button>
+<button onclick="clNav('inventory')" class="btn-ghost text-xs py-2 px-3"><i class="fa-solid fa-box mr-1"></i>Inventory</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="col-span-2 cl-card" style="max-height:320px;overflow-y:auto">
+<h3 class="font-bold text-sm mb-3 text-white"><i class="fa-solid fa-clock text-purple-400 mr-2"></i>Active Processing</h3>
+<table class="cl-table"><thead><tr><th>Client</th><th>Service</th><th>Timer</th><th>Status</th></tr></thead><tbody id="cl-active-tb"></tbody></table>
+<p id="cl-no-active" class="text-center text-purple-400/30 text-sm py-6"><i class="fa-solid fa-flask-vial text-2xl block mb-2"></i>No active sessions</p>
+</div>
+<div class="space-y-4">
+<div class="cl-card">
+<h3 class="text-xs text-purple-400/50 uppercase tracking-wider mb-2">Today's Appointments</h3>
+<div id="cl-today-appts" class="space-y-2 text-sm">
+<p class="text-purple-400/30 text-xs">No appointments today</p>
+</div>
+</div>
+<div class="cl-card" id="cl-env-card" style="border-left:3px solid #4ade80">
+<h3 class="text-xs font-bold text-green-400 mb-1"><i class="fa-solid fa-shield-halved mr-1"></i>Environment</h3>
+<p class="text-xs text-purple-300/40" id="cl-env-msg">Optimal processing zone</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- NEW MIX WIZARD -->
+<div id="cl-v-mix" class="cl-view hidden">
+<div class="flex gap-6" style="height:calc(100vh - 180px)">
+<div class="w-56 shrink-0 cl-card p-0 overflow-hidden flex flex-col">
+<div class="p-4 border-b border-purple-500/10 bg-purple-900/10">
+<h3 class="text-sm font-bold text-white">Workflow</h3>
+<p class="text-[10px] text-purple-400/40 mt-1" id="cl-mix-client">New Client</p>
+</div>
+<div class="flex-grow overflow-y-auto">
+<button onclick="clStep(1)" data-step="1" class="cl-step-btn active w-full text-left p-3 border-b border-purple-500/5 hover:bg-purple-500/5 text-xs"><span class="text-purple-500/40 uppercase text-[9px]">Step 1</span><br><span class="font-bold text-white">Prep & Protect</span></button>
+<button onclick="clStep(2)" data-step="2" class="cl-step-btn w-full text-left p-3 border-b border-purple-500/5 hover:bg-purple-500/5 text-xs"><span class="text-purple-500/40 uppercase text-[9px]">Step 2</span><br><span class="font-bold text-white">Formulate & Weigh</span></button>
+<button onclick="clStep(3)" data-step="3" class="cl-step-btn w-full text-left p-3 border-b border-purple-500/5 hover:bg-purple-500/5 text-xs"><span class="text-purple-500/40 uppercase text-[9px]">Step 3</span><br><span class="font-bold text-white">Strand Test</span></button>
+<button onclick="clStep(4)" data-step="4" class="cl-step-btn w-full text-left p-3 border-b border-purple-500/5 hover:bg-purple-500/5 text-xs"><span class="text-purple-500/40 uppercase text-[9px]">Step 4</span><br><span class="font-bold text-white">Process & Time</span></button>
+<button onclick="clStep(5)" data-step="5" class="cl-step-btn w-full text-left p-3 hover:bg-purple-500/5 text-xs"><span class="text-purple-500/40 uppercase text-[9px]">Step 5</span><br><span class="font-bold text-white">Finish & Log</span></button>
+</div>
+</div>
+<div class="flex-grow cl-card relative overflow-y-auto">
+<!-- Step 1: Prep -->
+<div class="cl-step" data-s="1">
+<h2 class="text-xl font-bold mb-6 text-white">Client Prep</h2>
+<div class="grid grid-cols-2 gap-3 mb-6">
+<input type="text" id="cl-cname" placeholder="Client Name" class="glass-input" oninput="document.getElementById('cl-mix-client').textContent=this.value||'New Client'">
+<select id="cl-csvc" class="glass-input"><option value="">Service Type</option><option>Root Touch Up</option><option>Full Balayage</option><option>Toner / Gloss</option><option>Vivid Color</option><option>Color Correction</option><option>Highlights</option><option>Keratin Treatment</option></select>
+<input type="text" id="cl-cphone" placeholder="Phone (optional)" class="glass-input">
+<input type="text" id="cl-cemail" placeholder="Email (optional)" class="glass-input">
+</div>
+<h3 class="text-xs font-bold text-purple-400/60 uppercase tracking-wider mb-3">Safety Checklist</h3>
+<label class="flex items-center gap-3 p-3 glass-sm mb-2 cursor-pointer text-sm text-purple-200"><input type="checkbox" class="accent-purple-500 w-4 h-4"> Cape & Towel Secure</label>
+<label class="flex items-center gap-3 p-3 glass-sm mb-2 cursor-pointer text-sm text-purple-200"><input type="checkbox" class="accent-purple-500 w-4 h-4"> Barrier Cream Applied</label>
+<label class="flex items-center gap-3 p-3 glass-sm mb-2 cursor-pointer text-sm text-purple-200"><input type="checkbox" class="accent-purple-500 w-4 h-4"> Scalp Analysis (No Abrasions)</label>
+<label class="flex items-center gap-3 p-3 glass-sm mb-2 cursor-pointer text-sm text-purple-200"><input type="checkbox" class="accent-purple-500 w-4 h-4"> Allergy / Patch Test Verified</label>
+</div>
+<!-- Step 2: Scale -->
+<div class="cl-step hidden" data-s="2">
+<h2 class="text-xl font-bold mb-6 text-white">Smart Scale</h2>
+<div class="flex justify-between items-center mb-6">
+<div id="cl-scale" class="text-5xl font-bold font-mono text-purple-400">0.0g</div>
+<button onclick="clTare()" class="btn-ghost text-xs">TARE</button>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<div class="glass-sm p-3"><p class="text-[10px] text-purple-400/40 uppercase mb-2">Ratio</p><div class="flex gap-1" id="cl-ratios"><button onclick="clRatio(this,'1:1')" class="flex-1 text-xs p-2 rounded-lg bg-purple-600/30 border border-purple-500/40 text-white">1:1</button><button onclick="clRatio(this,'1:1.5')" class="flex-1 text-xs p-2 rounded-lg glass-sm text-purple-300">1:1.5</button><button onclick="clRatio(this,'1:2')" class="flex-1 text-xs p-2 rounded-lg glass-sm text-purple-300">1:2</button></div></div>
+<div class="glass-sm p-3"><p class="text-[10px] text-purple-400/40 uppercase mb-2">Developer</p><select id="cl-dev" class="glass-input py-2 text-sm"><option>10 Vol (3%)</option><option selected>20 Vol (6%)</option><option>30 Vol (9%)</option><option>40 Vol (12%)</option></select></div>
+</div>
+<div class="h-2 rounded-full bg-purple-900/40 overflow-hidden mb-1"><div id="cl-pour-bar" class="h-full bg-gradient-to-r from-purple-500 to-purple-400 transition-all" style="width:0%"></div></div>
+<p class="text-center text-[10px] text-purple-500/30 mb-4"><i class="fa-solid fa-bluetooth text-blue-400 mr-1"></i>Scale Connected</p>
+<button onmousedown="clPourStart()" onmouseup="clPourStop()" ontouchstart="clPourStart()" ontouchend="clPourStop()" class="btn-primary w-full py-4">HOLD TO POUR (SIMULATE)</button>
+</div>
+<!-- Step 3: Strand -->
+<div class="cl-step hidden" data-s="3">
+<h2 class="text-xl font-bold mb-4 text-white">Strand Test</h2>
+<p class="text-sm text-purple-300/40 mb-6">Recommended for drastic changes or compromised hair.</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="cl-card text-center cursor-pointer hover:border-green-500/40" onclick="clStep(4)"><i class="fa-solid fa-check text-4xl text-green-500 mb-2"></i><h3 class="font-bold text-white">Passed</h3><p class="text-[10px] text-purple-400/40 mt-1">Integrity held, color true</p></div>
+<div class="cl-card text-center cursor-pointer hover:border-red-500/40"><i class="fa-solid fa-xmark text-4xl text-red-500 mb-2"></i><h3 class="font-bold text-white">Failed</h3><p class="text-[10px] text-purple-400/40 mt-1">Reformulate needed</p></div>
+</div>
+</div>
+<!-- Step 4: Timer -->
+<div class="cl-step hidden" data-s="4">
+<h2 class="text-xl font-bold mb-4 text-white">Processing Timer</h2>
+<div class="text-center py-6">
+<div class="relative inline-block"><svg width="200" height="200" class="transform -rotate-90"><circle cx="100" cy="100" r="90" stroke="rgba(88,28,135,0.3)" stroke-width="6" fill="transparent"/><circle id="cl-timer-ring" cx="100" cy="100" r="90" stroke="url(#pg)" stroke-width="6" fill="transparent" stroke-dasharray="565" stroke-dashoffset="565" stroke-linecap="round"/></svg>
+<div class="absolute inset-0 flex items-center justify-center"><span id="cl-timer-display" class="text-3xl font-bold font-mono text-white">00:00</span></div></div>
+</div>
+<div class="flex justify-center gap-2 flex-wrap">
+<button onclick="clTimer(15)" class="btn-ghost text-xs py-2">15m Toner</button>
+<button onclick="clTimer(25)" class="btn-ghost text-xs py-2">25m Quick</button>
+<button onclick="clTimer(35)" class="btn-ghost text-xs py-2">35m Standard</button>
+<button onclick="clTimer(45)" class="btn-ghost text-xs py-2">45m Grey</button>
+<button onclick="clTimerStop()" class="text-xs py-2 px-4 text-red-400 hover:bg-red-500/10 rounded-lg transition">Stop</button>
+</div>
+</div>
+<!-- Step 5: Finish -->
+<div class="cl-step hidden" data-s="5">
+<h2 class="text-xl font-bold mb-6 text-white">Finish & Log</h2>
+<div class="glass-sm p-4 mb-4 border-l-3" style="border-left:3px solid #f87171">
+<h3 class="text-sm font-bold text-red-400 mb-2"><i class="fa-solid fa-scale-balanced mr-1"></i>Waste Check</h3>
+<p class="text-xs text-purple-300/40 mb-2">Place bowl back on scale</p>
+<div class="text-2xl font-bold font-mono text-white" id="cl-waste">0.0g <span class="text-xs font-normal text-purple-400/40">unused</span></div>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<div class="glass-sm p-3"><p class="text-[10px] text-purple-400/40 uppercase mb-1">Formula Cost</p><input type="text" id="cl-cost" value="$45.00" class="glass-input py-2 text-sm"></div>
+<div class="glass-sm p-3"><p class="text-[10px] text-purple-400/40 uppercase mb-1">Notes</p><input type="text" id="cl-notes" placeholder="Session notes..." class="glass-input py-2 text-sm"></div>
+</div>
+<label class="flex items-center gap-3 p-3 glass-sm mb-4 cursor-pointer text-sm text-purple-200"><input type="checkbox" id="cl-save-formula" class="accent-purple-500 w-4 h-4"> Save formula to library</label>
+<button onclick="clFinish()" class="btn-primary w-full py-4"><i class="fa-solid fa-check-double mr-2"></i>LOG SESSION & FINISH</button>
+</div>
+<div class="absolute bottom-4 right-4"><button onclick="clNextStep()" class="btn-primary btn-pill px-6">Next <i class="fa-solid fa-arrow-right ml-1"></i></button></div>
+</div>
+</div>
+</div>
+
+<!-- CLIENTS -->
+<div id="cl-v-clients" class="cl-view hidden">
+<div class="flex justify-between items-center mb-4">
+<div class="flex gap-2"><input type="text" id="cl-client-search" placeholder="Search clients..." class="glass-input py-2 text-sm" style="width:250px" oninput="clSearchClients()"></div>
+<button onclick="clShowAddClient()" class="btn-primary text-xs"><i class="fa-solid fa-user-plus mr-1"></i>Add Client</button>
+</div>
+<div class="cl-card overflow-y-auto" style="max-height:calc(100vh - 260px)">
+<table class="cl-table"><thead><tr><th>Name</th><th>Phone</th><th>Email</th><th>Last Visit</th><th>Total Visits</th><th>Notes</th></tr></thead><tbody id="cl-clients-tb"></tbody></table>
+<p id="cl-no-clients" class="text-center text-purple-400/30 text-sm py-8">No clients yet. Add your first client!</p>
+</div>
+</div>
+
+<!-- FORMULA LIBRARY -->
+<div id="cl-v-formulas" class="cl-view hidden">
+<div class="flex justify-between items-center mb-4">
+<div class="flex gap-2"><input type="text" id="cl-formula-search" placeholder="Search formulas..." class="glass-input py-2 text-sm" style="width:250px" oninput="clSearchFormulas()"></div>
+<button onclick="clShowAddFormula()" class="btn-primary text-xs"><i class="fa-solid fa-plus mr-1"></i>New Formula</button>
+</div>
+<div id="cl-formulas-grid" class="grid grid-cols-3 gap-4" style="max-height:calc(100vh - 260px);overflow-y:auto"></div>
+<p id="cl-no-formulas" class="text-center text-purple-400/30 text-sm py-8">No saved formulas. Complete a mix to save one!</p>
+</div>
+
+<!-- CALENDAR -->
+<div id="cl-v-calendar" class="cl-view hidden">
+<div class="flex justify-between items-center mb-4">
+<div class="flex gap-2 items-center">
+<button onclick="clCalPrev()" class="btn-ghost text-xs p-2"><i class="fa-solid fa-chevron-left"></i></button>
+<span id="cl-cal-month" class="text-sm font-bold text-white px-4"></span>
+<button onclick="clCalNext()" class="btn-ghost text-xs p-2"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+<button onclick="clShowAddAppt()" class="btn-primary text-xs"><i class="fa-solid fa-calendar-plus mr-1"></i>New Appointment</button>
+</div>
+<div class="cl-card">
+<div class="grid grid-cols-7 gap-px text-center text-xs text-purple-400/40 mb-2">
+<div class="py-2">Sun</div><div class="py-2">Mon</div><div class="py-2">Tue</div><div class="py-2">Wed</div><div class="py-2">Thu</div><div class="py-2">Fri</div><div class="py-2">Sat</div>
+</div>
+<div id="cl-cal-grid" class="grid grid-cols-7 gap-px"></div>
+</div>
+<div class="mt-4 cl-card">
+<h3 class="text-sm font-bold text-white mb-3">Appointments for <span id="cl-cal-sel-date">Today</span></h3>
+<div id="cl-cal-appts" class="space-y-2">
+<p class="text-xs text-purple-400/30">Select a date to view appointments</p>
+</div>
+</div>
+</div>
+
+<!-- INVENTORY -->
+<div id="cl-v-inventory" class="cl-view hidden">
+<div class="flex justify-between items-center mb-4">
+<div class="flex gap-2"><input type="text" id="cl-inv-search" placeholder="Search products..." class="glass-input py-2 text-sm" style="width:250px" oninput="clSearchInv()"></div>
+<button onclick="clShowAddProduct()" class="btn-primary text-xs"><i class="fa-solid fa-plus mr-1"></i>Add Product</button>
+</div>
+<div class="cl-card overflow-y-auto" style="max-height:calc(100vh - 260px)">
+<table class="cl-table"><thead><tr><th>Product</th><th>Brand</th><th>Stock Level</th><th>Cost/Unit</th><th>Reorder At</th><th>Actions</th></tr></thead><tbody id="cl-inv-tb"></tbody></table>
+</div>
+</div>
+
+<!-- HISTORY -->
+<div id="cl-v-history" class="cl-view hidden">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-sm font-bold text-white">Session Logs</h3>
+<button onclick="clExportCSV()" class="btn-ghost text-xs"><i class="fa-solid fa-download mr-1"></i>Export CSV</button>
+</div>
+<div class="cl-card overflow-y-auto" style="max-height:calc(100vh - 240px)">
+<table class="cl-table"><thead><tr><th>Date</th><th>Stylist</th><th>Client</th><th>Service</th><th>Cost</th><th>Product</th><th>Waste</th></tr></thead><tbody id="cl-history-tb"></tbody></table>
+<p id="cl-no-history" class="text-center text-purple-400/30 text-sm py-8">No sessions logged yet</p>
+</div>
+</div>
+
+<!-- SETTINGS -->
+<div id="cl-v-settings" class="cl-view hidden">
+<div class="max-w-xl">
+<h2 class="text-xl font-bold text-white mb-6">Settings</h2>
+<div class="cl-card mb-4">
+<h3 class="text-sm font-bold text-white mb-3"><i class="fa-solid fa-palette text-purple-400 mr-2"></i>Business Profile</h3>
+<div class="grid grid-cols-2 gap-3">
+<div><label class="text-[10px] text-purple-400/40 uppercase">Salon Name</label><input id="cl-set-name" value="Studio Salon Odessa" class="glass-input py-2 text-sm mt-1"></div>
+<div><label class="text-[10px] text-purple-400/40 uppercase">Phone</label><input id="cl-set-phone" value="(613) 555-0123" class="glass-input py-2 text-sm mt-1"></div>
+<div><label class="text-[10px] text-purple-400/40 uppercase">Email</label><input id="cl-set-email" value="jordanch14@gmail.com" class="glass-input py-2 text-sm mt-1"></div>
+<div><label class="text-[10px] text-purple-400/40 uppercase">Location</label><input id="cl-set-loc" value="Odessa, Ontario" class="glass-input py-2 text-sm mt-1"></div>
+</div>
+</div>
+<div class="cl-card mb-4">
+<h3 class="text-sm font-bold text-white mb-3"><i class="fa-solid fa-share-nodes text-purple-400 mr-2"></i>Social & Integrations</h3>
+<div class="grid grid-cols-2 gap-3">
+<div><label class="text-[10px] text-purple-400/40 uppercase"><i class="fa-brands fa-instagram mr-1"></i>Instagram</label><input id="cl-set-ig" value="@studiosalonodessa" class="glass-input py-2 text-sm mt-1"></div>
+<div><label class="text-[10px] text-purple-400/40 uppercase"><i class="fa-brands fa-facebook mr-1"></i>Facebook</label><input id="cl-set-fb" value="studiosalonodessa" class="glass-input py-2 text-sm mt-1"></div>
+<div><label class="text-[10px] text-purple-400/40 uppercase"><i class="fa-brands fa-x-twitter mr-1"></i>X / Twitter</label><input id="cl-set-x" class="glass-input py-2 text-sm mt-1" placeholder="@handle"></div>
+<div><label class="text-[10px] text-purple-400/40 uppercase"><i class="fa-brands fa-google mr-1"></i>Google Business ID</label><input id="cl-set-goog" class="glass-input py-2 text-sm mt-1" placeholder="Place ID"></div>
+<div><label class="text-[10px] text-purple-400/40 uppercase"><i class="fa-brands fa-tiktok mr-1"></i>TikTok</label><input id="cl-set-tt" value="@studiosalonodessa" class="glass-input py-2 text-sm mt-1"></div>
+<div><label class="text-[10px] text-purple-400/40 uppercase"><i class="fa-brands fa-microsoft mr-1"></i>Microsoft Booking</label><input id="cl-set-ms" class="glass-input py-2 text-sm mt-1" placeholder="Booking page URL"></div>
+</div>
+</div>
+<div class="cl-card mb-4">
+<h3 class="text-sm font-bold text-white mb-3"><i class="fa-solid fa-database text-purple-400 mr-2"></i>Data Management</h3>
+<div class="flex gap-3 flex-wrap">
+<button onclick="clExportAll()" class="btn-ghost text-xs"><i class="fa-solid fa-download mr-1"></i>Export All Data (JSON)</button>
+<button onclick="clClearData()" class="text-xs py-2 px-4 text-red-400 hover:bg-red-500/10 rounded-lg transition border border-red-500/20"><i class="fa-solid fa-trash mr-1"></i>Clear All Data</button>
+</div>
+</div>
+<button onclick="clSaveSettings()" class="btn-primary"><i class="fa-solid fa-check mr-1"></i>Save Settings</button>
+</div>
+</div>
+
+</div><!-- end cl-views -->
+</main>
+</div><!-- end flex -->
+</div><!-- end cl-app -->
+
+<!-- Modal Overlay -->
+<div id="cl-modal" class="hidden fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-sm" onclick="if(event.target===this)clModalClose()">
+<div class="glass p-8 w-[480px] max-h-[80vh] overflow-y-auto anim-fade-up" id="cl-modal-body"></div>
+</div>
+
+<script>
+(function(){
+const U=[{n:'Jordan'},{n:'Mia'},{n:'Sophie'},{n:'Ava'},{n:'Emma'},{n:'Liam'},{n:'Noah'},{n:'Olivia'},{n:'Ella'},{n:'Luna'},{n:'Chloe'},{n:'Zoe'},{n:'Harper'},{n:'Aria'},{n:'Guest'}];
+let ME=null,STEP=1,WEIGHT=0,pourI=null,timerI=null,timerTotal=0,calDate=new Date(),calMonth=new Date();
+const LS=k=>JSON.parse(localStorage.getItem(k)||'[]');
+const SS=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+const $=id=>document.getElementById(id);
+
+function init(){renderUsers();tick();setInterval(tick,1000);setInterval(env,5000);env();loadDash();renderCal();loadInv();loadClients();loadFormulas();loadHistory();
+if(location.search.includes('staff=1')||location.hash==='#staff')$('cl-app').classList.add('active');}
+
+// LOGIN
+function renderUsers(){const g=$('cl-users');if(!g)return;g.innerHTML=U.map(u=>`<div onclick="clSel('${u.n}')" class="glass-sm p-1.5 rounded-xl cursor-pointer hover:bg-purple-600/20 transition text-center"><div class="w-7 h-7 mx-auto rounded-full bg-purple-500/20 flex items-center justify-center text-xs font-bold text-purple-300 mb-0.5">${u.n[0]}</div><span class="text-[9px] text-purple-300/60">${u.n}</span></div>`).join('');}
+window.clSel=n=>{$('cl-users').parentElement&&($('cl-users').parentElement.classList.add('hidden'));$('cl-pin-area').classList.remove('hidden');$('cl-sel-user').textContent=n;$('cl-pin').value='';$('cl-pin').focus();};
+window.clPin=n=>{const i=$('cl-pin');if(i.value.length<4){i.value+=n;if(i.value.length===4)setTimeout(clLogin,200);}};
+window.clBack=()=>{$('cl-pin-area').classList.add('hidden');const w=$('cl-users').parentElement;if(w)w.classList.remove('hidden');};
+window.clLogin=()=>{if($('cl-pin').value==='1234'){ME=$('cl-sel-user').textContent;$('cl-login').classList.add('hidden');$('cl-who').textContent=ME;log(ME,'System Login','-','$0','0g','0g');}else{$('cl-pin').value='';$('cl-pin').style.borderColor='#ef4444';setTimeout(()=>$('cl-pin').style.borderColor='',800);}};
+window.clLogout=()=>{ME=null;$('cl-login').classList.remove('hidden');clBack();};
+window.clExit=()=>$('cl-app').classList.remove('active');
+
+// NAV
+window.clNav=v=>{document.querySelectorAll('.cl-view').forEach(e=>e.classList.add('hidden'));const t=$('cl-v-'+v);if(t)t.classList.remove('hidden');document.querySelectorAll('.cl-nav-btn').forEach(b=>{b.classList.toggle('active',b.dataset.nav===v);});
+const titles={dash:'Dashboard',mix:'New Mix',clients:'Client Database',formulas:'Formula Library',calendar:'Calendar',inventory:'Inventory',history:'Session History',settings:'Settings'};$('cl-page-title').textContent=titles[v]||v;
+if(v==='calendar')renderCal();if(v==='dash')loadDash();if(v==='history')loadHistory();if(v==='clients')loadClients();if(v==='formulas')loadFormulas();};
+
+// CLOCK & ENV
+function tick(){const d=new Date();$('cl-clock')&&($('cl-clock').textContent=d.toLocaleTimeString('en-US',{hour12:false}));$('cl-date')&&($('cl-date').textContent=d.toLocaleDateString('en-US',{weekday:'long',month:'short',day:'numeric',year:'numeric'}));}
+function env(){const t=(20.5+Math.random()).toFixed(1),h=(44+Math.random()*3).toFixed(0);$('cl-temp')&&($('cl-temp').textContent=t+'\u00B0C');$('cl-hum')&&($('cl-hum').textContent=h+'%');
+const ok=h>=40&&h<=50&&t>=20&&t<=22;const b=$('cl-env-badge'),c=$('cl-env-card'),m=$('cl-env-msg');
+if(b){b.className='cl-badge '+(ok?'cl-badge-green':'cl-badge-amber');b.innerHTML=(ok?'<i class="fa-solid fa-leaf mr-1"></i>Optimal':'<i class="fa-solid fa-triangle-exclamation mr-1"></i>Warning');}
+if(c)c.style.borderLeftColor=ok?'#4ade80':'#fbbf24';if(m)m.textContent=ok?'Optimal processing zone':'Conditions drifting - check ventilation';}
+
+// MIX WIZARD
+window.clStep=s=>{STEP=s;document.querySelectorAll('.cl-step').forEach(e=>e.classList.toggle('hidden',e.dataset.s!=s));document.querySelectorAll('.cl-step-btn').forEach(b=>b.classList.toggle('active',b.dataset.step==s));};
+window.clNextStep=()=>{if(STEP<5)clStep(STEP+1);};
+// SCALE
+window.clPourStart=()=>{pourI=setInterval(()=>{WEIGHT+=0.5;$('cl-scale')&&($('cl-scale').textContent=WEIGHT.toFixed(1)+'g');const p=Math.min(WEIGHT/100*100,100);$('cl-pour-bar')&&($('cl-pour-bar').style.width=p+'%');},50);};
+window.clPourStop=()=>clearInterval(pourI);
+window.clTare=()=>{WEIGHT=0;$('cl-scale')&&($('cl-scale').textContent='0.0g');$('cl-pour-bar')&&($('cl-pour-bar').style.width='0%');};
+window.clRatio=(btn,r)=>{$('cl-ratios').querySelectorAll('button').forEach(b=>{b.className='flex-1 text-xs p-2 rounded-lg glass-sm text-purple-300';});btn.className='flex-1 text-xs p-2 rounded-lg bg-purple-600/30 border border-purple-500/40 text-white';};
+// TIMER
+window.clTimer=m=>{if(timerI)clearInterval(timerI);let s=m*60;timerTotal=s;const ring=$('cl-timer-ring'),disp=$('cl-timer-display');
+timerI=setInterval(()=>{s--;const mm=Math.floor(s/60),ss=s%60;if(disp)disp.textContent=(mm<10?'0'+mm:mm)+':'+(ss<10?'0'+ss:ss);
+if(ring){const off=565-(s/timerTotal*565);ring.style.strokeDashoffset=off;}
+if(s<=0){clearInterval(timerI);timerI=null;if(disp){disp.textContent='DONE!';disp.style.color='#4ade80';}}},1000);};
+window.clTimerStop=()=>{if(timerI){clearInterval(timerI);timerI=null;}};
+// FINISH
+window.clFinish=()=>{const client=$('cl-cname')?.value||'Walk-In',svc=$('cl-csvc')?.value||'Color',cost=$('cl-cost')?.value||'$45',waste=WEIGHT>0?WEIGHT.toFixed(1)+'g':'0g',product=WEIGHT.toFixed(1)+'g';
+log(ME||'Staff',client,svc,cost,product,waste);
+// Save client
+const clients=LS('cl_clients');const existing=clients.find(c=>c.name.toLowerCase()===client.toLowerCase());
+if(existing){existing.visits=(existing.visits||0)+1;existing.lastVisit=new Date().toLocaleDateString();existing.lastService=svc;}
+else if(client!=='Walk-In'){clients.push({name:client,phone:$('cl-cphone')?.value||'',email:$('cl-cemail')?.value||'',visits:1,lastVisit:new Date().toLocaleDateString(),lastService:svc,notes:$('cl-notes')?.value||'',created:new Date().toISOString()});}
+SS('cl_clients',clients);
+// Save formula if checked
+if($('cl-save-formula')?.checked){const formulas=LS('cl_formulas');formulas.unshift({name:client+' - '+svc,client,service:svc,ratio:document.querySelector('#cl-ratios .border-purple-500\\/40')?.textContent||'1:1',developer:$('cl-dev')?.value||'20 Vol',weight:WEIGHT.toFixed(1)+'g',notes:$('cl-notes')?.value||'',date:new Date().toLocaleDateString()});SS('cl_formulas',formulas);}
+// Reset
+WEIGHT=0;STEP=1;if(timerI){clearInterval(timerI);timerI=null;}
+['cl-cname','cl-cphone','cl-cemail','cl-notes'].forEach(id=>{const e=$(id);if(e)e.value='';});$('cl-csvc')&&($('cl-csvc').value='');$('cl-mix-client')&&($('cl-mix-client').textContent='New Client');$('cl-scale')&&($('cl-scale').textContent='0.0g');$('cl-pour-bar')&&($('cl-pour-bar').style.width='0%');$('cl-timer-display')&&($('cl-timer-display').textContent='00:00');$('cl-timer-display')&&($('cl-timer-display').style.color='');$('cl-timer-ring')&&($('cl-timer-ring').style.strokeDashoffset='565');
+clStep(1);clNav('dash');};
+
+function log(stylist,client,svc,cost,product,waste){const h=LS('cl_history');h.unshift({date:new Date().toLocaleString(),stylist,client,service:svc,cost,product,waste});if(h.length>500)h.length=500;SS('cl_history',h);}
+
+// DASHBOARD
+function loadDash(){const h=LS('cl_history');const today=new Date().toLocaleDateString();const ts=h.filter(e=>e.date?.includes(today)&&e.client!=='System Login');
+$('cl-sessions')&&($('cl-sessions').textContent=ts.length);
+let rev=0,prod=0;ts.forEach(s=>{const m=(s.cost||'').match(/[\d.]+/);if(m)rev+=parseFloat(m[0]);const p=(s.product||'').match(/[\d.]+/);if(p)prod+=parseFloat(p[0]);});
+$('cl-revenue')&&($('cl-revenue').textContent='$'+rev.toFixed(0));$('cl-avg-ticket')&&($('cl-avg-ticket').textContent=ts.length?'$'+(rev/ts.length).toFixed(0):'$0');$('cl-product-used')&&($('cl-product-used').textContent=prod.toFixed(0)+'g');
+// Today's appts
+const appts=LS('cl_appts').filter(a=>a.date===today);const el=$('cl-today-appts');if(el){if(appts.length===0)el.innerHTML='<p class="text-purple-400/30 text-xs">No appointments today</p>';
+else el.innerHTML=appts.map(a=>`<div class="flex justify-between items-center p-2 glass-sm rounded-lg"><div><span class="text-white text-xs font-bold">${a.time}</span> <span class="text-purple-300/60 text-xs ml-2">${a.client}</span></div><span class="cl-badge cl-badge-purple text-[10px]">${a.service}</span></div>`).join('');}
+}
+
+// CLIENTS
+function loadClients(){const c=LS('cl_clients');const tb=$('cl-clients-tb'),no=$('cl-no-clients');if(!tb)return;
+if(!c.length){tb.innerHTML='';no&&no.classList.remove('hidden');return;}no&&no.classList.add('hidden');
+tb.innerHTML=c.map(x=>`<tr><td class="text-white font-bold">${x.name}</td><td>${x.phone||'-'}</td><td>${x.email||'-'}</td><td>${x.lastVisit||'-'}</td><td class="text-center">${x.visits||0}</td><td class="text-xs">${x.notes||'-'}</td></tr>`).join('');}
+window.clSearchClients=()=>{const q=$('cl-client-search').value.toLowerCase();const rows=$('cl-clients-tb').querySelectorAll('tr');rows.forEach(r=>r.style.display=r.textContent.toLowerCase().includes(q)?'':'none');};
+window.clShowAddClient=()=>{$('cl-modal-body').innerHTML=`<h3 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-user-plus text-purple-400 mr-2"></i>Add Client</h3>
+<div class="space-y-3"><input id="m-cn" placeholder="Name *" class="glass-input py-2 text-sm"><input id="m-cp" placeholder="Phone" class="glass-input py-2 text-sm"><input id="m-ce" placeholder="Email" class="glass-input py-2 text-sm"><textarea id="m-cno" placeholder="Notes" class="glass-input py-2 text-sm" rows="2"></textarea>
+<button onclick="clAddClient()" class="btn-primary w-full">Save Client</button></div>`;$('cl-modal').classList.remove('hidden');};
+window.clAddClient=()=>{const n=$('m-cn')?.value;if(!n)return;const c=LS('cl_clients');c.push({name:n,phone:$('m-cp')?.value||'',email:$('m-ce')?.value||'',notes:$('m-cno')?.value||'',visits:0,created:new Date().toISOString()});SS('cl_clients',c);loadClients();clModalClose();};
+
+// FORMULAS
+function loadFormulas(){const f=LS('cl_formulas');const g=$('cl-formulas-grid'),no=$('cl-no-formulas');if(!g)return;
+if(!f.length){g.innerHTML='';no&&no.classList.remove('hidden');return;}no&&no.classList.add('hidden');
+g.innerHTML=f.map((x,i)=>`<div class="cl-card hover-lift"><div class="flex justify-between items-start mb-2"><h4 class="text-sm font-bold text-white">${x.name}</h4><span class="cl-badge cl-badge-purple text-[9px]">${x.date}</span></div>
+<div class="space-y-1 text-xs text-purple-300/50"><div><i class="fa-solid fa-flask mr-1"></i>${x.service||'Color'}</div><div><i class="fa-solid fa-scale-balanced mr-1"></i>${x.weight} at ${x.ratio}</div><div><i class="fa-solid fa-droplet mr-1"></i>${x.developer}</div>${x.notes?'<div><i class="fa-solid fa-note-sticky mr-1"></i>'+x.notes+'</div>':''}</div></div>`).join('');}
+window.clSearchFormulas=()=>{const q=$('cl-formula-search').value.toLowerCase();$('cl-formulas-grid').querySelectorAll('.cl-card').forEach(c=>c.style.display=c.textContent.toLowerCase().includes(q)?'':'none');};
+window.clShowAddFormula=()=>{$('cl-modal-body').innerHTML=`<h3 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-flask text-purple-400 mr-2"></i>New Formula</h3>
+<div class="space-y-3"><input id="m-fn" placeholder="Formula Name *" class="glass-input py-2 text-sm"><input id="m-fc" placeholder="Client" class="glass-input py-2 text-sm"><input id="m-fs" placeholder="Service" class="glass-input py-2 text-sm"><input id="m-fw" placeholder="Weight (e.g. 45g)" class="glass-input py-2 text-sm"><input id="m-fr" placeholder="Ratio (e.g. 1:1)" class="glass-input py-2 text-sm"><input id="m-fd" placeholder="Developer" class="glass-input py-2 text-sm"><textarea id="m-fno" placeholder="Notes" class="glass-input py-2 text-sm" rows="2"></textarea>
+<button onclick="clAddFormula()" class="btn-primary w-full">Save Formula</button></div>`;$('cl-modal').classList.remove('hidden');};
+window.clAddFormula=()=>{const n=$('m-fn')?.value;if(!n)return;const f=LS('cl_formulas');f.unshift({name:n,client:$('m-fc')?.value||'',service:$('m-fs')?.value||'',weight:$('m-fw')?.value||'',ratio:$('m-fr')?.value||'1:1',developer:$('m-fd')?.value||'',notes:$('m-fno')?.value||'',date:new Date().toLocaleDateString()});SS('cl_formulas',f);loadFormulas();clModalClose();};
+
+// CALENDAR
+function renderCal(){const m=calMonth.getMonth(),y=calMonth.getFullYear();$('cl-cal-month')&&($('cl-cal-month').textContent=new Date(y,m).toLocaleDateString('en-US',{month:'long',year:'numeric'}));
+const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();const g=$('cl-cal-grid');if(!g)return;
+const today=new Date();const todayStr=today.toLocaleDateString();const appts=LS('cl_appts');
+let html='';for(let i=0;i<first;i++)html+='<div class="p-2 text-center"></div>';
+for(let d=1;d<=days;d++){const dateStr=new Date(y,m,d).toLocaleDateString();const isToday=dateStr===todayStr;const hasAppt=appts.some(a=>a.date===dateStr);
+html+=`<div onclick="clCalDay('${dateStr}')" class="p-2 text-center rounded-lg cursor-pointer transition text-sm ${isToday?'bg-purple-600/30 text-white font-bold border border-purple-500/30':'text-purple-300/60 hover:bg-purple-500/10'}">${d}${hasAppt?'<div class="w-1 h-1 rounded-full bg-purple-400 mx-auto mt-0.5"></div>':''}</div>`;}
+g.innerHTML=html;}
+window.clCalPrev=()=>{calMonth.setMonth(calMonth.getMonth()-1);renderCal();};
+window.clCalNext=()=>{calMonth.setMonth(calMonth.getMonth()+1);renderCal();};
+window.clCalDay=d=>{$('cl-cal-sel-date')&&($('cl-cal-sel-date').textContent=d);const appts=LS('cl_appts').filter(a=>a.date===d);const el=$('cl-cal-appts');
+if(el){if(!appts.length)el.innerHTML='<p class="text-xs text-purple-400/30">No appointments</p>';
+else el.innerHTML=appts.map(a=>`<div class="flex justify-between items-center p-2 glass-sm rounded-lg"><div><span class="text-white text-xs font-bold">${a.time}</span> <span class="text-purple-300/60 text-xs">${a.client}</span></div><div class="flex gap-2"><span class="cl-badge cl-badge-purple text-[9px]">${a.service}</span></div></div>`).join('');}};
+window.clShowAddAppt=()=>{$('cl-modal-body').innerHTML=`<h3 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-calendar-plus text-purple-400 mr-2"></i>New Appointment</h3>
+<div class="space-y-3"><input id="m-ac" placeholder="Client Name *" class="glass-input py-2 text-sm"><select id="m-as" class="glass-input py-2 text-sm"><option>Root Touch Up</option><option>Balayage</option><option>Vivid Color</option><option>Highlights</option><option>Color Correction</option><option>Keratin</option><option>Head Spa</option><option>Cut & Style</option></select><input type="date" id="m-ad" class="glass-input py-2 text-sm"><select id="m-at" class="glass-input py-2 text-sm">${['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM'].map(t=>'<option>'+t+'</option>').join('')}</select><textarea id="m-ano" placeholder="Notes" class="glass-input py-2 text-sm" rows="2"></textarea>
+<button onclick="clAddAppt()" class="btn-primary w-full">Book Appointment</button></div>`;$('cl-modal').classList.remove('hidden');};
+window.clAddAppt=()=>{const c=$('m-ac')?.value;if(!c)return;const appts=LS('cl_appts');appts.push({client:c,service:$('m-as')?.value||'',date:$('m-ad')?.value?new Date($('m-ad').value+'T12:00').toLocaleDateString():new Date().toLocaleDateString(),time:$('m-at')?.value||'',notes:$('m-ano')?.value||''});SS('cl_appts',appts);renderCal();loadDash();clModalClose();};
+
+// INVENTORY
+const defaultInv=[{name:'20 Vol Developer',brand:'Joico',stock:85,cost:'$12',reorder:20},{name:'30 Vol Developer',brand:'Joico',stock:60,cost:'$12',reorder:20},{name:'Olaplex No.1',brand:'Olaplex',stock:45,cost:'$28',reorder:15},{name:'Purple Shampoo',brand:'Redken',stock:70,cost:'$18',reorder:25},{name:'Foils (500ct)',brand:'Framar',stock:40,cost:'$25',reorder:10},{name:'Balayage Clay',brand:'L\'Oreal',stock:55,cost:'$22',reorder:15},{name:'Keratin Treatment',brand:'GKhair',stock:30,cost:'$45',reorder:10},{name:'Toner 9V',brand:'Redken',stock:65,cost:'$9',reorder:20}];
+function loadInv(){let inv=LS('cl_inventory');if(!inv.length){inv=defaultInv;SS('cl_inventory',inv);}
+const tb=$('cl-inv-tb');if(!tb)return;tb.innerHTML=inv.map((p,i)=>{const pct=p.stock;const color=pct<=p.reorder?'bg-red-500':'pct<=40?bg-amber-500':'bg-green-500';
+return`<tr><td class="text-white font-bold text-xs">${p.name}</td><td class="text-xs">${p.brand}</td><td><div class="flex items-center gap-2"><div class="w-20 h-1.5 rounded-full bg-purple-900/40 overflow-hidden"><div class="h-full rounded-full ${pct<=p.reorder?'bg-red-500':pct<=40?'bg-amber-500':'bg-green-500'}" style="width:${pct}%"></div></div><span class="text-xs">${pct}%</span></div></td><td class="text-xs">${p.cost}</td><td class="text-xs">${p.reorder}%</td><td><button onclick="clRestockItem(${i})" class="text-[10px] text-purple-400 hover:text-white transition">Restock</button></td></tr>`;}).join('');}
+window.clRestockItem=i=>{const inv=LS('cl_inventory');if(inv[i]){inv[i].stock=Math.min(100,inv[i].stock+25);SS('cl_inventory',inv);loadInv();}};
+window.clSearchInv=()=>{const q=$('cl-inv-search').value.toLowerCase();$('cl-inv-tb').querySelectorAll('tr').forEach(r=>r.style.display=r.textContent.toLowerCase().includes(q)?'':'none');};
+window.clShowAddProduct=()=>{$('cl-modal-body').innerHTML=`<h3 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-box text-purple-400 mr-2"></i>Add Product</h3>
+<div class="space-y-3"><input id="m-pn" placeholder="Product Name *" class="glass-input py-2 text-sm"><input id="m-pb" placeholder="Brand" class="glass-input py-2 text-sm"><input id="m-pc" placeholder="Cost/Unit" class="glass-input py-2 text-sm"><input type="number" id="m-ps" placeholder="Stock %" value="100" class="glass-input py-2 text-sm"><input type="number" id="m-pr" placeholder="Reorder at %" value="20" class="glass-input py-2 text-sm">
+<button onclick="clAddProduct()" class="btn-primary w-full">Add Product</button></div>`;$('cl-modal').classList.remove('hidden');};
+window.clAddProduct=()=>{const n=$('m-pn')?.value;if(!n)return;const inv=LS('cl_inventory');inv.push({name:n,brand:$('m-pb')?.value||'',stock:parseInt($('m-ps')?.value)||100,cost:$('m-pc')?.value||'',reorder:parseInt($('m-pr')?.value)||20});SS('cl_inventory',inv);loadInv();clModalClose();};
+
+// HISTORY
+function loadHistory(){const h=LS('cl_history');const tb=$('cl-history-tb'),no=$('cl-no-history');if(!tb)return;
+const real=h.filter(e=>e.client!=='System Login');
+if(!real.length){tb.innerHTML='';no&&no.classList.remove('hidden');return;}no&&no.classList.add('hidden');
+tb.innerHTML=real.slice(0,100).map(e=>`<tr><td class="text-xs">${e.date}</td><td class="text-purple-400 font-bold text-xs">${e.stylist}</td><td class="text-white text-xs">${e.client}</td><td class="text-xs">${e.service||'-'}</td><td class="text-green-400 text-xs">${e.cost}</td><td class="text-xs">${e.product||'-'}</td><td class="text-red-400 text-xs">${e.waste||'-'}</td></tr>`).join('');}
+
+// EXPORT
+window.clExportCSV=()=>{const h=LS('cl_history').filter(e=>e.client!=='System Login');if(!h.length)return;
+let csv='Date,Stylist,Client,Service,Cost,Product,Waste\n';h.forEach(e=>csv+=`"${e.date}","${e.stylist}","${e.client}","${e.service||''}","${e.cost||''}","${e.product||''}","${e.waste||''}"\n`);
+const blob=new Blob([csv],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='chromaluxe-sessions.csv';a.click();};
+window.clExportAll=()=>{const data={clients:LS('cl_clients'),formulas:LS('cl_formulas'),history:LS('cl_history'),appointments:LS('cl_appts'),inventory:LS('cl_inventory'),settings:LS('cl_settings')};
+const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='chromaluxe-backup.json';a.click();};
+window.clClearData=()=>{if(confirm('This will delete ALL ChromaLuxe data. Are you sure?')){['cl_clients','cl_formulas','cl_history','cl_appts','cl_inventory','cl_settings'].forEach(k=>localStorage.removeItem(k));location.reload();}};
+
+// SETTINGS
+window.clSaveSettings=()=>{const s={name:$('cl-set-name')?.value,phone:$('cl-set-phone')?.value,email:$('cl-set-email')?.value,location:$('cl-set-loc')?.value,instagram:$('cl-set-ig')?.value,facebook:$('cl-set-fb')?.value,x:$('cl-set-x')?.value,google:$('cl-set-goog')?.value,tiktok:$('cl-set-tt')?.value,microsoft:$('cl-set-ms')?.value};SS('cl_settings',s);
+const badge=document.createElement('span');badge.className='cl-badge cl-badge-green ml-2';badge.textContent='Saved!';$('cl-page-title').appendChild(badge);setTimeout(()=>badge.remove(),2000);};
+
+// MODAL
+window.clModalClose=()=>$('cl-modal').classList.add('hidden');
+
+// INIT
+document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
+})();
+</script>
+
+<!-- JSON-LD Structured Data for Google -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"HairSalon",
+  "name":"Studio Salon Odessa",
+  "description":"A sanctuary of style featuring bespoke hair artistry in Odessa, Ontario",
+  "url":"https://cxzyr9hm2t-del.github.io/studio-salon-odessa/",
+  "telephone":"(613) 555-0123",
+  "email":"jordanch14@gmail.com",
+  "address":{"@type":"PostalAddress","addressLocality":"Odessa","addressRegion":"Ontario","addressCountry":"CA"},
+  "geo":{"@type":"GeoCoordinates","latitude":"44.2553","longitude":"-76.7260"},
+  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"18:00"}],
+  "priceRange":"$$",
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"50"},
+  "sameAs":["https://instagram.com/studiosalonodessa","https://facebook.com/studiosalonodessa","https://tiktok.com/@studiosalonodessa"]
+}
+</script>
+
+    <!-- Salon Website -->
     <script type="text/babel">
     const { useState, useEffect, useRef } = React;
 
@@ -1483,6 +1176,44 @@
             </div>
           </section>
 
+          {/* Social Integrations */}
+          <section className="relative py-20 px-6">
+            <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-12">
+                <p className="text-violet-400/70 text-sm uppercase tracking-[0.3em] mb-4">Connect With Us</p>
+                <h2 className="font-display text-4xl md:text-5xl font-medium gradient-text-purple">Find Us Everywhere</h2>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  { icon: 'fa-brands fa-instagram', name: 'Instagram', handle: '@studiosalonodessa', color: 'from-pink-600 to-purple-600', url: 'https://instagram.com/studiosalonodessa' },
+                  { icon: 'fa-brands fa-facebook', name: 'Facebook', handle: 'Studio Salon Odessa', color: 'from-blue-600 to-blue-800', url: 'https://facebook.com/studiosalonodessa' },
+                  { icon: 'fa-brands fa-tiktok', name: 'TikTok', handle: '@studiosalonodessa', color: 'from-gray-800 to-gray-900', url: 'https://tiktok.com/@studiosalonodessa' },
+                  { icon: 'fa-brands fa-google', name: 'Google', handle: '5.0 \u2605 Reviews', color: 'from-green-600 to-blue-600', url: '#' },
+                ].map((s, i) => (
+                  <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="liquid-glass p-6 text-center group hover:scale-[1.02] transition-all duration-300">
+                    <div className={`w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br ${s.color} flex items-center justify-center text-xl text-white shadow-lg group-hover:scale-110 transition-transform`}>
+                      <i className={s.icon}></i>
+                    </div>
+                    <h3 className="text-white font-medium text-sm">{s.name}</h3>
+                    <p className="text-violet-300/50 text-xs mt-1">{s.handle}</p>
+                  </a>
+                ))}
+              </div>
+              <div className="grid md:grid-cols-3 gap-4 mt-4">
+                {[
+                  { icon: 'fa-brands fa-x-twitter', name: 'X / Twitter', desc: 'Latest updates & trends', url: 'https://x.com' },
+                  { icon: 'fa-brands fa-microsoft', name: 'Microsoft Booking', desc: 'Book appointments online', url: '#' },
+                  { icon: 'fa-brands fa-yelp', name: 'Yelp', desc: 'Read reviews', url: 'https://yelp.com' },
+                ].map((s, i) => (
+                  <a key={i} href={s.url} target="_blank" rel="noopener noreferrer" className="liquid-glass p-4 flex items-center gap-4 group hover:scale-[1.01] transition-all">
+                    <div className="w-10 h-10 rounded-xl bg-violet-600/20 flex items-center justify-center text-violet-400 group-hover:text-white transition"><i className={s.icon}></i></div>
+                    <div><h3 className="text-white text-sm font-medium">{s.name}</h3><p className="text-violet-300/40 text-xs">{s.desc}</p></div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+
           {/* CTA Section */}
           <section className="relative py-32 px-6">
             <div className="max-w-4xl mx-auto text-center">
@@ -1524,6 +1255,7 @@
                   ))}
                 </div>
                 <a href="#staff" onClick={(e) => { e.preventDefault(); document.getElementById('chromaluxe-app')?.classList.add('active'); }} className="text-violet-300/30 hover:text-purple-400 text-xs transition-colors cursor-pointer flex items-center gap-1"><i className="fa-solid fa-flask"></i> Staff Portal</a>
+                    <a href="#" onClick={(e) => { e.preventDefault(); document.getElementById('cl-app')?.classList.add('active'); }} className="text-violet-300/30 hover:text-purple-400 text-xs transition-colors cursor-pointer flex items-center gap-1"><i className="fa-solid fa-flask-vial"></i> Staff Portal</a>
                     <p className="text-violet-300/30 text-xs">© 2026 Studio Salon Odessa. All rights reserved.</p>
               </div>
             </div>
