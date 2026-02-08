@@ -607,6 +607,451 @@ select.glass-input{appearance:none;background-image:url("data:image/svg+xml,%3Cs
 @media (max-width: 480px) {
   .social-grid { grid-template-columns: 1fr; }
 }
+
+
+/* ═══════ v9.0 Premium Loading Screen ═══════ */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: #0a0312;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.loader-logo {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: #fff;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+  opacity: 0;
+  animation: loaderFadeIn 0.6s ease 0.2s forwards;
+}
+.loader-bar-wrap {
+  width: 200px;
+  height: 3px;
+  background: rgba(168,85,247,0.15);
+  border-radius: 3px;
+  overflow: hidden;
+  opacity: 0;
+  animation: loaderFadeIn 0.6s ease 0.5s forwards;
+}
+.loader-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), #ec4899, var(--accent-glow));
+  border-radius: 3px;
+  animation: loaderProgress 1.8s cubic-bezier(0.65,0,0.35,1) 0.6s forwards;
+}
+@keyframes loaderFadeIn {
+  to { opacity: 1; }
+}
+@keyframes loaderProgress {
+  0% { width: 0%; }
+  40% { width: 60%; }
+  80% { width: 85%; }
+  100% { width: 100%; }
+}
+.loader-tagline {
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(168,85,247,0.5);
+  margin-top: 20px;
+  opacity: 0;
+  animation: loaderFadeIn 0.6s ease 0.8s forwards;
+}
+
+/* ═══════ v9.0 Cursor Glow Trail ═══════ */
+.cursor-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9995;
+  transform: translate(-50%, -50%);
+  transition: left 0.3s ease-out, top 0.3s ease-out, opacity 0.4s ease;
+  opacity: 0;
+}
+.cursor-glow.active { opacity: 1; }
+@media (max-width: 768px) { .cursor-glow { display: none; } }
+
+/* ═══════ v9.0 Morphing Blobs ═══════ */
+.morph-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.07;
+  animation: morphBlob 20s ease-in-out infinite;
+  pointer-events: none;
+}
+.morph-blob.b1 {
+  width: 500px; height: 500px;
+  background: var(--accent);
+  top: 10%; left: -10%;
+  animation-delay: 0s;
+}
+.morph-blob.b2 {
+  width: 400px; height: 400px;
+  background: #ec4899;
+  top: 50%; right: -8%;
+  animation-delay: -7s;
+}
+.morph-blob.b3 {
+  width: 350px; height: 350px;
+  background: var(--accent-glow);
+  bottom: 5%; left: 30%;
+  animation-delay: -14s;
+}
+@keyframes morphBlob {
+  0%, 100% { border-radius: 50% 40% 60% 50%; transform: translate(0,0) scale(1); }
+  25% { border-radius: 40% 60% 50% 55%; transform: translate(30px,-20px) scale(1.05); }
+  50% { border-radius: 55% 45% 40% 60%; transform: translate(-20px,30px) scale(0.95); }
+  75% { border-radius: 45% 55% 60% 40%; transform: translate(20px,20px) scale(1.03); }
+}
+
+
+/* ═══════ v9.0 3D Tilt Card Effect ═══════ */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+}
+.tilt-card:hover {
+  transform: rotateY(var(--rx, 0deg)) rotateX(var(--ry, 0deg));
+}
+.tilt-card .card-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+.tilt-card:hover .card-shine { opacity: 1; }
+
+/* ═══════ v9.0 Horizontal Scroll Showcase Reel ═══════ */
+.showcase-reel {
+  padding: 80px 0 60px;
+  overflow: hidden;
+}
+.showcase-reel .reel-header {
+  text-align: center;
+  padding: 0 5%;
+  margin-bottom: 40px;
+}
+.reel-track-wrapper {
+  position: relative;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+}
+.reel-track {
+  display: flex;
+  gap: 24px;
+  padding: 20px 40px;
+  animation: reelScroll 35s linear infinite;
+  width: max-content;
+}
+.reel-track:hover { animation-play-state: paused; }
+@keyframes reelScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.reel-item {
+  flex-shrink: 0;
+  width: 300px;
+  height: 380px;
+  border-radius: 20px;
+  background: rgba(168,85,247,0.06);
+  border: 1px solid rgba(168,85,247,0.12);
+  overflow: hidden;
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.23,1,0.32,1);
+  cursor: pointer;
+}
+.reel-item:hover {
+  transform: translateY(-12px) scale(1.03);
+  border-color: rgba(168,85,247,0.4);
+  box-shadow: 0 25px 60px rgba(168,85,247,0.2);
+}
+.reel-item .reel-visual {
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(236,72,153,0.06));
+}
+.reel-item .reel-info {
+  padding: 20px;
+}
+.reel-item .reel-info h4 {
+  font-family: var(--font-display);
+  color: #fff;
+  font-size: 1.05rem;
+  margin: 0 0 6px 0;
+}
+.reel-item .reel-info p {
+  color: rgba(255,255,255,0.45);
+  font-size: 0.78rem;
+  margin: 0;
+  line-height: 1.5;
+}
+.reel-item .reel-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: rgba(168,85,247,0.3);
+  color: #d8b4fe;
+  backdrop-filter: blur(8px);
+}
+
+/* ═══════ v9.0 Glassmorphism Nav Upgrade ═══════ */
+nav.scrolled {
+  background: rgba(10,3,18,0.7) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid rgba(168,85,247,0.1) !important;
+}
+nav .nav-indicator {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), #ec4899);
+  border-radius: 2px;
+  transition: all 0.4s cubic-bezier(0.23,1,0.32,1);
+}
+
+/* ═══════ v9.0 Animated Gradient Mesh ═══════ */
+.gradient-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.gradient-mesh .mesh-point {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  animation: meshFloat 25s ease-in-out infinite;
+}
+.gradient-mesh .mesh-point.m1 {
+  width: 40vw; height: 40vw;
+  background: rgba(88,28,135,0.3);
+  top: -10%; left: -10%;
+  animation-delay: 0s;
+}
+.gradient-mesh .mesh-point.m2 {
+  width: 35vw; height: 35vw;
+  background: rgba(168,85,247,0.2);
+  top: 40%; right: -10%;
+  animation-delay: -8s;
+}
+.gradient-mesh .mesh-point.m3 {
+  width: 30vw; height: 30vw;
+  background: rgba(236,72,153,0.15);
+  bottom: -10%; left: 20%;
+  animation-delay: -16s;
+}
+@keyframes meshFloat {
+  0%, 100% { transform: translate(0,0) rotate(0deg); }
+  33% { transform: translate(5vw, -3vw) rotate(120deg); }
+  66% { transform: translate(-3vw, 5vw) rotate(240deg); }
+}
+
+/* ═══════ v9.0 Section Dividers ═══════ */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, rgba(168,85,247,0.2), transparent);
+}
+
+/* ═══════ v9.0 Floating Label Tags ═══════ */
+.float-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: rgba(168,85,247,0.1);
+  border: 1px solid rgba(168,85,247,0.2);
+  color: var(--accent);
+  backdrop-filter: blur(10px);
+  animation: floatTagPulse 3s ease-in-out infinite;
+}
+@keyframes floatTagPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(168,85,247,0.1); }
+  50% { box-shadow: 0 0 0 8px rgba(168,85,247,0); }
+}
+
+/* ═══════ v9.0 Number Ticker ═══════ */
+.ticker-wrapper {
+  display: inline-flex;
+  overflow: hidden;
+  height: 1em;
+  line-height: 1;
+}
+.ticker-digit {
+  display: inline-block;
+  animation: tickUp 0.6s cubic-bezier(0.23,1,0.32,1) forwards;
+  transform: translateY(100%);
+  opacity: 0;
+}
+@keyframes tickUp {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ═══════ v9.0 Service Card Hover Lift ═══════ */
+.service-card-v9 {
+  position: relative;
+  overflow: hidden;
+}
+.service-card-v9::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #ec4899);
+  transform: scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.23,1,0.32,1);
+}
+.service-card-v9:hover::after { transform: scaleX(1); }
+
+/* ═══════ v9.0 Smooth Reveal Upgrade ═══════ */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1);
+}
+.reveal-up.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.23,1,0.32,1);
+}
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+/* ═══════ v9.0 Animated Text Highlight ═══════ */
+.text-highlight {
+  position: relative;
+  display: inline;
+}
+.text-highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: linear-gradient(90deg, rgba(168,85,247,0.25), rgba(236,72,153,0.2));
+  z-index: -1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.23,1,0.32,1);
+}
+.text-highlight.active::after {
+  transform: scaleX(1);
+}
+
+/* ═══════ v9.0 Dynamic Color-Shift Accent ═══════ */
+.color-shift {
+  animation: colorShift 8s ease-in-out infinite;
+}
+@keyframes colorShift {
+  0%, 100% { color: #a855f7; }
+  33% { color: #c084fc; }
+  66% { color: #e879f9; }
+}
+
+/* ═══════ v9.0 Glow Text on Scroll ═══════ */
+.glow-on-view {
+  text-shadow: 0 0 0 transparent;
+  transition: text-shadow 1s ease;
+}
+.glow-on-view.in-view {
+  text-shadow: 0 0 30px rgba(168,85,247,0.3), 0 0 60px rgba(168,85,247,0.1);
+}
+
+/* ═══════ v9.0 Responsive Tweaks ═══════ */
+@media (max-width: 768px) {
+  .reel-item { width: 250px; height: 330px; }
+  .reel-item .reel-visual { height: 200px; font-size: 3.5rem; }
+  .morph-blob { display: none; }
+  .gradient-mesh { opacity: 0.2; }
+  .reel-track { gap: 16px; padding: 15px 20px; }
+}
+@media (max-width: 480px) {
+  .reel-item { width: 220px; height: 300px; }
+  .reel-item .reel-visual { height: 180px; font-size: 3rem; }
+}
+
+/* ═══════ v9.0 Hover Card Glow ═══════ */
+.hover-glow {
+  transition: box-shadow 0.4s ease;
+}
+.hover-glow:hover {
+  box-shadow: 0 0 40px rgba(168,85,247,0.15), 0 20px 60px rgba(10,3,18,0.4);
+}
+
+/* ═══════ v9.0 Animated Border on Focus ═══════ */
+.focus-border {
+  position: relative;
+}
+.focus-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--accent), #ec4899, var(--accent-glow));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.focus-border:hover::before { opacity: 1; }
+
+/* ═══════ v9.0 Smooth Page Entry ═══════ */
+.page-enter {
+  opacity: 0;
+  animation: pageEnter 1s ease 2.4s forwards;
+}
+@keyframes pageEnter {
+  to { opacity: 1; }
+}
 </style>
 <body class="bg-[#0f0517]">
 <div class="scroll-progress" id="scroll-progress" style="width:0%"></div>
@@ -1366,6 +1811,95 @@ const SocialCard=({icon,name,handle,color,url,large})=>(
       );
     };
 
+
+
+    const LoadingScreen = () => {
+      const [hidden, setHidden] = React.useState(false);
+      React.useEffect(() => {
+        const timer = setTimeout(() => setHidden(true), 2400);
+        return () => clearTimeout(timer);
+      }, []);
+      return React.createElement('div', {className: 'loading-screen' + (hidden ? ' hidden' : '')},
+        React.createElement('div', {className: 'loader-logo'}, 'STUDIO'),
+        React.createElement('div', {className: 'loader-bar-wrap'},
+          React.createElement('div', {className: 'loader-bar'})
+        ),
+        React.createElement('div', {className: 'loader-tagline'}, 'Where Art Meets Beauty')
+      );
+    };
+
+    const CursorGlow = () => {
+      const ref = React.useRef(null);
+      React.useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        let active = false;
+        const onMove = (e) => {
+          if (!active) { el.classList.add('active'); active = true; }
+          el.style.left = e.clientX + 'px';
+          el.style.top = e.clientY + 'px';
+        };
+        const onLeave = () => { el.classList.remove('active'); active = false; };
+        window.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseleave', onLeave);
+        return () => { window.removeEventListener('mousemove', onMove); document.removeEventListener('mouseleave', onLeave); };
+      }, []);
+      return React.createElement('div', {ref: ref, className: 'cursor-glow'});
+    };
+
+    const GradientMesh = () => {
+      return React.createElement('div', {className: 'gradient-mesh', 'aria-hidden': 'true'},
+        React.createElement('div', {className: 'mesh-point m1'}),
+        React.createElement('div', {className: 'mesh-point m2'}),
+        React.createElement('div', {className: 'mesh-point m3'})
+      );
+    };
+
+    const MorphBlobs = () => {
+      return React.createElement('div', {'aria-hidden': 'true', style:{position:'absolute',inset:0,overflow:'hidden',pointerEvents:'none',zIndex:0}},
+        React.createElement('div', {className: 'morph-blob b1'}),
+        React.createElement('div', {className: 'morph-blob b2'}),
+        React.createElement('div', {className: 'morph-blob b3'})
+      );
+    };
+
+    const ShowcaseReel = () => {
+      const items = [
+        {emoji: '\uD83D\uDC87', title: 'Precision Cuts', desc: 'Expert shaping for every face', badge: 'SIGNATURE'},
+        {emoji: '\uD83C\uDF08', title: 'Vivid Color', desc: 'Bold fashion shades with Redken', badge: 'TRENDING'},
+        {emoji: '\u2728', title: 'Balayage', desc: 'Hand-painted sun-kissed highlights', badge: 'POPULAR'},
+        {emoji: '\uD83D\uDC86', title: 'Head Spa', desc: 'Deep scalp renewal ritual', badge: 'LUXURY'},
+        {emoji: '\uD83D\uDD25', title: 'Keratin Smooth', desc: 'Anti-frizz smoothing treatment', badge: 'PREMIUM'},
+        {emoji: '\uD83C\uDF1F', title: 'Bond Repair', desc: 'Acidic Bonding Concentrate', badge: 'REDKEN'},
+        {emoji: '\uD83D\uDC9C', title: 'Purple Toning', desc: 'Cool-toned blonde perfection', badge: 'SPECIALIST'},
+        {emoji: '\uD83C\uDF3F', title: 'Scalp Detox', desc: 'Purifying cleanse treatment', badge: 'WELLNESS'}
+      ];
+      const doubled = [...items, ...items];
+      return React.createElement('section', {className: 'showcase-reel'},
+        React.createElement('div', {className: 'reel-header'},
+          React.createElement('p', {className: 'section-label animate-on-scroll'}, 'EXPLORE'),
+          React.createElement('h2', {className: 'section-title animate-on-scroll glow-on-view', style:{fontFamily:'var(--font-display)',fontSize:'2.5rem',color:'#fff'}}, 'Our Specialties'),
+          React.createElement('p', {className: 'animate-on-scroll', style:{color:'rgba(255,255,255,0.5)',maxWidth:500,margin:'12px auto 0'}}, 'Scroll through our signature services \u2014 each crafted with artistry and Redken precision.')
+        ),
+        React.createElement('div', {className: 'reel-track-wrapper'},
+          React.createElement('div', {className: 'reel-track'},
+            doubled.map((item, i) =>
+              React.createElement('div', {key: i, className: 'reel-item hover-glow'},
+                React.createElement('div', {className: 'reel-badge'}, item.badge),
+                React.createElement('div', {className: 'reel-visual'}, item.emoji),
+                React.createElement('div', {className: 'reel-info'},
+                  React.createElement('h4', null, item.title),
+                  React.createElement('p', null, item.desc)
+                )
+              )
+            )
+          )
+        )
+      );
+    };
+
+    const SectionDivider = () => React.createElement('div', {className: 'section-divider', 'aria-hidden': 'true'});
+
 /* ════════════════════════════════════════════
    MAIN APP COMPONENT
    ════════════════════════════════════════════ */
@@ -1432,7 +1966,11 @@ const App=()=>{
   ];
 
   return (
-    <div className="relative min-h-screen">
+    <>
+      <LoadingScreen />
+      <CursorGlow />
+      <GradientMesh />
+      <div className="relative min-h-screen page-enter">
       {/* Immersive Purple Atmosphere */}
       <PurpleFlashes/>
       <div className="aurora-bg">
@@ -1473,6 +2011,7 @@ const App=()=>{
 
       {/* ═══ HERO ═══ */}
       <section id="home" className="relative min-h-screen flex items-center justify-center text-center px-6 overflow-hidden">
+        <MorphBlobs />
         <SparkleField/>
         <div className="relative z-10 max-w-4xl">
           <div className="animate-fade-up">
@@ -1524,6 +2063,12 @@ const App=()=>{
         </div>
       </section>
 
+      <SectionDivider />
+      <ShowcaseReel />
+      <SectionDivider />
+
+      
+
       {/* ═══ PRICING ═══ */}
       <section id="pricing" className="relative py-28 px-6">
         <div className="max-w-7xl mx-auto">
@@ -1541,6 +2086,10 @@ const App=()=>{
           </div>
         </div>
       </section>
+
+      <SectionDivider />
+
+      
 
       {/* ═══ REDKEN PRODUCTS ═══ */}
       <section id="redken" className="relative py-28 px-6">
@@ -1590,6 +2139,10 @@ const App=()=>{
           </div>
         </div>
       </section>
+
+      <SectionDivider />
+
+      
 
       {/* ═══ STATS ═══ */}
       <section className="relative py-20 px-6">
@@ -1892,6 +2445,7 @@ const App=()=>{
       {/* Staff Button */}
       <button className="staff-btn" onClick={()=>document.getElementById('cl-app').classList.add('active')} aria-label="Open Staff Portal" title="Staff Portal">🧪</button>
     </div>
+      </>
   );
 };
 
