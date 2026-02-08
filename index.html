@@ -1,227 +1,916 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Studio Salon Odessa - A sanctuary of style featuring the latest hair color trends in a luxurious, boutique setting.">
-  <meta name="keywords" content="hair salon, Odessa, Ontario, purple hair, balayage, vivid color, Loyalist Township">
-  <meta property="og:title" content="Studio Salon Odessa | Where Art Meets Beauty">
-  <meta property="og:description" content="Experience bespoke hair artistry in an intimate, boutique setting.">
-  <title>Studio Salon Odessa | Where Art Meets Beauty</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-    
-    :root {
-      /* Purple Hair Color Palette - RGB Accurate */
-      --electric-amethyst: #9966CC;
-      --violet: #8F00FF;
-      --lavender: #D6CADD;
-      --true-purple: #6A0DAD;
-      --plasma-lavender: #6600CA;
-      --neon-violet: #B23BEE;
-      --deep-plum: #3D1A5C;
-      --iris: #5A4FCF;
-      --orchid: #DA70D6;
-      --mauve: #E0B0FF;
-    }
-    
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0612; overflow-x: hidden; }
-    
-    .font-display { font-family: 'Playfair Display', serif; }
-    .font-body { font-family: 'Inter', sans-serif; }
-    
-    /* Aurora Background Animation */
-    @keyframes aurora {
-      0%, 100% { 
-        background-position: 0% 50%;
-        filter: hue-rotate(0deg);
-      }
-      25% { background-position: 50% 100%; }
-      50% { 
-        background-position: 100% 50%;
-        filter: hue-rotate(15deg);
-      }
-      75% { background-position: 50% 0%; }
-    }
-    
-    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(3deg); } }
-    @keyframes pulse-glow { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.05); } }
-    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-    @keyframes ripple { 0% { transform: scale(1); opacity: 0.4; } 100% { transform: scale(1.5); opacity: 0; } }
-    @keyframes prism { 0%, 100% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(30deg); } }
-    @keyframes liquid-flow { 0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; } }
-    @keyframes specular { 0%, 100% { opacity: 0.3; transform: translateX(-100%) rotate(45deg); } 50% { opacity: 0.6; transform: translateX(100%) rotate(45deg); } }
-    @keyframes glow-pulse { 0%, 100% { box-shadow: 0 0 20px rgba(138, 43, 226, 0.4), 0 0 40px rgba(138, 43, 226, 0.2); } 50% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.6), 0 0 60px rgba(138, 43, 226, 0.3), 0 0 80px rgba(138, 43, 226, 0.1); } }
-    @keyframes text-glow { 0%, 100% { text-shadow: 0 0 20px rgba(178, 59, 238, 0.5); } 50% { text-shadow: 0 0 40px rgba(178, 59, 238, 0.8), 0 0 60px rgba(138, 43, 226, 0.4); } }
-    @keyframes border-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-    
-    .animate-float { animation: float 6s ease-in-out infinite; }
-    .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
-    .animate-shimmer { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); background-size: 200% 100%; animation: shimmer 3s infinite; }
-    .animate-prism { animation: prism 8s ease-in-out infinite; }
-    .animate-liquid { animation: liquid-flow 8s ease-in-out infinite; }
-    .animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
-    .animate-text-glow { animation: text-glow 3s ease-in-out infinite; }
-    
-    /* Liquid Glass Effect */
-    .liquid-glass {
-      position: relative;
-      background: linear-gradient(135deg, rgba(138, 43, 226, 0.15) 0%, rgba(75, 0, 130, 0.1) 50%, rgba(148, 0, 211, 0.15) 100%);
-      backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
-      -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1);
-      border: 1px solid rgba(178, 59, 238, 0.2);
-      border-radius: 24px;
-      overflow: hidden;
-    }
-    
-    .liquid-glass::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
-      pointer-events: none;
-    }
-    
-    .liquid-glass::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 55%, transparent 60%);
-      animation: specular 6s ease-in-out infinite;
-      pointer-events: none;
-    }
-    
-    /* Enhanced Liquid Glass with Refraction */
-    .liquid-glass-pro {
-      position: relative;
-      background: linear-gradient(145deg, rgba(106, 13, 173, 0.2) 0%, rgba(90, 79, 207, 0.15) 50%, rgba(138, 43, 226, 0.2) 100%);
-      backdrop-filter: blur(24px) saturate(200%) brightness(1.05) contrast(1.1);
-      -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.05) contrast(1.1);
-      border: 1px solid;
-      border-image: linear-gradient(135deg, rgba(178, 59, 238, 0.4), rgba(218, 112, 214, 0.2), rgba(178, 59, 238, 0.4)) 1;
-      border-radius: 28px;
-      box-shadow: 
-        0 8px 32px rgba(138, 43, 226, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
-    
-    .liquid-glass-pro::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
-      pointer-events: none;
-      border-radius: 28px 28px 0 0;
-    }
-    
-    /* Gradient Border Animation */
-    .gradient-border {
-      position: relative;
-      background: linear-gradient(135deg, rgba(10, 6, 18, 0.9), rgba(20, 10, 35, 0.9));
-      border-radius: 24px;
-    }
-    
-    .gradient-border::before {
-      content: '';
-      position: absolute;
-      inset: -2px;
-      background: linear-gradient(135deg, #8F00FF, #B23BEE, #DA70D6, #6A0DAD, #8F00FF);
-      background-size: 300% 300%;
-      animation: border-flow 4s ease infinite;
-      border-radius: 26px;
-      z-index: -1;
-    }
-    
-    /* Glass Input */
-    .glass-input {
-      background: rgba(138, 43, 226, 0.1);
-      border: 1px solid rgba(178, 59, 238, 0.3);
-      backdrop-filter: blur(10px);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .glass-input:focus {
-      background: rgba(138, 43, 226, 0.2);
-      border-color: rgba(178, 59, 238, 0.6);
-      outline: none;
-      box-shadow: 0 0 30px rgba(138, 43, 226, 0.3), 0 0 60px rgba(178, 59, 238, 0.1);
-    }
-    
-    /* Gradient Text */
-    .gradient-text-purple {
-      background: linear-gradient(135deg, #E0B0FF 0%, #B23BEE 25%, #8F00FF 50%, #6A0DAD 75%, #B23BEE 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 4s linear infinite;
-    }
-    
-    /* Neon Text */
-    .neon-text {
-      color: #E0B0FF;
-      text-shadow: 
-        0 0 7px #B23BEE,
-        0 0 10px #B23BEE,
-        0 0 21px #B23BEE,
-        0 0 42px #8F00FF,
-        0 0 82px #8F00FF;
-    }
-    
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: rgba(10, 6, 18, 0.5); }
-    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8F00FF, #6A0DAD); border-radius: 4px; }
-    
-    /* Select styling */
-    select option { background: #1a0a2e; color: #E0B0FF; }
-    
-    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Studio Salon Odessa - A sanctuary of style featuring the latest hair color trends in a luxurious, boutique setting.">
+    <meta name="keywords" content="hair salon, Odessa, Ontario, purple hair, balayage, vivid color, Loyalist Township, ChromaLuxe">
+    <meta property="og:title" content="Studio Salon Odessa | Where Art Meets Beauty">
+    <meta property="og:description" content="Experience bespoke hair artistry in an intimate, boutique setting.">
+    <title>Studio Salon Odessa | Where Art Meets Beauty</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💜</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --electric-amethyst: #9966CC;
+            --violet: #8F00FF;
+            --lavender: #D6CADD;
+            --true-purple: #6A0DAD;
+            --plasma-lavender: #6600CA;
+            --neon-violet: #B23BEE;
+            --deep-plum: #3D1A5C;
+            --iris: #5A4FCF;
+            --orchid: #DA70D6;
+            --mauve: #E0B0FF;
+            --neon-purple: #a855f7;
+            --deep-bg: #0f0f13;
+            --glass: rgba(30, 30, 35, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0612; overflow-x: hidden; }
+        .font-display { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+
+        /* Aurora Background Animation */
+        @keyframes aurora { 0%, 100% { background-position: 0% 50%; filter: hue-rotate(0deg); } 25% { background-position: 50% 100%; } 50% { background-position: 100% 50%; filter: hue-rotate(15deg); } 75% { background-position: 50% 0%; } }
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(3deg); } }
+        @keyframes pulse-glow { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.05); } }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        @keyframes ripple { 0% { transform: scale(1); opacity: 0.4; } 100% { transform: scale(1.5); opacity: 0; } }
+        @keyframes prism { 0%, 100% { filter: hue-rotate(0deg); } 50% { filter: hue-rotate(30deg); } }
+        @keyframes liquid-flow { 0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; } 50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; } }
+        @keyframes specular { 0%, 100% { opacity: 0.3; transform: translateX(-100%) rotate(45deg); } 50% { opacity: 0.6; transform: translateX(100%) rotate(45deg); } }
+        @keyframes glow-pulse { 0%, 100% { box-shadow: 0 0 20px rgba(138, 43, 226, 0.4), 0 0 40px rgba(138, 43, 226, 0.2); } 50% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.6), 0 0 60px rgba(138, 43, 226, 0.3), 0 0 80px rgba(138, 43, 226, 0.1); } }
+        @keyframes text-glow { 0%, 100% { text-shadow: 0 0 20px rgba(178, 59, 238, 0.5); } 50% { text-shadow: 0 0 40px rgba(178, 59, 238, 0.8), 0 0 60px rgba(138, 43, 226, 0.4); } }
+        @keyframes border-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-pulse-glow { animation: pulse-glow 4s ease-in-out infinite; }
+        .animate-shimmer { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); background-size: 200% 100%; animation: shimmer 3s infinite; }
+        .animate-prism { animation: prism 8s ease-in-out infinite; }
+        .animate-liquid { animation: liquid-flow 8s ease-in-out infinite; }
+        .animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+        .animate-text-glow { animation: text-glow 3s ease-in-out infinite; }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+
+        /* Liquid Glass Effect */
+        .liquid-glass { position: relative; background: linear-gradient(135deg, rgba(138, 43, 226, 0.15) 0%, rgba(75, 0, 130, 0.1) 50%, rgba(148, 0, 211, 0.15) 100%); backdrop-filter: blur(20px) saturate(180%) brightness(1.1); -webkit-backdrop-filter: blur(20px) saturate(180%) brightness(1.1); border: 1px solid rgba(178, 59, 238, 0.2); border-radius: 24px; overflow: hidden; }
+        .liquid-glass::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%); pointer-events: none; }
+        .liquid-glass::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 45%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 55%, transparent 60%); animation: specular 6s ease-in-out infinite; pointer-events: none; }
+
+        .liquid-glass-pro { position: relative; background: linear-gradient(145deg, rgba(106, 13, 173, 0.2) 0%, rgba(90, 79, 207, 0.15) 50%, rgba(138, 43, 226, 0.2) 100%); backdrop-filter: blur(24px) saturate(200%) brightness(1.05) contrast(1.1); -webkit-backdrop-filter: blur(24px) saturate(200%) brightness(1.05) contrast(1.1); border: 1px solid; border-image: linear-gradient(135deg, rgba(178, 59, 238, 0.4), rgba(218, 112, 214, 0.2), rgba(178, 59, 238, 0.4)) 1; border-radius: 28px; box-shadow: 0 8px 32px rgba(138, 43, 226, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1); overflow: hidden; }
+        .liquid-glass-pro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%; background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%); pointer-events: none; border-radius: 28px 28px 0 0; }
+
+        .gradient-border { position: relative; background: linear-gradient(135deg, rgba(10, 6, 18, 0.9), rgba(20, 10, 35, 0.9)); border-radius: 24px; }
+        .gradient-border::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, #8F00FF, #B23BEE, #DA70D6, #6A0DAD, #8F00FF); background-size: 300% 300%; animation: border-flow 4s ease infinite; border-radius: 26px; z-index: -1; }
+
+        .glass-input { background: rgba(138, 43, 226, 0.1); border: 1px solid rgba(178, 59, 238, 0.3); backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-input:focus { background: rgba(138, 43, 226, 0.2); border-color: rgba(178, 59, 238, 0.6); outline: none; box-shadow: 0 0 30px rgba(138, 43, 226, 0.3), 0 0 60px rgba(178, 59, 238, 0.1); }
+
+        .gradient-text-purple { background: linear-gradient(135deg, #E0B0FF 0%, #B23BEE 25%, #8F00FF 50%, #6A0DAD 75%, #B23BEE 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shimmer 4s linear infinite; }
+        .neon-text { color: #E0B0FF; text-shadow: 0 0 7px #B23BEE, 0 0 10px #B23BEE, 0 0 21px #B23BEE, 0 0 42px #8F00FF, 0 0 82px #8F00FF; }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(10, 6, 18, 0.5); }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #8F00FF, #6A0DAD); border-radius: 4px; }
+        select option { background: #1a0a2e; color: #E0B0FF; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* ============================================ */
+        /* ChromaLuxe OS - Internal Staff Dashboard     */
+        /* ============================================ */
+        #chromaluxe-app { display: none; position: fixed; inset: 0; z-index: 9999; background: var(--deep-bg); }
+        #chromaluxe-app.active { display: flex; flex-direction: column; }
+
+        .cl-glass-panel {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+        .cl-glow-text { text-shadow: 0 0 20px rgba(168, 85, 247, 0.6); }
+        .cl-digital-clock {
+            font-family: 'JetBrains Mono', monospace;
+            background: -webkit-linear-gradient(#d8b4fe, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cl-active-step { border-left: 4px solid var(--neon-purple); background: rgba(168, 85, 247, 0.1); }
+
+        /* ChromaLuxe custom scrollbar */
+        #chromaluxe-app ::-webkit-scrollbar { width: 6px; }
+        #chromaluxe-app ::-webkit-scrollbar-track { background: #1a1a20; }
+        #chromaluxe-app ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+        /* Staff Portal Button */
+        .staff-portal-btn {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            z-index: 40;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(75, 0, 130, 0.5));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(178, 59, 238, 0.3);
+            color: rgba(178, 59, 238, 0.7);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 20px;
+        }
+        .staff-portal-btn:hover {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.5), rgba(75, 0, 130, 0.7));
+            color: white;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+            transform: scale(1.1);
+        }
+    </style>
 </head>
 <body>
-  <!-- SVG Filters for Liquid Glass Effect -->
-  <svg style="position: absolute; width: 0; height: 0;">
-    <defs>
-      <filter id="liquid-distortion" x="-20%" y="-20%" width="140%" height="140%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="2" seed="5" result="noise"/>
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
-      </filter>
-      <filter id="glow">
-        <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-        <feMerge>
-          <feMergeNode in="coloredBlur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
-      <linearGradient id="purple-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" style="stop-color:#8F00FF"/>
-        <stop offset="50%" style="stop-color:#B23BEE"/>
-        <stop offset="100%" style="stop-color:#6A0DAD"/>
-      </linearGradient>
-    </defs>
-  </svg>
+    <!-- SVG Filters for Liquid Glass Effect -->
+    <svg style="position: absolute; width: 0; height: 0;">
+        <defs>
+            <filter id="liquid-distortion" x="-20%" y="-20%" width="140%" height="140%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="2" seed="5" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+            <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <linearGradient id="purple-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#8F00FF"/>
+                <stop offset="50%" style="stop-color:#B23BEE"/>
+                <stop offset="100%" style="stop-color:#6A0DAD"/>
+            </linearGradient>
+        </defs>
+    </svg>
 
-  <div id="root"></div>
-  
-  <script type="text/babel">
+    <!-- Staff Portal Button -->
+    <button class="staff-portal-btn" onclick="document.getElementById('chromaluxe-app').classList.add('active')" title="Staff Portal">
+        <i class="fa-solid fa-flask"></i>
+    </button>
+
+    <!-- Main Salon Website -->
+    <div id="root"></div>
+
+    <!-- ============================================ -->
+    <!-- ChromaLuxe OS - Staff Dashboard              -->
+    <!-- ============================================ -->
+    <div id="chromaluxe-app" class="text-white" style="font-family: 'Inter', sans-serif;">
+
+        <!-- Login Screen -->
+        <div id="cl-loginScreen" class="absolute inset-0 z-50 bg-black/90 flex items-center justify-center fade-in">
+            <div class="cl-glass-panel p-10 rounded-2xl w-[420px] text-center">
+                <div class="mb-6">
+                    <span class="text-purple-500 text-4xl"><i class="fa-solid fa-flask"></i></span>
+                </div>
+                <h1 class="text-3xl font-bold mb-2 tracking-wider">CHROMALUXE</h1>
+                <p class="text-gray-400 mb-2 text-sm">PRECISION MIXOLOGY OS v2.4</p>
+                <p class="text-purple-400/50 mb-8 text-xs">Studio Salon Odessa · Internal Staff Tool</p>
+
+                <div id="cl-userGridWrap">
+                    <div id="cl-userGrid" class="grid grid-cols-5 gap-2 mb-4"></div>
+                </div>
+
+                <div id="cl-passcodeArea" class="hidden">
+                    <p id="cl-selectedUser" class="text-purple-400 font-bold mb-4">Stylist Name</p>
+                    <input type="password" id="cl-pinInput" placeholder="ENTER PIN" class="w-full bg-black/50 border border-gray-700 rounded p-3 text-center text-xl tracking-widest mb-4 focus:outline-none focus:border-purple-500 text-white transition-all">
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="clAddPin(1)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">1</button>
+                        <button onclick="clAddPin(2)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">2</button>
+                        <button onclick="clAddPin(3)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">3</button>
+                        <button onclick="clAddPin(4)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">4</button>
+                        <button onclick="clAddPin(5)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">5</button>
+                        <button onclick="clAddPin(6)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">6</button>
+                        <button onclick="clAddPin(7)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">7</button>
+                        <button onclick="clAddPin(8)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">8</button>
+                        <button onclick="clAddPin(9)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">9</button>
+                        <button onclick="clCancelLogin()" class="p-3 bg-red-900/50 rounded hover:bg-red-900 text-xs text-white">BACK</button>
+                        <button onclick="clAddPin(0)" class="p-3 bg-gray-800 rounded hover:bg-gray-700 text-white">0</button>
+                        <button onclick="clSubmitLogin()" class="p-3 bg-purple-600 rounded hover:bg-purple-500 font-bold text-white"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main App Layout -->
+        <nav class="w-20 bg-black/40 border-r border-white/10 flex flex-col items-center py-8 gap-8 z-10 shrink-0" style="position:absolute;left:0;top:0;bottom:0;">
+            <div class="text-purple-500 text-2xl font-bold"><i class="fa-solid fa-flask"></i></div>
+            <button onclick="clSwitchView('dashboard')" class="cl-nav-btn text-white/70 hover:text-white p-3 rounded-xl transition" title="Dashboard"><i class="fa-solid fa-table-columns"></i></button>
+            <button onclick="clSwitchView('mixology')" class="cl-nav-btn text-white/50 hover:text-white p-3 rounded-xl transition" title="Mixology"><i class="fa-solid fa-flask-vial"></i></button>
+            <button onclick="clSwitchView('history')" class="cl-nav-btn text-white/50 hover:text-white p-3 rounded-xl transition" title="History"><i class="fa-solid fa-clock-rotate-left"></i></button>
+            <div class="flex-grow"></div>
+            <button onclick="clExitToSite()" class="text-blue-400/50 hover:text-blue-400 p-3" title="Back to Website"><i class="fa-solid fa-globe"></i></button>
+            <button onclick="clLogout()" class="text-red-500/50 hover:text-red-500 p-3" title="Logout"><i class="fa-solid fa-power-off"></i></button>
+        </nav>
+
+        <main class="flex-grow p-8 relative overflow-y-auto overflow-x-hidden" style="margin-left:80px;">
+            <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <!-- Header with Environment Sensors -->
+            <header class="flex justify-between items-end mb-10 border-b border-white/10 pb-6">
+                <div>
+                    <h2 class="text-gray-400 text-sm tracking-widest mb-1">SALON ENVIRONMENT</h2>
+                    <div class="flex gap-6 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-droplet text-blue-400"></i>
+                            <span id="cl-humidityDisplay">45%</span> <span class="text-gray-400">Humidity</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-temperature-half text-orange-400"></i>
+                            <span id="cl-tempDisplay">21°C</span> <span class="text-gray-400">Temp</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-green-400">
+                            <i class="fa-solid fa-wind"></i>
+                            <span>AQI: 12 (Excellent)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div id="cl-digitalClock" class="cl-digital-clock text-5xl font-bold cl-glow-text" style="font-family:'JetBrains Mono',monospace;">12:00:00</div>
+                    <div id="cl-currentDate" class="text-gray-400 text-sm">Monday, Jan 01</div>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <div id="cl-view-dashboard" class="cl-view-section fade-in">
+                <div class="grid grid-cols-12 gap-6">
+                    <div class="col-span-12 md:col-span-3 cl-glass-panel p-6 rounded-2xl">
+                        <h3 class="text-gray-400 text-xs uppercase mb-4">Daily Formula Cost</h3>
+                        <div class="text-4xl font-bold text-white mb-2" id="cl-dailyCost">$0.00</div>
+                        <div class="text-xs text-green-400"><i class="fa-solid fa-arrow-trend-down"></i> Track with each session</div>
+                    </div>
+                    <div class="col-span-12 md:col-span-3 cl-glass-panel p-6 rounded-2xl">
+                        <h3 class="text-gray-400 text-xs uppercase mb-4">Sessions Today</h3>
+                        <div class="text-4xl font-bold text-white mb-2" id="cl-sessionCount">0</div>
+                        <div class="text-xs text-purple-400">Precision tracking active</div>
+                    </div>
+                    <div class="col-span-12 md:col-span-6 cl-glass-panel p-6 rounded-2xl flex items-center justify-between cursor-pointer hover:bg-white/5 transition" onclick="clSwitchView('mixology')">
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Start New Mix</h3>
+                            <p class="text-gray-400 text-sm">Launch the guided mixology wizard</p>
+                        </div>
+                        <div class="h-12 w-12 bg-purple-600 rounded-full flex items-center justify-center shadow-lg shadow-purple-500/30">
+                            <i class="fa-solid fa-plus text-white"></i>
+                        </div>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-8 cl-glass-panel p-6 rounded-2xl" style="max-height:400px;overflow-y:auto;">
+                        <h3 class="mb-4 font-bold border-b border-white/10 pb-2">Active Processing</h3>
+                        <table class="w-full text-left text-sm text-gray-400">
+                            <thead>
+                                <tr class="text-xs uppercase tracking-wider">
+                                    <th class="pb-3">Client</th>
+                                    <th class="pb-3">Stylist</th>
+                                    <th class="pb-3">Service</th>
+                                    <th class="pb-3">Timer</th>
+                                    <th class="pb-3">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cl-activeClientsTable"></tbody>
+                        </table>
+                        <div id="cl-noActiveMsg" class="text-center py-8 text-gray-500">
+                            <i class="fa-solid fa-flask-vial text-3xl mb-3 text-gray-600 block"></i>
+                            No active processing. Start a new mix!
+                        </div>
+                    </div>
+
+                    <div class="col-span-12 md:col-span-4 space-y-4">
+                        <div class="cl-glass-panel p-5 rounded-2xl">
+                            <h3 class="text-white font-bold mb-2"><i class="fa-solid fa-link text-purple-400 mr-2"></i>Client Quick Link</h3>
+                            <p class="text-xs text-gray-400 mb-4">Generate a live status link for clients.</p>
+                            <div class="flex gap-2">
+                                <input type="text" id="cl-clientLink" value="Start a session to generate link" readonly class="w-full bg-black/30 border border-white/10 rounded px-3 py-2 text-xs text-purple-300">
+                                <button onclick="clCopyLink()" class="bg-white/10 hover:bg-white/20 p-2 rounded text-white"><i class="fa-solid fa-copy"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="cl-glass-panel p-5 rounded-2xl border-l-4 border-green-500">
+                            <h3 class="text-green-400 font-bold mb-1 text-sm"><i class="fa-solid fa-shield-halved mr-1"></i> Environment Status</h3>
+                            <p class="text-xs text-gray-400" id="cl-envStatus">Optimal processing zone: 40-50% humidity, 20-22°C</p>
+                        </div>
+
+                        <div class="cl-glass-panel p-5 rounded-2xl border-l-4 border-yellow-500 hidden" id="cl-lowInventory">
+                            <h3 class="text-yellow-500 font-bold mb-1 text-sm"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Low Inventory</h3>
+                            <p class="text-xs text-gray-400">Warning: 20vol Developer is below 15%.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mixology Wizard View -->
+            <div id="cl-view-mixology" class="cl-view-section hidden fade-in flex gap-6" style="height:calc(100vh - 200px);">
+                <div class="w-1/4 cl-glass-panel rounded-2xl p-0 overflow-hidden flex flex-col" style="min-width:220px;">
+                    <div class="p-6 bg-purple-900/20 border-b border-white/10">
+                        <h3 class="font-bold text-white">Mix Workflow</h3>
+                        <p class="text-xs text-gray-400" id="cl-currentClientNameDisplay">New Client</p>
+                    </div>
+                    <div class="flex-grow overflow-y-auto">
+                        <button onclick="clSetStep(1)" id="cl-stepBtn1" class="w-full text-left p-4 border-b border-white/5 hover:bg-white/5 cl-active-step text-white">
+                            <div class="text-xs text-gray-500 uppercase">Step 1</div>
+                            <div class="font-bold">Prep & Protect</div>
+                        </button>
+                        <button onclick="clSetStep(2)" id="cl-stepBtn2" class="w-full text-left p-4 border-b border-white/5 hover:bg-white/5 text-white">
+                            <div class="text-xs text-gray-500 uppercase">Step 2</div>
+                            <div class="font-bold">Formulate & Weigh</div>
+                        </button>
+                        <button onclick="clSetStep(3)" id="cl-stepBtn3" class="w-full text-left p-4 border-b border-white/5 hover:bg-white/5 text-white">
+                            <div class="text-xs text-gray-500 uppercase">Step 3</div>
+                            <div class="font-bold">Test Strand</div>
+                        </button>
+                        <button onclick="clSetStep(4)" id="cl-stepBtn4" class="w-full text-left p-4 border-b border-white/5 hover:bg-white/5 text-white">
+                            <div class="text-xs text-gray-500 uppercase">Step 4</div>
+                            <div class="font-bold">Deploy & Process</div>
+                        </button>
+                        <button onclick="clSetStep(5)" id="cl-stepBtn5" class="w-full text-left p-4 border-b border-white/5 hover:bg-white/5 text-white">
+                            <div class="text-xs text-gray-500 uppercase">Step 5</div>
+                            <div class="font-bold">Cleanup & Waste</div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="w-3/4 cl-glass-panel rounded-2xl p-8 relative overflow-y-auto">
+                    <!-- Step 1: Client Prep -->
+                    <div id="cl-stepContent1" class="cl-step-content">
+                        <h2 class="text-2xl font-bold mb-6 text-white">Client Prep</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" id="cl-clientNameInput" placeholder="Client Name" class="bg-black/30 border border-white/20 p-4 rounded-xl text-white focus:border-purple-500 outline-none">
+                            <select id="cl-serviceSelect" class="bg-black/30 border border-white/20 p-4 rounded-xl text-white focus:border-purple-500 outline-none">
+                                <option value="">Select Service Type</option>
+                                <option value="Root Touch Up">Root Touch Up</option>
+                                <option value="Full Balayage">Full Balayage</option>
+                                <option value="Toner/Gloss">Toner/Gloss</option>
+                                <option value="Vivid Color">Vivid Color</option>
+                                <option value="Color Correction">Color Correction</option>
+                                <option value="Highlights">Highlights</option>
+                            </select>
+                        </div>
+                        <div class="mt-8">
+                            <h3 class="text-sm font-bold text-gray-400 mb-3">SAFETY CHECKLIST</h3>
+                            <label class="flex items-center gap-3 p-3 bg-white/5 rounded-lg mb-2 cursor-pointer text-white">
+                                <input type="checkbox" class="w-5 h-5 accent-purple-500">
+                                <span>Cape & Towel Secure</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 bg-white/5 rounded-lg mb-2 cursor-pointer text-white">
+                                <input type="checkbox" class="w-5 h-5 accent-purple-500">
+                                <span>Barrier Cream Applied</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 bg-white/5 rounded-lg mb-2 cursor-pointer text-white">
+                                <input type="checkbox" class="w-5 h-5 accent-purple-500">
+                                <span>Scalp Analysis Complete (No Abrasions)</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 bg-white/5 rounded-lg mb-2 cursor-pointer text-white">
+                                <input type="checkbox" class="w-5 h-5 accent-purple-500">
+                                <span>Allergy / Patch Test Verified</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Scale Interface -->
+                    <div id="cl-stepContent2" class="cl-step-content hidden">
+                        <h2 class="text-2xl font-bold mb-6 text-white">Smart Scale Interface</h2>
+                        <div class="flex justify-between items-center mb-6">
+                            <div class="text-6xl text-purple-400 font-bold" id="cl-scaleDisplay" style="font-family:'JetBrains Mono',monospace;">0.0g</div>
+                            <button onclick="clTareScale()" class="bg-gray-700 hover:bg-gray-600 px-6 py-2 rounded-lg text-sm text-white">TARE</button>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-black/20 p-4 rounded-xl border border-white/10">
+                                <h4 class="text-xs text-gray-500 uppercase mb-2">Target Ratio</h4>
+                                <div class="flex gap-2" id="cl-ratioButtons">
+                                    <button onclick="clSetRatio(this,'1:1')" class="flex-1 bg-purple-600/50 p-2 rounded text-sm border border-purple-500 text-white">1:1</button>
+                                    <button onclick="clSetRatio(this,'1:1.5')" class="flex-1 bg-gray-800 p-2 rounded text-sm text-white">1:1.5</button>
+                                    <button onclick="clSetRatio(this,'1:2')" class="flex-1 bg-gray-800 p-2 rounded text-sm text-white">1:2</button>
+                                </div>
+                            </div>
+                            <div class="bg-black/20 p-4 rounded-xl border border-white/10">
+                                <h4 class="text-xs text-gray-500 uppercase mb-2">Developer</h4>
+                                <select id="cl-devSelect" class="w-full bg-transparent text-white border-none outline-none">
+                                    <option value="10vol">10 Volume (3%)</option>
+                                    <option value="20vol" selected>20 Volume (6%)</option>
+                                    <option value="30vol">30 Volume (9%)</option>
+                                    <option value="40vol">40 Volume (12%)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all" id="cl-pourBar" style="width:0%"></div>
+                        </div>
+                        <p class="text-center text-xs text-gray-500 mt-2"><i class="fa-solid fa-bluetooth text-blue-400 mr-1"></i> Bluetooth Scale Connected</p>
+
+                        <button onmousedown="clSimulatePour()" onmouseup="clStopPour()" ontouchstart="clSimulatePour()" ontouchend="clStopPour()" class="w-full mt-6 bg-purple-600 hover:bg-purple-500 p-4 rounded-xl font-bold transition text-white">HOLD TO POUR (SIMULATE)</button>
+                    </div>
+
+                    <!-- Step 3: Strand Test -->
+                    <div id="cl-stepContent3" class="cl-step-content hidden">
+                        <h2 class="text-2xl font-bold mb-4 text-white">Strand Test Verification</h2>
+                        <p class="text-gray-400 mb-6">Recommended for drastic changes or compromised hair integrity.</p>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="cl-glass-panel p-6 rounded-xl text-center cursor-pointer hover:bg-green-900/30 border border-transparent hover:border-green-500 transition" onclick="clSetStep(4)">
+                                <i class="fa-solid fa-check text-5xl text-green-500 mb-3"></i>
+                                <h3 class="font-bold text-white text-lg">Passed</h3>
+                                <p class="text-xs text-gray-500 mt-1">Integrity held, color true.</p>
+                            </div>
+                            <div class="cl-glass-panel p-6 rounded-xl text-center cursor-pointer hover:bg-red-900/30 border border-transparent hover:border-red-500 transition">
+                                <i class="fa-solid fa-xmark text-5xl text-red-500 mb-3"></i>
+                                <h3 class="font-bold text-white text-lg">Failed</h3>
+                                <p class="text-xs text-gray-500 mt-1">Breakage or uneven lift. Reformulate.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Processing Timer -->
+                    <div id="cl-stepContent4" class="cl-step-content hidden">
+                        <h2 class="text-2xl font-bold mb-6 text-white">Processing Tracker</h2>
+                        <div class="text-center py-8">
+                            <div class="inline-block relative">
+                                <svg class="w-64 h-64 transform -rotate-90">
+                                    <circle cx="128" cy="128" r="120" stroke="currentColor" stroke-width="8" fill="transparent" class="text-gray-800" />
+                                    <circle cx="128" cy="128" r="120" stroke="currentColor" stroke-width="8" fill="transparent" class="text-purple-500" stroke-dasharray="753" stroke-dashoffset="753" id="cl-timerCircle" />
+                                </svg>
+                                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-white" id="cl-processingTimer" style="font-family:'JetBrains Mono',monospace;">00:00</div>
+                            </div>
+                        </div>
+                        <div class="flex justify-center gap-4 flex-wrap">
+                            <button onclick="clStartTimer(20)" class="bg-white/10 px-6 py-3 rounded-xl hover:bg-white/20 text-white">20 Min (Toner)</button>
+                            <button onclick="clStartTimer(35)" class="bg-white/10 px-6 py-3 rounded-xl hover:bg-white/20 text-white">35 Min (Standard)</button>
+                            <button onclick="clStartTimer(45)" class="bg-white/10 px-6 py-3 rounded-xl hover:bg-white/20 text-white">45 Min (Grey Cov)</button>
+                            <button onclick="clStopTimer()" class="bg-red-900/30 px-6 py-3 rounded-xl hover:bg-red-900/50 text-red-300">Stop</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Cleanup -->
+                    <div id="cl-stepContent5" class="cl-step-content hidden">
+                        <h2 class="text-2xl font-bold mb-6 text-white">Cleanup & Data Entry</h2>
+                        <div class="bg-red-900/20 border border-red-500/30 p-6 rounded-xl mb-6">
+                            <h3 class="text-red-400 font-bold mb-2"><i class="fa-solid fa-scale-balanced mr-2"></i>Waste Check</h3>
+                            <p class="mb-4 text-sm text-gray-300">Place bowl back on scale to measure waste.</p>
+                            <div class="text-3xl text-white" style="font-family:'JetBrains Mono',monospace;" id="cl-wasteDisplay">0.0g <span class="text-sm text-gray-400">Unused Product</span></div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-black/20 p-4 rounded-xl border border-white/10">
+                                <h4 class="text-xs text-gray-500 uppercase mb-2">Formula Cost</h4>
+                                <input type="text" id="cl-formulaCost" value="$45.00" class="w-full bg-transparent text-white text-xl font-bold outline-none">
+                            </div>
+                            <div class="bg-black/20 p-4 rounded-xl border border-white/10">
+                                <h4 class="text-xs text-gray-500 uppercase mb-2">Notes</h4>
+                                <input type="text" id="cl-sessionNotes" placeholder="Optional notes..." class="w-full bg-transparent text-white outline-none text-sm">
+                            </div>
+                        </div>
+                        <button onclick="clFinishSession()" class="w-full bg-green-600 hover:bg-green-500 p-4 rounded-xl font-bold text-white transition"><i class="fa-solid fa-check-double mr-2"></i>LOG SESSION & FINISH</button>
+                    </div>
+
+                    <!-- Next Button -->
+                    <div class="absolute bottom-8 right-8 flex gap-4">
+                        <button onclick="clNextStep()" class="bg-white text-black px-8 py-3 rounded-full font-bold hover:scale-105 transition">Next Step <i class="fa-solid fa-arrow-right ml-2"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History View -->
+            <div id="cl-view-history" class="cl-view-section hidden fade-in">
+                <h2 class="text-2xl font-bold mb-6 text-white">Session Logs</h2>
+                <div class="cl-glass-panel rounded-2xl overflow-hidden">
+                    <table class="w-full text-left">
+                        <thead class="bg-white/5 text-gray-400 text-xs uppercase">
+                            <tr>
+                                <th class="p-4">Date/Time</th>
+                                <th class="p-4">Stylist</th>
+                                <th class="p-4">Client</th>
+                                <th class="p-4">Service</th>
+                                <th class="p-4">Formula Cost</th>
+                                <th class="p-4">Waste</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cl-historyTableBody" class="divide-y divide-white/10 text-sm"></tbody>
+                    </table>
+                    <div id="cl-noHistoryMsg" class="text-center py-8 text-gray-500">
+                        <i class="fa-solid fa-clock-rotate-left text-3xl mb-3 text-gray-600 block"></i>
+                        No sessions logged yet.
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ChromaLuxe OS JavaScript -->
+    <script>
+    (function() {
+        // ====== CONFIGURATION ======
+        const clUsers = [
+            {name:'Jordan'},{name:'Mia'},{name:'Sophie'},{name:'Ava'},{name:'Emma'},
+            {name:'Liam'},{name:'Noah'},{name:'Olivia'},{name:'Ella'},{name:'Luna'},
+            {name:'Chloe'},{name:'Zoe'},{name:'Harper'},{name:'Aria'},{name:'Guest'}
+        ];
+
+        let clCurrentUser = null;
+        let clCurrentStep = 1;
+        let clCurrentWeight = 0;
+        let clPourInterval = null;
+        let clTimerInterval = null;
+        let clActiveClients = [];
+        let clSelectedRatio = '1:1';
+
+        // ====== INIT ======
+        function clInit() {
+            clRenderUserGrid();
+            clStartClock();
+            clUpdateEnvSensors();
+            clLoadHistory();
+            clUpdateDashboardStats();
+        }
+
+        // ====== LOGIN SYSTEM ======
+        function clRenderUserGrid() {
+            const grid = document.getElementById('cl-userGrid');
+            if (!grid) return;
+            grid.innerHTML = clUsers.map(u =>
+                `<div onclick="clSelectUser('${u.name}')" class="bg-gray-800 hover:bg-purple-600 p-2 rounded cursor-pointer transition text-xs font-bold text-center border border-white/5 flex flex-col justify-center items-center" style="aspect-ratio:1;">
+                    <div class="w-8 h-8 rounded-full bg-white/10 mb-1 flex items-center justify-center text-sm">${u.name.charAt(0)}</div>
+                    <span class="text-[10px]">${u.name}</span>
+                </div>`
+            ).join('');
+        }
+
+        window.clSelectUser = function(name) {
+            document.getElementById('cl-userGridWrap').classList.add('hidden');
+            document.getElementById('cl-passcodeArea').classList.remove('hidden');
+            document.getElementById('cl-selectedUser').innerText = name;
+            document.getElementById('cl-pinInput').value = '';
+        };
+
+        window.clAddPin = function(num) {
+            const input = document.getElementById('cl-pinInput');
+            if (input.value.length < 4) input.value += num;
+        };
+
+        window.clCancelLogin = function() {
+            document.getElementById('cl-passcodeArea').classList.add('hidden');
+            document.getElementById('cl-userGridWrap').classList.remove('hidden');
+        };
+
+        window.clSubmitLogin = function() {
+            const pin = document.getElementById('cl-pinInput').value;
+            if (pin === '1234') {
+                clCurrentUser = document.getElementById('cl-selectedUser').innerText;
+                document.getElementById('cl-loginScreen').classList.add('hidden');
+                clLogHistory(clCurrentUser, 'System Login', '-', '-', '-');
+            } else {
+                document.getElementById('cl-pinInput').value = '';
+                document.getElementById('cl-pinInput').style.borderColor = '#ef4444';
+                setTimeout(() => { document.getElementById('cl-pinInput').style.borderColor = ''; }, 1000);
+            }
+        };
+
+        window.clLogout = function() {
+            clCurrentUser = null;
+            document.getElementById('cl-loginScreen').classList.remove('hidden');
+            clCancelLogin();
+        };
+
+        window.clExitToSite = function() {
+            document.getElementById('chromaluxe-app').classList.remove('active');
+        };
+
+        // ====== NAVIGATION ======
+        window.clSwitchView = function(viewName) {
+            document.querySelectorAll('.cl-view-section').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById('cl-view-' + viewName);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.cl-nav-btn').forEach(btn => {
+                btn.classList.remove('text-white/70');
+                btn.classList.add('text-white/50');
+            });
+        };
+
+        // ====== CLOCK & SENSORS ======
+        function clStartClock() {
+            setInterval(() => {
+                const now = new Date();
+                const clockEl = document.getElementById('cl-digitalClock');
+                const dateEl = document.getElementById('cl-currentDate');
+                if (clockEl) clockEl.innerText = now.toLocaleTimeString('en-US', {hour12: false});
+                if (dateEl) dateEl.innerText = now.toLocaleDateString('en-US', {weekday:'long', month:'short', day:'numeric'});
+            }, 1000);
+        }
+
+        function clUpdateEnvSensors() {
+            setInterval(() => {
+                const temp = (21 + (Math.random() * 0.5 - 0.25)).toFixed(1);
+                const hum = (45 + (Math.random() * 2 - 1)).toFixed(0);
+                const tempEl = document.getElementById('cl-tempDisplay');
+                const humEl = document.getElementById('cl-humidityDisplay');
+                if (tempEl) tempEl.innerText = temp + '\u00B0C';
+                if (humEl) humEl.innerText = hum + '%';
+
+                // Environment alert
+                const envEl = document.getElementById('cl-envStatus');
+                if (envEl) {
+                    const h = parseFloat(hum);
+                    const t = parseFloat(temp);
+                    if (h < 40 || h > 50 || t < 20 || t > 22) {
+                        envEl.innerHTML = '<span class=\"text-yellow-400\">\u26A0 Conditions drifting from optimal zone</span>';
+                        envEl.parentElement.classList.remove('border-green-500');
+                        envEl.parentElement.classList.add('border-yellow-500');
+                    } else {
+                        envEl.innerHTML = '\u2705 Optimal processing zone active';
+                        envEl.parentElement.classList.remove('border-yellow-500');
+                        envEl.parentElement.classList.add('border-green-500');
+                    }
+                }
+            }, 5000);
+        }
+
+        // ====== MIXOLOGY WIZARD ======
+        window.clSetStep = function(step) {
+            clCurrentStep = step;
+            document.querySelectorAll('.cl-step-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById('cl-stepContent' + step);
+            if (target) target.classList.remove('hidden');
+
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.getElementById('cl-stepBtn' + i);
+                if (btn) {
+                    if (i === step) btn.classList.add('cl-active-step');
+                    else btn.classList.remove('cl-active-step');
+                }
+            }
+
+            // Update client name display
+            const nameInput = document.getElementById('cl-clientNameInput');
+            const nameDisplay = document.getElementById('cl-currentClientNameDisplay');
+            if (nameInput && nameDisplay && nameInput.value) {
+                nameDisplay.innerText = nameInput.value;
+            }
+        };
+
+        window.clNextStep = function() {
+            if (clCurrentStep < 5) clSetStep(clCurrentStep + 1);
+        };
+
+        // ====== SCALE SIMULATION ======
+        window.clSimulatePour = function() {
+            clPourInterval = setInterval(() => {
+                clCurrentWeight += 0.5;
+                const display = document.getElementById('cl-scaleDisplay');
+                if (display) display.innerText = clCurrentWeight.toFixed(1) + 'g';
+                let pct = Math.min((clCurrentWeight / 100) * 100, 100);
+                const bar = document.getElementById('cl-pourBar');
+                if (bar) bar.style.width = pct + '%';
+            }, 50);
+        };
+
+        window.clStopPour = function() {
+            clearInterval(clPourInterval);
+        };
+
+        window.clTareScale = function() {
+            clCurrentWeight = 0;
+            const display = document.getElementById('cl-scaleDisplay');
+            if (display) display.innerText = '0.0g';
+            const bar = document.getElementById('cl-pourBar');
+            if (bar) bar.style.width = '0%';
+        };
+
+        window.clSetRatio = function(btn, ratio) {
+            clSelectedRatio = ratio;
+            const container = document.getElementById('cl-ratioButtons');
+            if (container) {
+                container.querySelectorAll('button').forEach(b => {
+                    b.className = 'flex-1 bg-gray-800 p-2 rounded text-sm text-white';
+                });
+                btn.className = 'flex-1 bg-purple-600/50 p-2 rounded text-sm border border-purple-500 text-white';
+            }
+        };
+
+        // ====== TIMER ======
+        window.clStartTimer = function(minutes) {
+            if (clTimerInterval) clearInterval(clTimerInterval);
+            let seconds = minutes * 60;
+            const totalSeconds = seconds;
+            const display = document.getElementById('cl-processingTimer');
+            const circle = document.getElementById('cl-timerCircle');
+            const totalDash = 753;
+
+            // Add to active clients
+            const clientName = document.getElementById('cl-clientNameInput')?.value || 'Walk-In';
+            const service = document.getElementById('cl-serviceSelect')?.value || 'Color Service';
+            clActiveClients = [{
+                name: clientName,
+                stylist: clCurrentUser || 'Staff',
+                service: service,
+                time: seconds,
+                status: 'Processing'
+            }];
+            clRenderActiveClients();
+
+            // Generate client link
+            const linkEl = document.getElementById('cl-clientLink');
+            const code = Math.random().toString(36).substring(2, 8);
+            if (linkEl) linkEl.value = 'https://studiosalonodessa.com/live/' + code;
+
+            clTimerInterval = setInterval(() => {
+                seconds--;
+                let m = Math.floor(seconds / 60);
+                let s = seconds % 60;
+                if (display) display.innerText = (m < 10 ? '0' + m : m) + ':' + (s < 10 ? '0' + s : s);
+
+                let offset = totalDash - (seconds / totalSeconds * totalDash);
+                if (circle) circle.style.strokeDashoffset = offset;
+
+                // Update active client time
+                if (clActiveClients[0]) clActiveClients[0].time = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(clTimerInterval);
+                    clTimerInterval = null;
+                    if (clActiveClients[0]) clActiveClients[0].status = 'Complete';
+                    clRenderActiveClients();
+                    // Visual alert
+                    if (display) {
+                        display.style.color = '#22c55e';
+                        display.innerText = 'DONE!';
+                    }
+                }
+            }, 1000);
+        };
+
+        window.clStopTimer = function() {
+            if (clTimerInterval) {
+                clearInterval(clTimerInterval);
+                clTimerInterval = null;
+            }
+        };
+
+        // ====== ACTIVE CLIENTS ======
+        function clRenderActiveClients() {
+            const tbody = document.getElementById('cl-activeClientsTable');
+            const noMsg = document.getElementById('cl-noActiveMsg');
+            if (!tbody) return;
+
+            if (clActiveClients.length === 0) {
+                tbody.innerHTML = '';
+                if (noMsg) noMsg.classList.remove('hidden');
+                return;
+            }
+            if (noMsg) noMsg.classList.add('hidden');
+
+            tbody.innerHTML = clActiveClients.map(c => {
+                const mins = Math.floor(c.time / 60);
+                const secs = c.time % 60;
+                const statusColor = c.status === 'Complete' ? 'bg-green-900 text-green-300' : 'bg-blue-900 text-blue-300';
+                return `<tr class="border-b border-white/5">
+                    <td class="py-3 font-bold text-white">${c.name}</td>
+                    <td class="py-3 text-gray-400">${c.stylist}</td>
+                    <td class="py-3 text-purple-300">${c.service}</td>
+                    <td class="py-3 font-mono text-white">${mins}m ${secs < 10 ? '0' + secs : secs}s</td>
+                    <td class="py-3"><span class="${statusColor} px-2 py-1 rounded text-xs">${c.status}</span></td>
+                </tr>`;
+            }).join('');
+        }
+
+        // ====== SESSION FINISH ======
+        window.clFinishSession = function() {
+            const client = document.getElementById('cl-clientNameInput')?.value || 'Walk-In';
+            const service = document.getElementById('cl-serviceSelect')?.value || 'Color Service';
+            const cost = document.getElementById('cl-formulaCost')?.value || '$45.00';
+            const waste = clCurrentWeight > 0 ? clCurrentWeight.toFixed(1) + 'g' : '0.0g';
+
+            clLogHistory(clCurrentUser || 'Staff', client, service, cost, waste);
+
+            // Reset state
+            clActiveClients = [];
+            clRenderActiveClients();
+            clCurrentWeight = 0;
+            clCurrentStep = 1;
+            if (clTimerInterval) { clearInterval(clTimerInterval); clTimerInterval = null; }
+
+            // Reset form
+            const nameInput = document.getElementById('cl-clientNameInput');
+            if (nameInput) nameInput.value = '';
+            const serviceSelect = document.getElementById('cl-serviceSelect');
+            if (serviceSelect) serviceSelect.value = '';
+            const display = document.getElementById('cl-currentClientNameDisplay');
+            if (display) display.innerText = 'New Client';
+
+            clUpdateDashboardStats();
+            clSetStep(1);
+            clSwitchView('dashboard');
+        };
+
+        // ====== HISTORY & DATA ======
+        function clLogHistory(stylist, client, service, cost, waste) {
+            const history = JSON.parse(localStorage.getItem('chromaHistory') || '[]');
+            const entry = {
+                date: new Date().toLocaleString(),
+                stylist: stylist,
+                client: client,
+                service: service,
+                cost: cost,
+                waste: waste
+            };
+            history.unshift(entry);
+            if (history.length > 100) history.length = 100; // Keep last 100
+            localStorage.setItem('chromaHistory', JSON.stringify(history));
+            clLoadHistory();
+        }
+
+        function clLoadHistory() {
+            const history = JSON.parse(localStorage.getItem('chromaHistory') || '[]');
+            const tbody = document.getElementById('cl-historyTableBody');
+            const noMsg = document.getElementById('cl-noHistoryMsg');
+            if (!tbody) return;
+
+            if (history.length === 0) {
+                tbody.innerHTML = '';
+                if (noMsg) noMsg.classList.remove('hidden');
+                return;
+            }
+            if (noMsg) noMsg.classList.add('hidden');
+
+            tbody.innerHTML = history.map(h =>
+                `<tr class="hover:bg-white/5 transition">
+                    <td class="p-4 text-gray-400">${h.date}</td>
+                    <td class="p-4 font-bold text-purple-400">${h.stylist}</td>
+                    <td class="p-4 text-white">${h.client}</td>
+                    <td class="p-4 text-blue-300">${h.service || '-'}</td>
+                    <td class="p-4 text-green-400">${h.cost}</td>
+                    <td class="p-4 text-red-400">${h.waste}</td>
+                </tr>`
+            ).join('');
+        }
+
+        // ====== DASHBOARD STATS ======
+        function clUpdateDashboardStats() {
+            const history = JSON.parse(localStorage.getItem('chromaHistory') || '[]');
+            const today = new Date().toLocaleDateString();
+            const todaySessions = history.filter(h =>
+                h.date && h.date.includes(today) && h.client !== 'System Login'
+            );
+
+            const countEl = document.getElementById('cl-sessionCount');
+            if (countEl) countEl.innerText = todaySessions.length;
+
+            let totalCost = 0;
+            todaySessions.forEach(s => {
+                const match = (s.cost || '').match(/[\d.]+/);
+                if (match) totalCost += parseFloat(match[0]);
+            });
+            const costEl = document.getElementById('cl-dailyCost');
+            if (costEl) costEl.innerText = '$' + totalCost.toFixed(2);
+        }
+
+        // ====== COPY LINK ======
+        window.clCopyLink = function() {
+            const linkEl = document.getElementById('cl-clientLink');
+            if (linkEl && linkEl.value) {
+                navigator.clipboard.writeText(linkEl.value).then(() => {
+                    const originalValue = linkEl.value;
+                    linkEl.value = '\u2705 Copied!';
+                    setTimeout(() => { linkEl.value = originalValue; }, 2000);
+                });
+            }
+        };
+
+        // ====== URL PARAMETER CHECK ======
+        // Allow ?staff=1 to auto-open ChromaLuxe
+        if (window.location.search.includes('staff=1') || window.location.hash === '#staff') {
+            setTimeout(() => {
+                document.getElementById('chromaluxe-app')?.classList.add('active');
+            }, 500);
+        }
+
+        // ====== RUN ======
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', clInit);
+        } else {
+            clInit();
+        }
+    })();
+    <\/script>
+
+    <!-- Main Salon Website React App -->
+    <script type="text/babel">
     const { useState, useEffect, useRef } = React;
 
     // Aurora Orb Component
@@ -834,7 +1523,8 @@
                     </a>
                   ))}
                 </div>
-                <p className="text-violet-300/30 text-xs">© 2026 Studio Salon Odessa. All rights reserved.</p>
+                <a href="#staff" onClick={(e) => { e.preventDefault(); document.getElementById('chromaluxe-app')?.classList.add('active'); }} className="text-violet-300/30 hover:text-purple-400 text-xs transition-colors cursor-pointer flex items-center gap-1"><i className="fa-solid fa-flask"></i> Staff Portal</a>
+                    <p className="text-violet-300/30 text-xs">© 2026 Studio Salon Odessa. All rights reserved.</p>
               </div>
             </div>
           </footer>
