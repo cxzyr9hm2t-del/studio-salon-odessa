@@ -9,13 +9,13 @@
 <meta property="og:description" content="Experience bespoke hair artistry in an intimate, boutique setting in Odessa, Ontario.">
 <meta property="og:type" content="business.business">
 <meta property="og:url" content="https://cxzyr9hm2t-del.github.io/studio-salon-odessa/">
-<meta property="og:image" content="https://cxzyr9hm2t-del.github.io/studio-salon-odessa/og-image.png">
+<meta property="og:image" content="https://cxzyr9hm2t-dhel.github.io/studio-salon-odessa/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Studio Salon Odessa | Where Art Meets Beauty">
 <meta name="twitter:description" content="Bespoke hair artistry in Odessa, Ontario. Book your appointment today.">
 <meta name="theme-color" content="#6A0DAD">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">h
 <link rel="manifest" href="data:application/json,%7B%22name%22%3A%22Studio%20Salon%20Odessa%22%2C%22short_name%22%3A%22Studio%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230a0612%22%2C%22theme_color%22%3A%22%236A0DAD%22%7D">
 <title>Studio Salon Odessa | Where Art Meets Beauty</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>\u{1F49C}</text></svg>">
@@ -548,7 +548,7 @@ window.clAddAppt=()=>{const c=$('m-ac')?.value;if(!c)return;const appts=LS('cl_a
 // INVENTORY
 const defaultInv=[{name:'20 Vol Developer',brand:'Joico',stock:85,cost:'$12',reorder:20},{name:'30 Vol Developer',brand:'Joico',stock:60,cost:'$12',reorder:20},{name:'Olaplex No.1',brand:'Olaplex',stock:45,cost:'$28',reorder:15},{name:'Purple Shampoo',brand:'Redken',stock:70,cost:'$18',reorder:25},{name:'Foils (500ct)',brand:'Framar',stock:40,cost:'$25',reorder:10},{name:'Balayage Clay',brand:'L\'Oreal',stock:55,cost:'$22',reorder:15},{name:'Keratin Treatment',brand:'GKhair',stock:30,cost:'$45',reorder:10},{name:'Toner 9V',brand:'Redken',stock:65,cost:'$9',reorder:20}];
 function loadInv(){let inv=LS('cl_inventory');if(!inv.length){inv=defaultInv;SS('cl_inventory',inv);}
-const tb=$('cl-inv-tb');if(!tb)return;tb.innerHTML=inv.map((p,i)=>{const pct=p.stock;const color=pct<=p.reorder?'bg-red-500':'pct<=40?bg-amber-500':'bg-green-500';
+const tb=$('cl-inv-tb');if(!tb)return;tb.innerHTML=inv.map((p,i)=>{const pct=p.stock;const color=pct<=p.reorder?'bg-red-500':pct<=40?'bg-amber-500':'bg-green-500';
 return`<tr><td class="text-white font-bold text-xs">${p.name}</td><td class="text-xs">${p.brand}</td><td><div class="flex items-center gap-2"><div class="w-20 h-1.5 rounded-full bg-purple-900/40 overflow-hidden"><div class="h-full rounded-full ${pct<=p.reorder?'bg-red-500':pct<=40?'bg-amber-500':'bg-green-500'}" style="width:${pct}%"></div></div><span class="text-xs">${pct}%</span></div></td><td class="text-xs">${p.cost}</td><td class="text-xs">${p.reorder}%</td><td><button onclick="clRestockItem(${i})" class="text-[10px] text-purple-400 hover:text-white transition">Restock</button></td></tr>`;}).join('');}
 window.clRestockItem=i=>{const inv=LS('cl_inventory');if(inv[i]){inv[i].stock=Math.min(100,inv[i].stock+25);SS('cl_inventory',inv);loadInv();}};
 window.clSearchInv=()=>{const q=$('cl-inv-search').value.toLowerCase();$('cl-inv-tb').querySelectorAll('tr').forEach(r=>r.style.display=r.textContent.toLowerCase().includes(q)?'':'none');};
