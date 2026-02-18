@@ -1113,6 +1113,97 @@ nav .nav-indicator {
 @keyframes typingBounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
 @media(max-width:640px){.schedule-grid{grid-template-columns:repeat(3,1fr);gap:8px}.schedule-day{padding:14px 8px}.chat-panel-v9{right:10px;left:10px;width:auto;bottom:90px}}
 
+
+/* ADVANCED LIVE CALENDAR */
+.cal-section{position:relative;overflow:hidden}
+.cal-container{max-width:1100px;margin:0 auto}
+.cal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.cal-nav{display:flex;align-items:center;gap:8px}
+.cal-nav-btn{width:40px;height:40px;border-radius:50%;border:1px solid rgba(168,85,247,0.25);background:rgba(168,85,247,0.08);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.3s;font-size:18px}
+.cal-nav-btn:hover{background:rgba(168,85,247,0.2);border-color:rgba(168,85,247,0.5);transform:scale(1.1)}
+.cal-month-title{font-family:var(--font-display);font-size:1.8rem;color:#fff;min-width:220px;text-align:center}
+.cal-today-btn{padding:6px 16px;border-radius:20px;border:1px solid rgba(168,85,247,0.3);background:rgba(168,85,247,0.1);color:var(--p200);font-size:0.8rem;cursor:pointer;transition:all 0.3s;text-transform:uppercase;letter-spacing:0.1em;font-weight:600}
+.cal-today-btn:hover{background:rgba(168,85,247,0.25);border-color:rgba(168,85,247,0.5)}
+.cal-view-toggle{display:flex;gap:4px;background:rgba(168,85,247,0.06);border-radius:12px;padding:3px;border:1px solid rgba(168,85,247,0.12)}
+.cal-view-btn{padding:6px 14px;border-radius:10px;border:none;background:transparent;color:var(--p300);cursor:pointer;transition:all 0.3s;font-size:0.78rem;font-weight:500}
+.cal-view-btn.active{background:rgba(168,85,247,0.2);color:#fff}
+.cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px}
+.cal-weekday{text-align:center;font-size:0.7rem;font-weight:600;color:var(--p300);text-transform:uppercase;letter-spacing:0.15em;padding:8px 0}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-day{min-height:90px;border-radius:12px;border:1px solid rgba(168,85,247,0.08);background:rgba(10,5,20,0.4);padding:8px;cursor:pointer;transition:all 0.35s ease;position:relative;overflow:hidden}
+.cal-day::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(168,85,247,0.06),transparent);opacity:0;transition:opacity 0.3s}
+.cal-day:hover::before{opacity:1}
+.cal-day:hover{border-color:rgba(168,85,247,0.3);transform:translateY(-2px);box-shadow:0 4px 20px rgba(168,85,247,0.1)}
+.cal-day.today{border-color:rgba(168,85,247,0.5);background:rgba(168,85,247,0.08)}
+.cal-day.today .cal-day-num{background:var(--p500);color:#fff;font-weight:700}
+.cal-day.other-month{opacity:0.3;pointer-events:none}
+.cal-day.selected{border-color:var(--p400);background:rgba(168,85,247,0.12);box-shadow:0 0 20px rgba(168,85,247,0.15)}
+.cal-day.closed-day{background:rgba(255,50,50,0.03);border-color:rgba(255,255,255,0.04)}
+.cal-day.closed-day .cal-day-num{color:var(--p400);opacity:0.4}
+.cal-day-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-size:0.82rem;font-weight:500;color:var(--p200);transition:all 0.3s;position:relative;z-index:1}
+.cal-day-slots{margin-top:4px;position:relative;z-index:1}
+.cal-slot-indicator{display:flex;gap:3px;flex-wrap:wrap;margin-top:2px}
+.cal-slot-dot{width:6px;height:6px;border-radius:50%;transition:all 0.3s}
+.cal-slot-dot.available{background:rgba(52,211,153,0.7)}
+.cal-slot-dot.limited{background:rgba(251,191,36,0.7)}
+.cal-slot-dot.booked{background:rgba(239,68,68,0.4)}
+.cal-day-label{font-size:0.6rem;color:var(--p400);margin-top:3px;position:relative;z-index:1}
+.cal-day-closed{font-size:0.6rem;color:rgba(239,68,68,0.5);margin-top:4px;font-weight:500;letter-spacing:0.05em}
+.cal-legend{display:flex;gap:16px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.cal-legend-item{display:flex;align-items:center;gap:6px;font-size:0.72rem;color:var(--p300)}
+.cal-legend-dot{width:8px;height:8px;border-radius:50%}
+.cal-panel{margin-top:24px;border-radius:16px;border:1px solid rgba(168,85,247,0.15);background:rgba(10,5,20,0.5);overflow:hidden;transition:all 0.4s ease;backdrop-filter:blur(10px)}
+.cal-panel-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid rgba(168,85,247,0.1);background:rgba(168,85,247,0.04)}
+.cal-panel-title{font-weight:600;color:#fff;font-size:1rem}
+.cal-panel-date{font-size:0.8rem;color:var(--p300)}
+.cal-panel-body{padding:16px 20px}
+.cal-time-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px}
+.cal-time-slot{padding:10px 8px;border-radius:10px;border:1px solid rgba(168,85,247,0.12);background:rgba(168,85,247,0.04);text-align:center;cursor:pointer;transition:all 0.3s}
+.cal-time-slot:hover{border-color:rgba(168,85,247,0.35);background:rgba(168,85,247,0.1);transform:translateY(-1px)}
+.cal-time-slot.selected{border-color:var(--p400);background:rgba(168,85,247,0.2)}
+.cal-time-slot.booked{opacity:0.3;pointer-events:none;text-decoration:line-through}
+.cal-time-text{font-size:0.82rem;font-weight:600;color:#fff}
+.cal-time-avail{font-size:0.62rem;color:var(--p400);margin-top:2px}
+.cal-booking-form{margin-top:20px;display:grid;gap:12px}
+.cal-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cal-input{padding:12px 16px;border-radius:10px;border:1px solid rgba(168,85,247,0.15);background:rgba(168,85,247,0.05);color:#fff;font-size:0.85rem;transition:all 0.3s;font-family:inherit;width:100%}
+.cal-input:focus{outline:none;border-color:var(--p400);background:rgba(168,85,247,0.1);box-shadow:0 0 15px rgba(168,85,247,0.1)}
+.cal-input::placeholder{color:var(--p400)}
+.cal-select{appearance:none;padding:12px 16px;border-radius:10px;border:1px solid rgba(168,85,247,0.15);background:rgba(168,85,247,0.05);color:#fff;font-size:0.85rem;cursor:pointer;font-family:inherit;width:100%}
+.cal-select:focus{outline:none;border-color:var(--p400)}
+.cal-select option{background:#1a0a2e;color:#fff}
+.cal-submit{padding:14px 32px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--p500),var(--p700));color:#fff;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.3s;letter-spacing:0.05em;text-transform:uppercase;position:relative;overflow:hidden}
+.cal-submit:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(168,85,247,0.3)}
+.cal-submit:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.cal-toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:rgba(10,5,20,0.95);border:1px solid rgba(168,85,247,0.3);border-radius:14px;padding:16px 24px;z-index:9999;backdrop-filter:blur(20px);box-shadow:0 10px 40px rgba(0,0,0,0.5);transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1),opacity 0.5s;opacity:0;display:flex;align-items:center;gap:12px;max-width:420px}
+.cal-toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+.cal-toast-icon{font-size:1.5rem;flex-shrink:0}
+.cal-toast-msg{font-size:0.85rem;color:#fff;line-height:1.4}
+.cal-toast-sub{font-size:0.72rem;color:var(--p300);margin-top:2px}
+.cal-live-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.2);font-size:0.7rem;color:rgb(52,211,153);font-weight:600;letter-spacing:0.05em}
+.cal-live-pulse{width:7px;height:7px;border-radius:50%;background:rgb(52,211,153);animation:calPulse 2s ease infinite}
+@keyframes calPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,211,153,0.4)}50%{opacity:0.8;box-shadow:0 0 0 6px rgba(52,211,153,0)}}
+.cal-week-view{display:grid;grid-template-columns:60px repeat(7,1fr);gap:2px}
+.cal-week-time{font-size:0.65rem;color:var(--p400);text-align:right;padding:4px 8px 4px 0;height:40px;display:flex;align-items:center;justify-content:flex-end}
+.cal-week-cell{height:40px;border-radius:6px;border:1px solid rgba(168,85,247,0.05);background:rgba(168,85,247,0.02);transition:all 0.3s;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:var(--p300)}
+.cal-week-cell:hover{background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.2)}
+.cal-week-cell.has-slot{background:rgba(52,211,153,0.08);border-color:rgba(52,211,153,0.15)}
+.cal-week-cell.booked-slot{background:rgba(239,68,68,0.05);border-color:rgba(239,68,68,0.1);opacity:0.5}
+.cal-week-header{font-size:0.7rem;font-weight:600;color:var(--p200);text-align:center;padding:8px 0;height:auto}
+.cal-confirm-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9998;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(5px);opacity:0;pointer-events:none;transition:all 0.3s}
+.cal-confirm-overlay.show{opacity:1;pointer-events:all}
+.cal-confirm-modal{background:linear-gradient(145deg,rgba(20,10,40,0.98),rgba(10,5,25,0.98));border:1px solid rgba(168,85,247,0.25);border-radius:20px;padding:32px;max-width:450px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.5);transform:scale(0.9);transition:transform 0.3s}
+.cal-confirm-overlay.show .cal-confirm-modal{transform:scale(1)}
+.cal-confirm-title{font-family:var(--font-display);font-size:1.3rem;color:#fff;margin-bottom:16px;text-align:center}
+.cal-confirm-details{background:rgba(168,85,247,0.06);border-radius:12px;padding:16px;margin-bottom:20px;border:1px solid rgba(168,85,247,0.1)}
+.cal-confirm-row{display:flex;justify-content:space-between;padding:6px 0;font-size:0.82rem}
+.cal-confirm-label{color:var(--p300)}
+.cal-confirm-value{color:#fff;font-weight:500}
+.cal-confirm-actions{display:flex;gap:12px;justify-content:center}
+.cal-confirm-cancel{padding:10px 24px;border-radius:10px;border:1px solid rgba(168,85,247,0.2);background:transparent;color:var(--p300);cursor:pointer;transition:all 0.3s;font-size:0.85rem}
+.cal-confirm-cancel:hover{border-color:rgba(168,85,247,0.4);color:#fff}
+@media(max-width:768px){.cal-day{min-height:60px;padding:4px}.cal-day-num{width:22px;height:22px;font-size:0.7rem}.cal-day-label,.cal-day-closed{display:none}.cal-form-row{grid-template-columns:1fr}.cal-month-title{font-size:1.2rem;min-width:160px}.cal-time-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}.cal-week-view{font-size:0.6rem}}
+
 </style>
 <body class="bg-[#0f0517]">
 <div class="scroll-progress" id="scroll-progress" style="width:0%"></div>
@@ -2012,7 +2103,84 @@ const ScheduleSection=()=>{
         React.createElement('button',{className:'schedule-action-btn',onClick:()=>{const el=document.querySelector('.chat-fab');if(el)el.click();}},'\ud83d\udcac Live Chat'))));
 };
 
-const App=()=>{
+
+
+const LiveCalendar=()=>{
+  const{useState,useEffect,useCallback,useRef}=React;
+  const[currentDate,setCurrentDate]=useState(new Date());
+  const[selectedDate,setSelectedDate]=useState(null);
+  const[selectedTime,setSelectedTime]=useState(null);
+  const[viewMode,setViewMode]=useState('month');
+  const[bookingStep,setBookingStep]=useState(0);
+  const[formData,setFormData]=useState({name:'',phone:'',email:'',service:'',notes:''});
+  const[toast,setToast]=useState(null);
+  const[confirmOpen,setConfirmOpen]=useState(false);
+  const[submitting,setSubmitting]=useState(false);
+  const[bookedSlots,setBookedSlots]=useState(()=>{try{return JSON.parse(localStorage.getItem('sso-booked')||'[]')}catch(e){return[]}});
+  const[tick,setTick]=useState(0);
+  const panelRef=useRef(null);
+  useEffect(()=>{const t=setInterval(()=>setTick(p=>p+1),60000);return()=>clearInterval(t)},[]);
+  useEffect(()=>{try{localStorage.setItem('sso-booked',JSON.stringify(bookedSlots))}catch(e){}},[bookedSlots]);
+  const HOURS={0:null,1:null,2:{open:'9:00 AM',close:'6:00 PM',slots:['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM']},3:{open:'9:00 AM',close:'6:00 PM',slots:['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM']},4:{open:'9:00 AM',close:'6:00 PM',slots:['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM']},5:{open:'9:00 AM',close:'6:00 PM',slots:['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM']},6:{open:'9:00 AM',close:'4:00 PM',slots:['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM']}};
+  const SERVICES=['Signature Cut \u2014 $65+','Vivid / Fashion Color \u2014 $150+','Balayage / Ombr\u00e9 \u2014 $180+','Partial Highlights \u2014 $120+','Full Highlights \u2014 $165+','Keratin Smoothing \u2014 $250+','Head Spa Ritual \u2014 $85','Gloss / Toner \u2014 $45+','Bond Repair \u2014 $40+','Scalp Detox \u2014 $65','Deep Conditioning \u2014 $35','Bridal Hair \u2014 $150+','Color Correction \u2014 $120/hr'];
+  const now=new Date();const year=currentDate.getFullYear();const month=currentDate.getMonth();
+  const firstDay=new Date(year,month,1).getDay();const daysInMonth=new Date(year,month+1,0).getDate();const prevDays=new Date(year,month,0).getDate();
+  const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];const DAYSFULL=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const isToday=(d)=>d===now.getDate()&&month===now.getMonth()&&year===now.getFullYear();
+  const isPast=(d)=>{const dt=new Date(year,month,d);dt.setHours(23,59,59);return dt<now};
+  const getDayInfo=(d)=>{const dt=new Date(year,month,d);return HOURS[dt.getDay()]};
+  const isSlotBooked=(dateStr,time)=>bookedSlots.some(b=>b.date===dateStr&&b.time===time);
+  const formatDateStr=(d)=>year+'-'+(month+1).toString().padStart(2,'0')+'-'+d.toString().padStart(2,'0');
+  const getAvailCount=(d)=>{const info=getDayInfo(d);if(!info)return 0;const ds=formatDateStr(d);return info.slots.filter(s=>!isSlotBooked(ds,s)).length};
+  const showToast=(icon,msg,sub)=>{setToast({icon,msg,sub});setTimeout(()=>setToast(null),4500)};
+  const prevMonth=()=>setCurrentDate(new Date(year,month-1,1));
+  const nextMonth=()=>setCurrentDate(new Date(year,month+1,1));
+  const goToday=()=>{setCurrentDate(new Date());setSelectedDate(now.getDate())};
+  const selectDay=(d)=>{if(isPast(d)&&!isToday(d))return;const info=getDayInfo(d);if(!info)return;setSelectedDate(d);setSelectedTime(null);setBookingStep(0);setTimeout(()=>{if(panelRef.current)panelRef.current.scrollIntoView({behavior:'smooth',block:'start'})},100)};
+  const handleSubmit=()=>{if(!formData.name||!formData.phone||!formData.service){showToast('\u26a0\ufe0f','Please fill in all required fields','Name, phone, and service are required');return}setConfirmOpen(true)};
+  const confirmBooking=()=>{setSubmitting(true);const dateStr=formatDateStr(selectedDate);const dayName=DAYSFULL[new Date(year,month,selectedDate).getDay()];const fDate=MONTHS[month]+' '+selectedDate+', '+year;const smsBody='NEW BOOKING\n'+formData.name+'\n'+fDate+' ('+dayName+') at '+selectedTime+'\nService: '+formData.service.split(' \u2014')[0]+'\nPhone: '+formData.phone+(formData.email?'\nEmail: '+formData.email:'')+(formData.notes?'\nNotes: '+formData.notes:'');const emailSubject='New Booking: '+formData.name+' - '+fDate+' '+selectedTime;const emailBody='New appointment request:\n\nClient: '+formData.name+'\nDate: '+fDate+' ('+dayName+')\nTime: '+selectedTime+'\nService: '+formData.service+'\nPhone: '+formData.phone+'\nEmail: '+(formData.email||'N/A')+'\nNotes: '+(formData.notes||'None')+'\n\n--- Studio Salon Odessa Live Calendar ---';setTimeout(()=>{window.open('sms:6135839977?body='+encodeURIComponent(smsBody),'_sms');setTimeout(()=>{window.open('mailto:jordanch14\u0040gmail.com?subject='+encodeURIComponent(emailSubject)+'&body='+encodeURIComponent(emailBody),'_email')},600);setBookedSlots(prev=>[...prev,{date:dateStr,time:selectedTime,name:formData.name,service:formData.service}]);setSubmitting(false);setConfirmOpen(false);setBookingStep(0);setSelectedTime(null);setFormData({name:'',phone:'',email:'',service:'',notes:''});showToast('\u2728','Booking Request Sent!','Confirmation via SMS & email. We will confirm within 1 hour.')},1200)};
+
+  const calDays=[];for(let i=firstDay-1;i>=0;i--)calDays.push({day:prevDays-i,current:false});for(let d=1;d<=daysInMonth;d++)calDays.push({day:d,current:true});const rem=42-calDays.length;for(let d=1;d<=rem;d++)calDays.push({day:d,current:false});
+  const weekStart=new Date(year,month,selectedDate||now.getDate());weekStart.setDate(weekStart.getDate()-weekStart.getDay());const weekDays=[];for(let i=0;i<7;i++){const wd=new Date(weekStart);wd.setDate(weekStart.getDate()+i);weekDays.push(wd)}
+  const wts=['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM'];
+  const selDayInfo=selectedDate?getDayInfo(selectedDate):null;const selDateStr=selectedDate?formatDateStr(selectedDate):null;
+  const ce=React.createElement;const F=React.Fragment;
+  return ce('section',{id:'calendar',className:'cal-section relative py-28 px-6'},ce('div',{className:'cal-container'},
+    ce('div',{className:'text-center mb-16'},
+      ce('p',{className:'reveal text-sm font-medium text-purple-400 tracking-[0.2em] uppercase mb-4'},'Real-Time Availability'),
+      ce('h2',{className:'reveal font-display text-4xl md:text-5xl font-bold text-white mb-4'},'Book Your Appointment'),
+      ce('p',{className:'reveal text-purple-200/50 max-w-xl mx-auto mb-4'},'Select a date and time below. Your booking request is sent instantly via SMS & email for fast confirmation.'),
+      ce('div',{className:'flex justify-center'},ce('div',{className:'cal-live-badge'},ce('span',{className:'cal-live-pulse'}),'LIVE SCHEDULE'))
+    ),
+    ce('div',{className:'cal-header'},
+      ce('div',{className:'cal-nav'},ce('button',{className:'cal-nav-btn',onClick:prevMonth},'\u2039'),ce('div',{className:'cal-month-title'},MONTHS[month]+' '+year),ce('button',{className:'cal-nav-btn',onClick:nextMonth},'\u203a')),
+      ce('div',{className:'flex items-center gap-8 flex-wrap'},ce('button',{className:'cal-today-btn',onClick:goToday},'\ud83d\udcc5 Today'),ce('div',{className:'cal-view-toggle'},ce('button',{className:'cal-view-btn'+(viewMode==='month'?' active':''),onClick:()=>setViewMode('month')},'Month'),ce('button',{className:'cal-view-btn'+(viewMode==='week'?' active':''),onClick:()=>setViewMode('week')},'Week')))
+    ),
+    viewMode==='month'?ce(F,null,
+      ce('div',{className:'cal-weekdays'},DAYS.map(d=>ce('div',{key:d,className:'cal-weekday'},d))),
+      ce('div',{className:'cal-grid'},calDays.map((cd,i)=>{if(!cd.current)return ce('div',{key:'e'+i,className:'cal-day other-month'},ce('span',{className:'cal-day-num'},cd.day));const d=cd.day;const info=getDayInfo(d);const past=isPast(d)&&!isToday(d);const avail=getAvailCount(d);const td=isToday(d);return ce('div',{key:d,className:'cal-day'+(td?' today':'')+(selectedDate===d?' selected':'')+(past?' other-month':'')+(!info?' closed-day':''),onClick:()=>!past&&selectDay(d)},ce('span',{className:'cal-day-num'},d),info&&!past?ce('div',{className:'cal-day-slots'},ce('div',{className:'cal-slot-indicator'},Array.from({length:Math.min(avail,5)}).map((_,si)=>ce('span',{key:si,className:'cal-slot-dot'+(avail>8?' available':avail>3?' limited':' booked')}))),ce('div',{className:'cal-day-label'},avail>8?'Open':avail>3?avail+' left':avail>0?'Last '+avail:'Full')):!info&&!past?ce('div',{className:'cal-day-closed'},'Closed'):null)})),
+      ce('div',{className:'cal-legend'},[{c:'rgba(52,211,153,0.7)',l:'Available'},{c:'rgba(251,191,36,0.7)',l:'Limited'},{c:'rgba(239,68,68,0.4)',l:'Booked'}].map(x=>ce('div',{key:x.l,className:'cal-legend-item'},ce('span',{className:'cal-legend-dot',style:{background:x.c}}),x.l)))
+    ):ce('div',{className:'cal-week-view'},ce('div',{className:'cal-week-time cal-week-header'},''),weekDays.map(wd=>ce('div',{key:wd.toISOString(),className:'cal-week-time cal-week-header'+(wd.toDateString()===now.toDateString()?' text-purple-300':'')},DAYS[wd.getDay()]+' '+wd.getDate())),wts.map(ts=>ce(F,{key:ts},ce('div',{className:'cal-week-time'},ts),weekDays.map(wd=>{const di=HOURS[wd.getDay()];const hs=di&&di.slots.includes(ts);const ds=wd.getFullYear()+'-'+(wd.getMonth()+1).toString().padStart(2,'0')+'-'+wd.getDate().toString().padStart(2,'0');const bk=isSlotBooked(ds,ts);const wp=wd<new Date(now.getFullYear(),now.getMonth(),now.getDate());return ce('div',{key:wd.toISOString()+ts,className:'cal-week-cell'+(hs&&!bk&&!wp?' has-slot':'')+(bk?' booked-slot':''),onClick:()=>{if(hs&&!bk&&!wp){setCurrentDate(new Date(wd));setSelectedDate(wd.getDate());setSelectedTime(ts);setBookingStep(1);setViewMode('month');setTimeout(()=>{if(panelRef.current)panelRef.current.scrollIntoView({behavior:'smooth',block:'start'})},100)}}},hs?(bk?'\u2715':'\u2713'):'')})))),
+
+    selectedDate&&selDayInfo?ce('div',{ref:panelRef,className:'cal-panel animate-on-scroll'},
+      ce('div',{className:'cal-panel-header'},ce('div',null,ce('div',{className:'cal-panel-title'},DAYSFULL[new Date(year,month,selectedDate).getDay()]+', '+MONTHS[month]+' '+selectedDate),ce('div',{className:'cal-panel-date'},selDayInfo.open+' \u2013 '+selDayInfo.close+' \u00b7 '+getAvailCount(selectedDate)+' slots available')),ce('button',{className:'cal-nav-btn',onClick:()=>{setSelectedDate(null);setSelectedTime(null);setBookingStep(0)},style:{width:32,height:32,fontSize:14}},'\u2715')),
+      ce('div',{className:'cal-panel-body'},
+        bookingStep===0?ce(F,null,ce('p',{className:'text-sm text-purple-300 mb-3 font-medium'},'Select a time slot:'),ce('div',{className:'cal-time-grid'},selDayInfo.slots.map(s=>{const bk=isSlotBooked(selDateStr,s);return ce('div',{key:s,className:'cal-time-slot'+(selectedTime===s?' selected':'')+(bk?' booked':''),onClick:()=>{if(!bk){setSelectedTime(s);setBookingStep(1)}}},ce('div',{className:'cal-time-text'},s),ce('div',{className:'cal-time-avail'},bk?'Booked':'Available'))}))):ce('div',{className:'cal-booking-form'},
+          ce('div',{className:'flex items-center gap-3 mb-2 p-3 rounded-xl',style:{background:'rgba(168,85,247,0.06)',border:'1px solid rgba(168,85,247,0.12)'}},ce('span',{style:{fontSize:'1.2rem'}},'\ud83d\udcc5'),ce('div',null,ce('div',{className:'text-white text-sm font-semibold'},MONTHS[month]+' '+selectedDate+', '+year+' at '+selectedTime),ce('div',{className:'text-purple-300 text-xs'},'Your selected appointment time')),ce('button',{className:'ml-auto text-purple-400 text-xs hover:text-white transition-colors',onClick:()=>{setBookingStep(0);setSelectedTime(null)}},'Change')),
+          ce('div',{className:'cal-form-row'},ce('input',{className:'cal-input',placeholder:'Full Name *',value:formData.name,onChange:e=>setFormData(p=>({...p,name:e.target.value}))}),ce('input',{className:'cal-input',placeholder:'Phone Number *',type:'tel',value:formData.phone,onChange:e=>setFormData(p=>({...p,phone:e.target.value}))})),
+          ce('div',{className:'cal-form-row'},ce('input',{className:'cal-input',placeholder:'Email (optional)',type:'email',value:formData.email,onChange:e=>setFormData(p=>({...p,email:e.target.value}))}),ce('select',{className:'cal-select',value:formData.service,onChange:e=>setFormData(p=>({...p,service:e.target.value}))},ce('option',{value:''},'Select Service *'),SERVICES.map(s=>ce('option',{key:s,value:s},s)))),
+          ce('textarea',{className:'cal-input',placeholder:'Special requests or notes...',rows:2,value:formData.notes,onChange:e=>setFormData(p=>({...p,notes:e.target.value}))}),
+          ce('button',{className:'cal-submit',onClick:handleSubmit,disabled:submitting},ce('span',{className:'cal-submit-glow'}),submitting?'Sending...':'\u2728 Request Appointment'),
+          ce('p',{className:'text-center text-purple-400/50 text-xs mt-1'},'Instant notification via SMS & email. Confirmation within 1 hour.'))
+      )
+    ):null,
+    ce('div',{className:'cal-confirm-overlay'+(confirmOpen?' show':''),onClick:e=>{if(e.target===e.currentTarget)setConfirmOpen(false)}},ce('div',{className:'cal-confirm-modal'},ce('div',{className:'text-center text-3xl mb-3'},'\ud83d\udc87\u200d\u2640\ufe0f'),ce('div',{className:'cal-confirm-title'},'Confirm Your Booking'),ce('div',{className:'cal-confirm-details'},[{l:'Date',v:selectedDate?MONTHS[month]+' '+selectedDate+', '+year:''},{l:'Time',v:selectedTime||''},{l:'Service',v:formData.service?formData.service.split(' \u2014')[0]:''},{l:'Client',v:formData.name},{l:'Phone',v:formData.phone}].map(r=>ce('div',{key:r.l,className:'cal-confirm-row'},ce('span',{className:'cal-confirm-label'},r.l),ce('span',{className:'cal-confirm-value'},r.v)))),ce('p',{className:'text-center text-xs text-purple-300/60 mb-4'},'SMS to (613) 583-9977 & email to jordanch14@gmail.com'),ce('div',{className:'cal-confirm-actions'},ce('button',{className:'cal-confirm-cancel',onClick:()=>setConfirmOpen(false)},'Go Back'),ce('button',{className:'cal-submit',style:{padding:'10px 28px',fontSize:'0.85rem'},onClick:confirmBooking,disabled:submitting},submitting?'Sending...':'Confirm & Send')))),
+    toast?ce('div',{className:'cal-toast show'},ce('span',{className:'cal-toast-icon'},toast.icon),ce('div',null,ce('div',{className:'cal-toast-msg'},toast.msg),toast.sub?ce('div',{className:'cal-toast-sub'},toast.sub):null)):null
+  ));
+};
+
+    const App=()=>{
   const [scrolled,setScrolled]=useState(false);
   const [mobileMenu,setMobileMenu]=useState(false);
   useScrollProgress();
@@ -2101,6 +2269,7 @@ const App=()=>{
             <NavLink href="#gallery">Gallery</NavLink>
             <NavLink href="#booking">Booking</NavLink>
             <NavLink href="#schedule">Schedule</NavLink>
+            <NavLink href="#calendar">Calendar</NavLink>
             <NavLink href="#faq">FAQ</NavLink>
             <NavLink href="#about">About</NavLink>
             <a href="mailto:jordanch14@gmail.com?subject=Appointment%20Request" className="btn-primary btn-pill btn-sm px-6" style={{fontSize:'0.85rem'}}><span>BOOK NOW</span></a>
@@ -2110,7 +2279,7 @@ const App=()=>{
         {mobileMenu&&(
           <div className="md:hidden glass mx-4 mt-2 rounded-2xl p-6 animate-scale-in">
             <div className="flex flex-col gap-4">
-              {['Home','Services','Pricing','Redken','Reviews','Gallery','Booking','Schedule','FAQ','About'].map(s=>(
+              {['Home','Services','Pricing','Redken','Reviews','Gallery','Booking','Schedule','Calendar','FAQ','About'].map(s=>(
                 <a key={s} href={'#'+s.toLowerCase()} className="text-purple-200 hover:text-white transition-colors py-2" onClick={()=>setMobileMenu(false)}>{s}</a>
               ))}
               <a href="mailto:jordanch14@gmail.com?subject=Appointment%20Request" className="btn-primary btn-pill text-center mt-2"><span>BOOK NOW</span></a>
@@ -2334,6 +2503,9 @@ const App=()=>{
 
       {/* ═══ SCHEDULE & AVAILABILITY ═══ */}
       <ScheduleSection />
+
+      {/* \u2550\u2550\u2550 LIVE BOOKING CALENDAR \u2550\u2550\u2550 */}
+      <LiveCalendar />
 
       {/* ═══ GALLERY — BEFORE & AFTER ═══ */}
       <section id="gallery" className="relative py-28 px-6">
