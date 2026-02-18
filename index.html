@@ -1204,6 +1204,14 @@ nav .nav-indicator {
 .cal-confirm-cancel:hover{border-color:rgba(168,85,247,0.4);color:#fff}
 @media(max-width:768px){.cal-day{min-height:60px;padding:4px}.cal-day-num{width:22px;height:22px;font-size:0.7rem}.cal-day-label,.cal-day-closed{display:none}.cal-form-row{grid-template-columns:1fr}.cal-month-title{font-size:1.2rem;min-width:160px}.cal-time-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}.cal-week-view{font-size:0.6rem}}
 
+
+/* ULTIMATE TIER ENHANCEMENTS */
+.ring-2{box-shadow:0 0 0 2px rgba(168,85,247,0.3),0 0 30px rgba(168,85,247,0.1)}
+nav a[href="#calendar"]{position:relative}
+nav a[href="#calendar"]::after{content:'';position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:rgb(52,211,153);border-radius:50%;opacity:0.8}
+.cal-section .cal-day:hover{box-shadow:0 4px 25px rgba(168,85,247,0.15)}
+.cal-time-slot:hover{box-shadow:0 2px 15px rgba(168,85,247,0.12)}
+.glass-card{backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 </style>
 <body class="bg-[#0f0517]">
 <div class="scroll-progress" id="scroll-progress" style="width:0%"></div>
@@ -1457,7 +1465,7 @@ nav .nav-indicator {
         <div class="cl-section"><div class="cl-section-title">⚙ Business Profile</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:500px">
           <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Name</label><input id="cl-s-name" class="glass-input" value="Studio Salon Odessa"></div>
-          <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Phone</label><input id="cl-s-phone" class="glass-input" value="(613) 555-0123"></div>
+          <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Phone</label><input id="cl-s-phone" class="glass-input" value="(613) 583-9977"></div>
           <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Email</label><input id="cl-s-email" class="glass-input" value="jordanch14@gmail.com"></div>
           <div><label style="font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px">Location</label><input id="cl-s-loc" class="glass-input" value="Odessa, Ontario"></div>
         </div>
@@ -1653,7 +1661,7 @@ init();
 })();
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"HairSalon","name":"Studio Salon Odessa","description":"Official Redken salon in Loyalist Township. Premium hair artistry: balayage, Shades EQ color, precision cuts & luxury spa treatments.","url":"https://cxzyr9hm2t-del.github.io/studio-salon-odessa/","telephone":"(613) 555-0123","email":"jordanch14@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Odessa","addressRegion":"Ontario","addressCountry":"CA"},"geo":{"@type":"GeoCoordinates","latitude":"44.2581","longitude":"-76.7383"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"18:00"}],"priceRange":"$$","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"48","bestRating":"5"},"sameAs":["https://instagram.com/studiosalonodessa","https://facebook.com/studiosalonodessa","https://tiktok.com/@studiosalonodessa"],"brand":{"@type":"Brand","name":"Redken","url":"https://www.redken.com"},"knowsAbout":["Redken Shades EQ","Redken Color Gels Lacquers","Balayage","Hair Color","Professional Hair Care"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Signature Cut","description":"Precision cutting tailored to your features"},"price":"65.00","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Balayage","description":"Hand-painted highlights for natural color"},"price":"180.00","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Vivid Color","description":"Bold, vibrant fashion colors"},"price":"150.00","priceCurrency":"CAD"}]}}
+{"@context":"https://schema.org","@type":"HairSalon","name":"Studio Salon Odessa","description":"Official Redken salon in Loyalist Township. Premium hair artistry: balayage, Shades EQ color, precision cuts & luxury spa treatments.","url":"https://cxzyr9hm2t-del.github.io/studio-salon-odessa/","telephone":"(613) 583-9977","email":"jordanch14@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Odessa","addressRegion":"Ontario","addressCountry":"CA"},"geo":{"@type":"GeoCoordinates","latitude":"44.2581","longitude":"-76.7383"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"18:00"}],"priceRange":"$$","aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"48","bestRating":"5"},"sameAs":["https://instagram.com/studiosalonodessa","https://facebook.com/studiosalonodessa","https://tiktok.com/@studiosalonodessa"],"brand":{"@type":"Brand","name":"Redken","url":"https://www.redken.com"},"knowsAbout":["Redken Shades EQ","Redken Color Gels Lacquers","Balayage","Hair Color","Professional Hair Care"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Signature Cut","description":"Precision cutting tailored to your features"},"price":"65.00","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Balayage","description":"Hand-painted highlights for natural color"},"price":"180.00","priceCurrency":"CAD"},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Vivid Color","description":"Bold, vibrant fashion colors"},"price":"150.00","priceCurrency":"CAD"}]}}
 </script>
 
 <script type="application/ld+json">
@@ -2100,6 +2108,7 @@ const ScheduleSection=()=>{
         React.createElement('a',{href:'tel:6135839977',className:'schedule-action-btn primary'},'\ud83d\udcde Call Now'),
         React.createElement('a',{href:'mailto:jordanch14@gmail.com?subject=Appointment%20Request',className:'schedule-action-btn'},'\u2709\ufe0f Email Us'),
         React.createElement('a',{href:'https://www.instagram.com/studiosalonodessa/',target:'_blank',rel:'noopener noreferrer',className:'schedule-action-btn'},'\ud83d\udcac Instagram DM'),
+        React.createElement('a',{href:'#calendar',className:'schedule-action-btn primary'},'\ud83d\udcc5 Live Calendar'),
         React.createElement('button',{className:'schedule-action-btn',onClick:()=>{const el=document.querySelector('.chat-fab');if(el)el.click();}},'\ud83d\udcac Live Chat'))));
 };
 
@@ -2268,18 +2277,17 @@ const LiveCalendar=()=>{
                 <NavLink href="#reviews">Reviews</NavLink>
             <NavLink href="#gallery">Gallery</NavLink>
             <NavLink href="#booking">Booking</NavLink>
-            <NavLink href="#schedule">Schedule</NavLink>
             <NavLink href="#calendar">Calendar</NavLink>
             <NavLink href="#faq">FAQ</NavLink>
             <NavLink href="#about">About</NavLink>
-            <a href="mailto:jordanch14@gmail.com?subject=Appointment%20Request" className="btn-primary btn-pill btn-sm px-6" style={{fontSize:'0.85rem'}}><span>BOOK NOW</span></a>
+            <a href="#calendar" className="btn-primary btn-pill btn-sm px-6" style={{fontSize:'0.85rem'}}><span>BOOK NOW</span></a>
           </div>
           <button className="md:hidden text-white text-2xl" onClick={()=>setMobileMenu(!mobileMenu)} aria-label="Toggle menu">{mobileMenu?'✕':'☰'}</button>
         </div>
         {mobileMenu&&(
           <div className="md:hidden glass mx-4 mt-2 rounded-2xl p-6 animate-scale-in">
             <div className="flex flex-col gap-4">
-              {['Home','Services','Pricing','Redken','Reviews','Gallery','Booking','Schedule','Calendar','FAQ','About'].map(s=>(
+              {['Home','Services','Pricing','Redken','Reviews','Gallery','Booking','Calendar','FAQ','About'].map(s=>(
                 <a key={s} href={'#'+s.toLowerCase()} className="text-purple-200 hover:text-white transition-colors py-2" onClick={()=>setMobileMenu(false)}>{s}</a>
               ))}
               <a href="mailto:jordanch14@gmail.com?subject=Appointment%20Request" className="btn-primary btn-pill text-center mt-2"><span>BOOK NOW</span></a>
@@ -2306,7 +2314,7 @@ const LiveCalendar=()=>{
             A sanctuary of style in the heart of Loyalist Township. Experience bespoke hair artistry in an intimate, boutique setting.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 animate-fade-up anim-delay-3">
-            <a href="mailto:jordanch14@gmail.com?subject=Appointment%20Request&body=Hi%2C%20I'd%20like%20to%20book%20an%20appointment.%0A%0AName%3A%0APreferred%20Date%3A%0AService%3A" className="btn-primary btn-pill px-10 py-4 text-lg no-underline"><span>RESERVE YOUR SEAT</span></a>
+            <a href="#calendar" className="btn-primary btn-pill px-10 py-4 text-lg no-underline"><span>RESERVE YOUR SEAT</span></a>
             <a href="#services" className="btn-ghost btn-pill px-8 py-4 no-underline">EXPLORE SERVICES</a>
           </div>
           <div className="flex items-center justify-center gap-6 mt-12 animate-fade-up anim-delay-4">
@@ -2459,12 +2467,13 @@ const LiveCalendar=()=>{
             <p className="reveal text-purple-200/50 max-w-2xl mx-auto">Choose your preferred way to book — we make it easy to reserve your session</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6 mb-12">
-            {[
+            {[{icon:'\ud83d\udcc5',title:'Live Calendar',desc:'Select your date & time instantly. Real-time availability with SMS & email confirmation.',action:'#calendar',btn:'Open Calendar',color:'from-purple-600 to-purple-800',featured:true},
+              
               {icon:'📧',title:'Email Booking',desc:'Send us your preferred date, time, and service. We will confirm within 24 hours.',action:'mailto:jordanch14@gmail.com?subject=Appointment%20Request&body=Hi%2C%20I%27d%20like%20to%20book%20an%20appointment.%0A%0AName%3A%0APreferred%20Date%3A%0AService%3A%0APhone%3A',btn:'Send Request',color:'from-purple-600 to-purple-700'},
               {icon:'📱',title:'Call or Text',desc:'Reach out directly for same-day availability or quick questions about services.',action:'tel:+16135839977',btn:'(613) 583-9977',color:'from-purple-700 to-purple-800'},
               {icon:'💬',title:'Instagram DM',desc:'Send us a direct message on Instagram for booking or consultation inquiries.',action:'https://instagram.com/studiosalonodessa',btn:'@studiosalonodessa',color:'from-pink-600 to-purple-600'}
             ].map((b,i)=>(
-              <a key={i} href={b.action} target={b.action.startsWith('http')?'_blank':undefined} rel={b.action.startsWith('http')?'noopener noreferrer':undefined} className="reveal glass-card p-8 text-center group cursor-pointer no-underline block" style={{transitionDelay:i*0.15+'s'}}>
+              <a key={i} href={b.action} target={b.action.startsWith('http')?'_blank':undefined} rel={b.action.startsWith('http')?'noopener noreferrer':undefined} className={"reveal glass-card p-8 text-center group cursor-pointer no-underline block"+(b.featured?" ring-2 ring-purple-500/50":"")} style={{transitionDelay:i*0.15+'s'}}>
                 <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">{b.icon}</div>
                 <h3 className="text-xl font-semibold text-white mb-3">{b.title}</h3>
                 <p className="text-purple-200/60 text-sm leading-relaxed mb-6">{b.desc}</p>
@@ -2515,7 +2524,7 @@ const LiveCalendar=()=>{
             <h2 className="reveal font-display text-5xl md:text-6xl font-bold text-white mb-4">Before & After</h2>
             <p className="reveal text-purple-200/50">Real transformations, real results — powered by Redken</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {[
               {before:'Level 4 Brown',after:'Platinum Blonde Balayage',service:'Balayage + Toner',time:'4 hrs',products:'Flash Lift + Shades EQ 09V',emoji:'🌟'},
               {before:'Grown-out Highlights',after:'Seamless Vivid Purple',service:'Vivid Color',time:'3 hrs',products:'Color Gels Lacquers + Shades EQ',emoji:'💜'},
@@ -2678,7 +2687,7 @@ const LiveCalendar=()=>{
           <p className="reveal text-sm font-medium text-purple-400 uppercase tracking-[0.2em] mb-4">Ready?</p>
           <h2 className="reveal font-display text-5xl md:text-7xl font-bold text-white mb-6">Let's Create Together</h2>
           <p className="reveal text-purple-200/50 mb-10">Your journey to exceptional hair begins with a single message. Book your consultation today.</p>
-          <a href="mailto:jordanch14@gmail.com?subject=Appointment%20Request&body=Hi%2C%20I'd%20like%20to%20book%20an%20appointment.%0A%0AName%3A%0APreferred%20Date%3A%0AService%3A" className="reveal btn-primary btn-pill px-12 py-5 text-lg no-underline inline-block"><span>BOOK YOUR APPOINTMENT</span></a>
+          <a href="#calendar" className="reveal btn-primary btn-pill px-12 py-5 text-lg no-underline inline-block"><span>BOOK YOUR APPOINTMENT</span></a>
         </div>
       </section>
 
@@ -2700,7 +2709,7 @@ const LiveCalendar=()=>{
             <div className="reveal">
               <p className="text-xs text-purple-400/50 uppercase tracking-wider mb-2">Contact</p>
               <a href="mailto:jordanch14@gmail.com" className="text-white font-semibold hover:text-purple-300 transition-colors no-underline block">jordanch14@gmail.com</a>
-              <a href="tel:+16135550123" className="text-sm text-purple-300/50 hover:text-purple-300 transition-colors no-underline block">(613) 555-0123</a>
+              <a href="tel:+16135839977" className="text-sm text-purple-300/50 hover:text-purple-300 transition-colors no-underline block">(613) 583-9977</a>
             </div>
           </div>
         </div>
