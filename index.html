@@ -2081,115 +2081,407 @@ const ScrollToTop = () => {
    ════════════════════════════════════════════ */
 
 const ScheduleSection=()=>{
-  const days=[{key:'sun',label:'Sunday',hours:null,closed:true},{key:'mon',label:'Monday',hours:null,closed:true},{key:'tue',label:'Tuesday',hours:'9 AM - 6 PM',closed:false},{key:'wed',label:'Wednesday',hours:'9 AM - 6 PM',closed:false},{key:'thu',label:'Thursday',hours:'9 AM - 6 PM',closed:false},{key:'fri',label:'Friday',hours:'9 AM - 6 PM',closed:false},{key:'sat',label:'Saturday',hours:'9 AM - 4 PM',closed:false}];
-  const now=new Date();const currentDay=now.getDay();const currentHour=now.getHours();const todayInfo=days[currentDay];
-  const getStatus=(dayIdx,d)=>{if(d.closed)return{text:'Closed',cls:'closed'};if(dayIdx!==currentDay)return{text:d.hours,cls:'open'};const closeHour=dayIdx===6?16:18;if(currentHour<9)return{text:'Opens at 9 AM',cls:'closed'};if(currentHour>=closeHour)return{text:'Closed',cls:'closed'};if(currentHour>=closeHour-1)return{text:'Closing soon',cls:'closing'};return{text:'Open now',cls:'open'};};
-  const isOpenNow=!todayInfo.closed&&currentHour>=9&&currentHour<(currentDay===6?16:18);
-  const closingSoon=isOpenNow&&currentHour>=(currentDay===6?15:17);
-  const [tick,setTick]=useState(0);
-  useEffect(()=>{const t=setInterval(()=>setTick(p=>p+1),60000);return()=>clearInterval(t);},[]);
-  const getNextOpen=()=>{for(let i=1;i<=7;i++){const idx=(currentDay+i)%7;if(!days[idx].closed)return days[idx].label+' at 9:00 AM';}return'';};
-  return React.createElement('section',{id:'schedule',className:'schedule-section relative py-28 px-6'},
-    React.createElement('div',{className:'max-w-5xl mx-auto'},
-      React.createElement('div',{className:'text-center mb-16'},
-        React.createElement('p',{className:'reveal text-sm font-medium text-purple-400 tracking-[0.2em] uppercase mb-4'},'Availability'),
-        React.createElement('h2',{className:'reveal text-4xl md:text-5xl font-bold text-white mb-4'},'Our Schedule'),
-        React.createElement('p',{className:'reveal text-purple-200/50 max-w-xl mx-auto'},'Plan your visit with real-time availability. By appointment only, Tue\u2013Sat.')),
-      React.createElement('div',{className:'schedule-grid reveal'},
-        days.map((d,i)=>{const status=getStatus(i,d);const isToday=i===currentDay;
-          return React.createElement('div',{key:d.key,className:'schedule-day'+(isToday?' today':'')+(d.closed?' closed':'')},
-            React.createElement('div',{className:'day-label'},d.label.substring(0,3)),
-            React.createElement('div',{className:'day-hours'},d.closed?'Closed':d.hours),
-            isToday&&React.createElement('div',{className:'day-status'},React.createElement('span',{className:'status-dot '+status.cls}),React.createElement('span',{style:{color:status.cls==='open'?'#34d399':status.cls==='closing'?'#fbbf24':'#f87171'}},status.text)));})),
-      React.createElement('div',{className:'schedule-now-banner reveal '+(isOpenNow?'is-open':'is-closed')},
-        isOpenNow?React.createElement(React.Fragment,null,React.createElement('span',{style:{fontSize:'1.3rem'}},closingSoon?'\u23F3':'\u2705'),React.createElement('span',null,closingSoon?'Closing soon today! Call now to book.':'We are open right now! Book your appointment today.')):
-        React.createElement(React.Fragment,null,React.createElement('span',{style:{fontSize:'1.3rem'}},'\ud83d\udcc5'),React.createElement('span',null,'Currently closed. Next open '+getNextOpen()+'. Book ahead!'))),
-      React.createElement('div',{className:'schedule-actions reveal'},
-        React.createElement('a',{href:'tel:6135839977',className:'schedule-action-btn primary'},'\ud83d\udcde Call Now'),
-        React.createElement('a',{href:'mailto:jordanch14@gmail.com?subject=Appointment%20Request',className:'schedule-action-btn'},'\u2709\ufe0f Email Us'),
-        React.createElement('a',{href:'https://www.instagram.com/studiosalonodessa/',target:'_blank',rel:'noopener noreferrer',className:'schedule-action-btn'},'\ud83d\udcac Instagram DM'),
-        React.createElement('a',{href:'#calendar',className:'schedule-action-btn primary'},'\ud83d\udcc5 Live Calendar'),
-        React.createElement('button',{className:'schedule-action-btn',onClick:()=>{const el=document.querySelector('.chat-fab');if(el)el.click();}},'\ud83d\udcac Live Chat'))));
+  const days=[
+    {day:"Sunday",hours:"Closed",closed:true},
+    {day:"Monday",hours:"9:00 AM - 5:00 PM"},
+    {day:"Tuesday",hours:"9:00 AM - 7:00 PM"},
+    {day:"Wednesday",hours:"9:00 AM - 7:00 PM"},
+    {day:"Thursday",hours:"9:00 AM - 7:00 PM"},
+    {day:"Friday",hours:"9:00 AM - 5:00 PM"},
+    {day:"Saturday",hours:"9:00 AM - 3:00 PM"}
+  ];
+  const today=new Date().getDay();
+  return(
+    <div className="relative py-20 overflow-hidden">
+      <div className="max-w-5xl mx-auto px-4">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-4" style={{fontFamily:"Playfair Display"}}>
+          <span className="bg-gradient-to-r from-purple-300 via-purple-200 to-pink-300 bg-clip-text text-transparent">
+            Studio Hours</span></h2>
+        <p className="text-purple-300/70 text-center mb-12 text-lg">Our weekly availability</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
+          {days.map((d,i)=>(
+            <div key={i} className={`relative group backdrop-blur-xl border rounded-2xl p-4 text-center transition-all duration-500 hover:scale-105 ${i===today?"border-purple-400/60 bg-purple-500/15 shadow-lg shadow-purple-500/20":"border-white/10 bg-white/5 hover:border-purple-400/30 hover:bg-white/10"} ${d.closed?"opacity-60":""}`}>
+              {i===today&&<div className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-green-400 rounded-full animate-pulse"/>}
+              <div className={`text-sm font-semibold mb-2 ${i===today?"text-purple-300":"text-purple-400/80"}`}>{d.day}</div>
+              <div className={`text-xs ${d.closed?"text-red-400/70":"text-purple-200/90"}`}>{d.hours}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
+const BOOKING_SERVICES=[
+  {id:"cut",name:"Signature Cut",price:"$65+",duration:"60 min",icon:String.fromCodePoint(9986),desc:"Precision cut tailored to your unique style"},
+  {id:"color",name:"Vivid Color",price:"$150+",duration:"120 min",icon:String.fromCodePoint(127912),desc:"Bold, vibrant color transformations"},
+  {id:"balayage",name:"Balayage",price:"$180+",duration:"150 min",icon:String.fromCodePoint(9728),desc:"Hand-painted sun-kissed highlights"},
+  {id:"correction",name:"Color Correction",price:"$120/hr",duration:"180+ min",icon:String.fromCodePoint(128300),desc:"Expert color repair and restoration"},
+  {id:"keratin",name:"Keratin Treatment",price:"$250+",duration:"180 min",icon:String.fromCodePoint(10024),desc:"Smooth, frizz-free perfection"},
+  {id:"spa",name:"Head Spa",price:"$85",duration:"75 min",icon:String.fromCodePoint(128134),desc:"Luxurious scalp therapy experience"},
+  {id:"bridal",name:"Bridal Hair",price:"$150+",duration:"120 min",icon:String.fromCodePoint(128141),desc:"Picture-perfect wedding day styling"},
+  {id:"blowout",name:"Blowout",price:"$45+",duration:"45 min",icon:String.fromCodePoint(128168),desc:"Salon-fresh volume and shine"}
+];
 
+const BOOKING_HOURS={0:null,1:["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","1:00","1:30","2:00","2:30","3:00","3:30","4:00","4:30"],2:["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","1:00","1:30","2:00","2:30","3:00","3:30","4:00","4:30","5:00","5:30","6:00","6:30"],3:["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","1:00","1:30","2:00","2:30","3:00","3:30","4:00","4:30","5:00","5:30","6:00","6:30"],4:["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","1:00","1:30","2:00","2:30","3:00","3:30","4:00","4:30","5:00","5:30","6:00","6:30"],5:["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","1:00","1:30","2:00","2:30","3:00","3:30","4:00","4:30"],6:["9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","1:00","1:30","2:00"]};
 
-const LiveCalendar=()=>{
-  const{useState,useEffect,useCallback,useRef}=React;
-  const[currentDate,setCurrentDate]=useState(new Date());
-  const[selectedDate,setSelectedDate]=useState(null);
-  const[selectedTime,setSelectedTime]=useState(null);
-  const[viewMode,setViewMode]=useState('month');
-  const[bookingStep,setBookingStep]=useState(0);
-  const[formData,setFormData]=useState({name:'',phone:'',email:'',service:'',notes:''});
-  const[toast,setToast]=useState(null);
-  const[confirmOpen,setConfirmOpen]=useState(false);
-  const[submitting,setSubmitting]=useState(false);
-  const[bookedSlots,setBookedSlots]=useState(()=>{try{return JSON.parse(localStorage.getItem('sso-booked')||'[]')}catch(e){return[]}});
-  const[tick,setTick]=useState(0);
-  const panelRef=useRef(null);
-  useEffect(()=>{const t=setInterval(()=>setTick(p=>p+1),60000);return()=>clearInterval(t)},[]);
-  useEffect(()=>{try{localStorage.setItem('sso-booked',JSON.stringify(bookedSlots))}catch(e){}},[bookedSlots]);
-  const HOURS={0:null,1:null,2:{open:'9:00 AM',close:'6:00 PM',slots:['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM']},3:{open:'9:00 AM',close:'6:00 PM',slots:['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM']},4:{open:'9:00 AM',close:'6:00 PM',slots:['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM']},5:{open:'9:00 AM',close:'6:00 PM',slots:['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM']},6:{open:'9:00 AM',close:'4:00 PM',slots:['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM']}};
-  const SERVICES=['Signature Cut \u2014 $65+','Vivid / Fashion Color \u2014 $150+','Balayage / Ombr\u00e9 \u2014 $180+','Partial Highlights \u2014 $120+','Full Highlights \u2014 $165+','Keratin Smoothing \u2014 $250+','Head Spa Ritual \u2014 $85','Gloss / Toner \u2014 $45+','Bond Repair \u2014 $40+','Scalp Detox \u2014 $65','Deep Conditioning \u2014 $35','Bridal Hair \u2014 $150+','Color Correction \u2014 $120/hr'];
-  const now=new Date();const year=currentDate.getFullYear();const month=currentDate.getMonth();
-  const firstDay=new Date(year,month,1).getDay();const daysInMonth=new Date(year,month+1,0).getDate();const prevDays=new Date(year,month,0).getDate();
-  const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  const DAYS=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];const DAYSFULL=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const isToday=(d)=>d===now.getDate()&&month===now.getMonth()&&year===now.getFullYear();
-  const isPast=(d)=>{const dt=new Date(year,month,d);dt.setHours(23,59,59);return dt<now};
-  const getDayInfo=(d)=>{const dt=new Date(year,month,d);return HOURS[dt.getDay()]};
-  const isSlotBooked=(dateStr,time)=>bookedSlots.some(b=>b.date===dateStr&&b.time===time);
-  const formatDateStr=(d)=>year+'-'+(month+1).toString().padStart(2,'0')+'-'+d.toString().padStart(2,'0');
-  const getAvailCount=(d)=>{const info=getDayInfo(d);if(!info)return 0;const ds=formatDateStr(d);return info.slots.filter(s=>!isSlotBooked(ds,s)).length};
-  const showToast=(icon,msg,sub)=>{setToast({icon,msg,sub});setTimeout(()=>setToast(null),4500)};
-  const prevMonth=()=>setCurrentDate(new Date(year,month-1,1));
-  const nextMonth=()=>setCurrentDate(new Date(year,month+1,1));
-  const goToday=()=>{setCurrentDate(new Date());setSelectedDate(now.getDate())};
-  const selectDay=(d)=>{if(isPast(d)&&!isToday(d))return;const info=getDayInfo(d);if(!info)return;setSelectedDate(d);setSelectedTime(null);setBookingStep(0);setTimeout(()=>{if(panelRef.current)panelRef.current.scrollIntoView({behavior:'smooth',block:'start'})},100)};
-  const handleSubmit=()=>{if(!formData.name||!formData.phone||!formData.service){showToast('\u26a0\ufe0f','Please fill in all required fields','Name, phone, and service are required');return}setConfirmOpen(true)};
-  const confirmBooking=()=>{setSubmitting(true);const dateStr=formatDateStr(selectedDate);const dayName=DAYSFULL[new Date(year,month,selectedDate).getDay()];const fDate=MONTHS[month]+' '+selectedDate+', '+year;const smsBody='NEW BOOKING\n'+formData.name+'\n'+fDate+' ('+dayName+') at '+selectedTime+'\nService: '+formData.service.split(' \u2014')[0]+'\nPhone: '+formData.phone+(formData.email?'\nEmail: '+formData.email:'')+(formData.notes?'\nNotes: '+formData.notes:'');const emailSubject='New Booking: '+formData.name+' - '+fDate+' '+selectedTime;const emailBody='New appointment request:\n\nClient: '+formData.name+'\nDate: '+fDate+' ('+dayName+')\nTime: '+selectedTime+'\nService: '+formData.service+'\nPhone: '+formData.phone+'\nEmail: '+(formData.email||'N/A')+'\nNotes: '+(formData.notes||'None')+'\n\n--- Studio Salon Odessa Live Calendar ---';setTimeout(()=>{window.open('sms:6135839977?body='+encodeURIComponent(smsBody),'_sms');setTimeout(()=>{window.open('mailto:jordanch14\u0040gmail.com?subject='+encodeURIComponent(emailSubject)+'&body='+encodeURIComponent(emailBody),'_email')},600);setBookedSlots(prev=>[...prev,{date:dateStr,time:selectedTime,name:formData.name,service:formData.service}]);setSubmitting(false);setConfirmOpen(false);setBookingStep(0);setSelectedTime(null);setFormData({name:'',phone:'',email:'',service:'',notes:''});showToast('\u2728','Booking Request Sent!','Confirmation via SMS & email. We will confirm within 1 hour.')},1200)};
+const BMONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const BDAYS=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
-  const calDays=[];for(let i=firstDay-1;i>=0;i--)calDays.push({day:prevDays-i,current:false});for(let d=1;d<=daysInMonth;d++)calDays.push({day:d,current:true});const rem=42-calDays.length;for(let d=1;d<=rem;d++)calDays.push({day:d,current:false});
-  const weekStart=new Date(year,month,selectedDate||now.getDate());weekStart.setDate(weekStart.getDate()-weekStart.getDay());const weekDays=[];for(let i=0;i<7;i++){const wd=new Date(weekStart);wd.setDate(weekStart.getDate()+i);weekDays.push(wd)}
-  const wts=['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','12:00 PM','12:30 PM','1:00 PM','1:30 PM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM','5:30 PM'];
-  const selDayInfo=selectedDate?getDayInfo(selectedDate):null;const selDateStr=selectedDate?formatDateStr(selectedDate):null;
-  const ce=React.createElement;const F=React.Fragment;
-  return ce('section',{id:'calendar',className:'cal-section relative py-28 px-6'},ce('div',{className:'cal-container'},
-    ce('div',{className:'text-center mb-16'},
-      ce('p',{className:'reveal text-sm font-medium text-purple-400 tracking-[0.2em] uppercase mb-4'},'Real-Time Availability'),
-      ce('h2',{className:'reveal font-display text-4xl md:text-5xl font-bold text-white mb-4'},'Book Your Appointment'),
-      ce('p',{className:'reveal text-purple-200/50 max-w-xl mx-auto mb-4'},'Select a date and time below. Your booking request is sent instantly via SMS & email for fast confirmation.'),
-      ce('div',{className:'flex justify-center'},ce('div',{className:'cal-live-badge'},ce('span',{className:'cal-live-pulse'}),'LIVE SCHEDULE'))
-    ),
-    ce('div',{className:'cal-header'},
-      ce('div',{className:'cal-nav'},ce('button',{className:'cal-nav-btn',onClick:prevMonth},'\u2039'),ce('div',{className:'cal-month-title'},MONTHS[month]+' '+year),ce('button',{className:'cal-nav-btn',onClick:nextMonth},'\u203a')),
-      ce('div',{className:'flex items-center gap-8 flex-wrap'},ce('button',{className:'cal-today-btn',onClick:goToday},'\ud83d\udcc5 Today'),ce('div',{className:'cal-view-toggle'},ce('button',{className:'cal-view-btn'+(viewMode==='month'?' active':''),onClick:()=>setViewMode('month')},'Month'),ce('button',{className:'cal-view-btn'+(viewMode==='week'?' active':''),onClick:()=>setViewMode('week')},'Week')))
-    ),
-    viewMode==='month'?ce(F,null,
-      ce('div',{className:'cal-weekdays'},DAYS.map(d=>ce('div',{key:d,className:'cal-weekday'},d))),
-      ce('div',{className:'cal-grid'},calDays.map((cd,i)=>{if(!cd.current)return ce('div',{key:'e'+i,className:'cal-day other-month'},ce('span',{className:'cal-day-num'},cd.day));const d=cd.day;const info=getDayInfo(d);const past=isPast(d)&&!isToday(d);const avail=getAvailCount(d);const td=isToday(d);return ce('div',{key:d,className:'cal-day'+(td?' today':'')+(selectedDate===d?' selected':'')+(past?' other-month':'')+(!info?' closed-day':''),onClick:()=>!past&&selectDay(d)},ce('span',{className:'cal-day-num'},d),info&&!past?ce('div',{className:'cal-day-slots'},ce('div',{className:'cal-slot-indicator'},Array.from({length:Math.min(avail,5)}).map((_,si)=>ce('span',{key:si,className:'cal-slot-dot'+(avail>8?' available':avail>3?' limited':' booked')}))),ce('div',{className:'cal-day-label'},avail>8?'Open':avail>3?avail+' left':avail>0?'Last '+avail:'Full')):!info&&!past?ce('div',{className:'cal-day-closed'},'Closed'):null)})),
-      ce('div',{className:'cal-legend'},[{c:'rgba(52,211,153,0.7)',l:'Available'},{c:'rgba(251,191,36,0.7)',l:'Limited'},{c:'rgba(239,68,68,0.4)',l:'Booked'}].map(x=>ce('div',{key:x.l,className:'cal-legend-item'},ce('span',{className:'cal-legend-dot',style:{background:x.c}}),x.l)))
-    ):ce('div',{className:'cal-week-view'},ce('div',{className:'cal-week-time cal-week-header'},''),weekDays.map(wd=>ce('div',{key:wd.toISOString(),className:'cal-week-time cal-week-header'+(wd.toDateString()===now.toDateString()?' text-purple-300':'')},DAYS[wd.getDay()]+' '+wd.getDate())),wts.map(ts=>ce(F,{key:ts},ce('div',{className:'cal-week-time'},ts),weekDays.map(wd=>{const di=HOURS[wd.getDay()];const hs=di&&di.slots.includes(ts);const ds=wd.getFullYear()+'-'+(wd.getMonth()+1).toString().padStart(2,'0')+'-'+wd.getDate().toString().padStart(2,'0');const bk=isSlotBooked(ds,ts);const wp=wd<new Date(now.getFullYear(),now.getMonth(),now.getDate());return ce('div',{key:wd.toISOString()+ts,className:'cal-week-cell'+(hs&&!bk&&!wp?' has-slot':'')+(bk?' booked-slot':''),onClick:()=>{if(hs&&!bk&&!wp){setCurrentDate(new Date(wd));setSelectedDate(wd.getDate());setSelectedTime(ts);setBookingStep(1);setViewMode('month');setTimeout(()=>{if(panelRef.current)panelRef.current.scrollIntoView({behavior:'smooth',block:'start'})},100)}}},hs?(bk?'\u2715':'\u2713'):'')})))),
+const AdvancedBookingSystem=()=>{
+  const[step,setStep]=React.useState(0);
+  const[selectedService,setSelectedService]=React.useState(null);
+  const[currentMonth,setCurrentMonth]=React.useState(new Date().getMonth());
+  const[currentYear,setCurrentYear]=React.useState(new Date().getFullYear());
+  const[selectedDate,setSelectedDate]=React.useState(null);
+  const[selectedTime,setSelectedTime]=React.useState(null);
+  const[clientInfo,setClientInfo]=React.useState({name:"",phone:"",email:"",hairHistory:"",allergies:"",inspiration:"",notes:""});
+  const[photos,setPhotos]=React.useState([]);
+  const[isSubmitting,setIsSubmitting]=React.useState(false);
+  const[isConfirmed,setIsConfirmed]=React.useState(false);
+  const[animateIn,setAnimateIn]=React.useState(true);
 
-    selectedDate&&selDayInfo?ce('div',{ref:panelRef,className:'cal-panel animate-on-scroll'},
-      ce('div',{className:'cal-panel-header'},ce('div',null,ce('div',{className:'cal-panel-title'},DAYSFULL[new Date(year,month,selectedDate).getDay()]+', '+MONTHS[month]+' '+selectedDate),ce('div',{className:'cal-panel-date'},selDayInfo.open+' \u2013 '+selDayInfo.close+' \u00b7 '+getAvailCount(selectedDate)+' slots available')),ce('button',{className:'cal-nav-btn',onClick:()=>{setSelectedDate(null);setSelectedTime(null);setBookingStep(0)},style:{width:32,height:32,fontSize:14}},'\u2715')),
-      ce('div',{className:'cal-panel-body'},
-        bookingStep===0?ce(F,null,ce('p',{className:'text-sm text-purple-300 mb-3 font-medium'},'Select a time slot:'),ce('div',{className:'cal-time-grid'},selDayInfo.slots.map(s=>{const bk=isSlotBooked(selDateStr,s);return ce('div',{key:s,className:'cal-time-slot'+(selectedTime===s?' selected':'')+(bk?' booked':''),onClick:()=>{if(!bk){setSelectedTime(s);setBookingStep(1)}}},ce('div',{className:'cal-time-text'},s),ce('div',{className:'cal-time-avail'},bk?'Booked':'Available'))}))):ce('div',{className:'cal-booking-form'},
-          ce('div',{className:'flex items-center gap-3 mb-2 p-3 rounded-xl',style:{background:'rgba(168,85,247,0.06)',border:'1px solid rgba(168,85,247,0.12)'}},ce('span',{style:{fontSize:'1.2rem'}},'\ud83d\udcc5'),ce('div',null,ce('div',{className:'text-white text-sm font-semibold'},MONTHS[month]+' '+selectedDate+', '+year+' at '+selectedTime),ce('div',{className:'text-purple-300 text-xs'},'Your selected appointment time')),ce('button',{className:'ml-auto text-purple-400 text-xs hover:text-white transition-colors',onClick:()=>{setBookingStep(0);setSelectedTime(null)}},'Change')),
-          ce('div',{className:'cal-form-row'},ce('input',{className:'cal-input',placeholder:'Full Name *',value:formData.name,onChange:e=>setFormData(p=>({...p,name:e.target.value}))}),ce('input',{className:'cal-input',placeholder:'Phone Number *',type:'tel',value:formData.phone,onChange:e=>setFormData(p=>({...p,phone:e.target.value}))})),
-          ce('div',{className:'cal-form-row'},ce('input',{className:'cal-input',placeholder:'Email (optional)',type:'email',value:formData.email,onChange:e=>setFormData(p=>({...p,email:e.target.value}))}),ce('select',{className:'cal-select',value:formData.service,onChange:e=>setFormData(p=>({...p,service:e.target.value}))},ce('option',{value:''},'Select Service *'),SERVICES.map(s=>ce('option',{key:s,value:s},s)))),
-          ce('textarea',{className:'cal-input',placeholder:'Special requests or notes...',rows:2,value:formData.notes,onChange:e=>setFormData(p=>({...p,notes:e.target.value}))}),
-          ce('button',{className:'cal-submit',onClick:handleSubmit,disabled:submitting},ce('span',{className:'cal-submit-glow'}),submitting?'Sending...':'\u2728 Request Appointment'),
-          ce('p',{className:'text-center text-purple-400/50 text-xs mt-1'},'Instant notification via SMS & email. Confirmation within 1 hour.'))
-      )
-    ):null,
-    ce('div',{className:'cal-confirm-overlay'+(confirmOpen?' show':''),onClick:e=>{if(e.target===e.currentTarget)setConfirmOpen(false)}},ce('div',{className:'cal-confirm-modal'},ce('div',{className:'text-center text-3xl mb-3'},'\ud83d\udc87\u200d\u2640\ufe0f'),ce('div',{className:'cal-confirm-title'},'Confirm Your Booking'),ce('div',{className:'cal-confirm-details'},[{l:'Date',v:selectedDate?MONTHS[month]+' '+selectedDate+', '+year:''},{l:'Time',v:selectedTime||''},{l:'Service',v:formData.service?formData.service.split(' \u2014')[0]:''},{l:'Client',v:formData.name},{l:'Phone',v:formData.phone}].map(r=>ce('div',{key:r.l,className:'cal-confirm-row'},ce('span',{className:'cal-confirm-label'},r.l),ce('span',{className:'cal-confirm-value'},r.v)))),ce('p',{className:'text-center text-xs text-purple-300/60 mb-4'},'SMS to (613) 583-9977 & email to jordanch14@gmail.com'),ce('div',{className:'cal-confirm-actions'},ce('button',{className:'cal-confirm-cancel',onClick:()=>setConfirmOpen(false)},'Go Back'),ce('button',{className:'cal-submit',style:{padding:'10px 28px',fontSize:'0.85rem'},onClick:confirmBooking,disabled:submitting},submitting?'Sending...':'Confirm & Send')))),
-    toast?ce('div',{className:'cal-toast show'},ce('span',{className:'cal-toast-icon'},toast.icon),ce('div',null,ce('div',{className:'cal-toast-msg'},toast.msg),toast.sub?ce('div',{className:'cal-toast-sub'},toast.sub):null)):null
-  ));
+  React.useEffect(()=>{setAnimateIn(false);const t=setTimeout(()=>setAnimateIn(true),50);return()=>clearTimeout(t);},[step]);
+
+  const getDaysInMonth=(m,y)=>new Date(y,m+1,0).getDate();
+  const getFirstDayOfMonth=(m,y)=>new Date(y,m,1).getDay();
+  const isToday=(d)=>{const t=new Date();return d===t.getDate()&&currentMonth===t.getMonth()&&currentYear===t.getFullYear();};
+  const isPast=(d)=>{const t=new Date();t.setHours(0,0,0,0);return new Date(currentYear,currentMonth,d)<t;};
+  const getDayStatus=(d)=>{if(isPast(d))return"past";const dow=new Date(currentYear,currentMonth,d).getDay();if(dow===0)return"closed";if(dow===6)return"limited";return"available";};
+
+  const prevMonth=()=>{if(currentMonth===0){setCurrentMonth(11);setCurrentYear(y=>y-1);}else setCurrentMonth(m=>m-1);};
+  const nextMonth=()=>{if(currentMonth===11){setCurrentMonth(0);setCurrentYear(y=>y+1);}else setCurrentMonth(m=>m+1);};
+  const goToday=()=>{setCurrentMonth(new Date().getMonth());setCurrentYear(new Date().getFullYear());};
+
+  const handlePhotoUpload=(e)=>{
+    const files=Array.from(e.target.files);
+    files.forEach(file=>{
+      const reader=new FileReader();
+      reader.onloadend=()=>{setPhotos(prev=>[...prev,{name:file.name,url:reader.result,size:(file.size/1024).toFixed(1)+"KB"}]);};
+      reader.readAsDataURL(file);
+    });
+  };
+  const removePhoto=(idx)=>setPhotos(prev=>prev.filter((_,i)=>i!==idx));
+
+  const handleSubmit=()=>{
+    setIsSubmitting(true);
+    const svc=BOOKING_SERVICES.find(s=>s.id===selectedService);
+    const dateStr=BMONTHS[currentMonth]+" "+selectedDate+", "+currentYear;
+    const body=encodeURIComponent("NEW BOOKING REQUEST\n\nService: "+svc.name+" ("+svc.price+")\nDate: "+dateStr+"\nTime: "+selectedTime+"\n\nClient: "+clientInfo.name+"\nPhone: "+clientInfo.phone+"\nEmail: "+clientInfo.email+"\n\nHair History: "+(clientInfo.hairHistory||"N/A")+"\nAllergies: "+(clientInfo.allergies||"None")+"\nInspiration: "+(clientInfo.inspiration||"N/A")+"\nNotes: "+(clientInfo.notes||"N/A")+"\nPhotos Attached: "+photos.length);
+    const mailLink="mailto:jordanch14"+"@"+"gmail.com?subject="+encodeURIComponent("Booking: "+svc.name+" - "+dateStr)+"&body="+body;
+    window.open(mailLink,"_blank");
+    const smsBody=encodeURIComponent("Hi! I just booked "+svc.name+" for "+dateStr+" at "+selectedTime+". - "+clientInfo.name);
+    const smsLink="sms:+1613"+"5839977?body="+smsBody;
+    setTimeout(()=>{window.open(smsLink,"_blank");},500);
+    setTimeout(()=>{setIsSubmitting(false);setIsConfirmed(true);},1500);
+  };
+
+  const stepTitles=["Select Service","Choose Date & Time","Your Details","Review & Confirm"];
+  if(isConfirmed)return(
+    <div className="relative py-24 overflow-hidden" id="booking">
+      <div className="max-w-2xl mx-auto px-4 text-center">
+        <div className="backdrop-blur-2xl bg-white/5 border border-green-400/30 rounded-3xl p-12 shadow-2xl">
+          <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-gradient-to-br from-green-400/20 to-emerald-500/20 border border-green-400/40 flex items-center justify-center text-5xl animate-bounce">
+            {String.fromCodePoint(10004)}</div>
+          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-green-300 to-emerald-300 bg-clip-text text-transparent" style={{fontFamily:"Playfair Display"}}>
+            Booking Confirmed!</h2>
+          <p className="text-purple-200/80 text-lg mb-2">Your appointment request has been sent.</p>
+          <p className="text-purple-300/60 mb-8">We will confirm via text or email within 24 hours.</p>
+          <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 mb-8 text-left space-y-2">
+            <div className="flex justify-between"><span className="text-purple-400/70">Service</span><span className="text-purple-200">{BOOKING_SERVICES.find(s=>s.id===selectedService)?.name}</span></div>
+            <div className="flex justify-between"><span className="text-purple-400/70">Date</span><span className="text-purple-200">{BMONTHS[currentMonth]} {selectedDate}, {currentYear}</span></div>
+            <div className="flex justify-between"><span className="text-purple-400/70">Time</span><span className="text-purple-200">{selectedTime}</span></div>
+            <div className="flex justify-between"><span className="text-purple-400/70">Client</span><span className="text-purple-200">{clientInfo.name}</span></div>
+          </div>
+          <button onClick={()=>{setIsConfirmed(false);setStep(0);setSelectedService(null);setSelectedDate(null);setSelectedTime(null);setClientInfo({name:"",phone:"",email:"",hairHistory:"",allergies:"",inspiration:"",notes:""});setPhotos([]);}}
+            className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 hover:scale-105">
+            Book Another Appointment</button>
+        </div>
+      </div>
+    </div>
+  );
+
+  return(
+    <div className="relative py-24 overflow-hidden" id="booking">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-sm mb-6">
+            <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"/><span>Online Booking</span></div>
+          <h2 className="text-5xl md:text-6xl font-bold mb-4" style={{fontFamily:"Playfair Display"}}>
+            <span className="bg-gradient-to-r from-purple-300 via-purple-200 to-pink-300 bg-clip-text text-transparent">
+              Book Your Experience</span></h2>
+          <p className="text-purple-300/70 text-lg max-w-2xl mx-auto">
+            Schedule your appointment in a few simple steps</p>
+        </div>
+        {/* Step Indicator */}
+        <div className="flex items-center justify-center mb-12 gap-1">
+          {stepTitles.map((title,i)=>(
+            <React.Fragment key={i}>
+              <button onClick={()=>{if(i<step)setStep(i);}} className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-500 ${i===step?"bg-purple-500/30 border border-purple-400/50 text-purple-200 shadow-lg shadow-purple-500/20":i<step?"bg-purple-500/10 border border-purple-500/20 text-purple-300 cursor-pointer hover:bg-purple-500/20":"bg-white/5 border border-white/5 text-purple-400/40"}`}>
+                <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${i===step?"bg-purple-500 text-white":i<step?"bg-purple-500/50 text-purple-200":"bg-white/10 text-purple-400/40"}`}>{i<step?String.fromCodePoint(10003):i+1}</span>
+                <span className="hidden sm:inline">{title}</span>
+              </button>
+              {i<3&&<div className={`w-8 h-0.5 ${i<step?"bg-purple-400/50":"bg-white/10"}`}/>}
+            </React.Fragment>
+          ))}
+        </div>
+
+        <div className={`transition-all duration-500 ${animateIn?"opacity-100 translate-y-0":"opacity-0 translate-y-4"}`}>
+
+        {/* STEP 0: Service Selection */}
+        {step===0&&(
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {BOOKING_SERVICES.map(svc=>(
+              <button key={svc.id} onClick={()=>{setSelectedService(svc.id);setStep(1);}}
+                className={`group relative backdrop-blur-2xl border rounded-3xl p-6 text-left transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl ${selectedService===svc.id?"border-purple-400/60 bg-purple-500/15 shadow-lg shadow-purple-500/25":"border-white/10 bg-white/[0.03] hover:border-purple-400/30 hover:bg-white/[0.07]"}`}>
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"/>
+                <div className="relative z-10">
+                  <div className="text-3xl mb-3">{svc.icon}</div>
+                  <h3 className="text-lg font-bold text-purple-100 mb-1">{svc.name}</h3>
+                  <p className="text-purple-300/60 text-sm mb-3">{svc.desc}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-purple-300 font-semibold">{svc.price}</span>
+                    <span className="text-purple-400/50 text-xs">{svc.duration}</span>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
+        {/* STEP 1: Date & Time */}
+        {step===1&&(
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+            {/* Calendar */}
+            <div className="lg:col-span-3 backdrop-blur-2xl bg-white/[0.03] border border-white/10 rounded-3xl p-6 shadow-xl">
+              <div className="flex items-center justify-between mb-6">
+                <button onClick={prevMonth} className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-purple-300 hover:bg-purple-500/20 hover:border-purple-400/40 transition-all">{String.fromCodePoint(9664)}</button>
+                <div className="text-center">
+                  <h3 className="text-2xl font-bold text-purple-100" style={{fontFamily:"Playfair Display"}}>{BMONTHS[currentMonth]} {currentYear}</h3>
+                  <button onClick={goToday} className="text-xs text-purple-400/60 hover:text-purple-300 transition-colors mt-1">Go to Today</button>
+                </div>
+                <button onClick={nextMonth} className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-purple-300 hover:bg-purple-500/20 hover:border-purple-400/40 transition-all">{String.fromCodePoint(9654)}</button>
+              </div>
+              <div className="grid grid-cols-7 gap-1 mb-2">
+                {BDAYS.map(d=>(<div key={d} className="text-center text-xs font-semibold text-purple-400/60 py-2">{d}</div>))}
+              </div>
+              <div className="grid grid-cols-7 gap-1">
+                {Array(getFirstDayOfMonth(currentMonth,currentYear)).fill(null).map((_,i)=>(<div key={"e"+i}/>))}
+                {Array(getDaysInMonth(currentMonth,currentYear)).fill(null).map((_,i)=>{
+                  const d=i+1;const status=getDayStatus(d);const isSelected=selectedDate===d;
+                  return(
+                    <button key={d} disabled={status==="past"||status==="closed"}
+                      onClick={()=>{setSelectedDate(d);setSelectedTime(null);}}
+                      className={`relative aspect-square rounded-2xl flex flex-col items-center justify-center text-sm font-medium transition-all duration-300 ${
+                        isSelected?"bg-purple-500/40 border-2 border-purple-400 text-white shadow-lg shadow-purple-500/30 scale-110":
+                        status==="past"?"text-purple-500/20 cursor-not-allowed":
+                        status==="closed"?"text-red-400/30 cursor-not-allowed":
+                        status==="limited"?"border border-amber-400/20 bg-amber-500/5 text-amber-300/80 hover:bg-amber-500/15 hover:border-amber-400/40 cursor-pointer":
+                        "border border-white/5 bg-white/[0.02] text-purple-200/80 hover:bg-purple-500/15 hover:border-purple-400/30 cursor-pointer"
+                      }`}>
+                      {isToday(d)&&<div className="absolute top-1 right-1 w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"/>}
+                      <span>{d}</span>
+                      {status==="available"&&!isSelected&&<div className="w-1 h-1 rounded-full bg-green-400/60 mt-0.5"/>}
+                      {status==="limited"&&!isSelected&&<div className="w-1 h-1 rounded-full bg-amber-400/60 mt-0.5"/>}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="flex items-center justify-center gap-6 mt-4 pt-4 border-t border-white/5">
+                <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-green-400/60"/><span className="text-xs text-purple-400/60">Available</span></div>
+                <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-amber-400/60"/><span className="text-xs text-purple-400/60">Limited</span></div>
+                <div className="flex items-center gap-2"><div className="w-2 h-2 rounded-full bg-purple-500/20"/><span className="text-xs text-purple-400/60">Unavailable</span></div>
+              </div>
+            </div>
+            {/* Time Slots */}
+            <div className="lg:col-span-2 backdrop-blur-2xl bg-white/[0.03] border border-white/10 rounded-3xl p-6 shadow-xl">
+              <h3 className="text-lg font-bold text-purple-100 mb-1">Select Time</h3>
+              <p className="text-purple-400/60 text-sm mb-4">{selectedDate?BMONTHS[currentMonth]+" "+selectedDate+", "+currentYear:"Pick a date first"}</p>
+              {selectedDate&&BOOKING_HOURS[new Date(currentYear,currentMonth,selectedDate).getDay()]?(
+                <div className="grid grid-cols-2 gap-2 max-h-80 overflow-y-auto pr-1 custom-scrollbar">
+                  {BOOKING_HOURS[new Date(currentYear,currentMonth,selectedDate).getDay()].map(time=>(
+                    <button key={time} onClick={()=>setSelectedTime(time)}
+                      className={`py-2.5 px-3 rounded-xl text-sm font-medium transition-all duration-300 ${selectedTime===time?"bg-purple-500/40 border border-purple-400/60 text-white shadow-lg shadow-purple-500/20":"border border-white/5 bg-white/[0.02] text-purple-200/70 hover:bg-purple-500/10 hover:border-purple-400/20"}`}>
+                      {time}</button>
+                  ))}
+                </div>
+              ):selectedDate?(
+                <div className="text-center py-12 text-purple-400/50">
+                  <div className="text-4xl mb-3">{String.fromCodePoint(128564)}</div>
+                  <p>Closed on this day</p>
+                </div>
+              ):(
+                <div className="text-center py-12 text-purple-400/40">
+                  <div className="text-4xl mb-3">{String.fromCodePoint(128197)}</div>
+                  <p>Select a date to see available times</p>
+                </div>
+              )}
+              {selectedTime&&(
+                <button onClick={()=>setStep(2)} className="w-full mt-4 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 hover:scale-[1.02]">
+                  Continue to Details {String.fromCodePoint(8594)}</button>
+              )}
+            </div>
+          </div>
+        )}
+        {/* STEP 2: Client Details */}
+        {step===2&&(
+          <div className="max-w-3xl mx-auto">
+            <div className="backdrop-blur-2xl bg-white/[0.03] border border-white/10 rounded-3xl p-8 shadow-xl">
+              <h3 className="text-2xl font-bold text-purple-100 mb-6" style={{fontFamily:"Playfair Display"}}>Tell Us About You</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                  <label className="block text-sm text-purple-300/70 mb-1.5">Full Name *</label>
+                  <input type="text" value={clientInfo.name} onChange={e=>setClientInfo(p=>({...p,name:e.target.value}))} placeholder="Your name"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-purple-100 placeholder-purple-400/30 focus:border-purple-400/50 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all"/>
+                </div>
+                <div>
+                  <label className="block text-sm text-purple-300/70 mb-1.5">Phone *</label>
+                  <input type="tel" value={clientInfo.phone} onChange={e=>setClientInfo(p=>({...p,phone:e.target.value}))} placeholder="(555) 123-4567"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-purple-100 placeholder-purple-400/30 focus:border-purple-400/50 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all"/>
+                </div>
+                <div>
+                  <label className="block text-sm text-purple-300/70 mb-1.5">Email *</label>
+                  <input type="email" value={clientInfo.email} onChange={e=>setClientInfo(p=>({...p,email:e.target.value}))} placeholder="your@email.com"
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-purple-100 placeholder-purple-400/30 focus:border-purple-400/50 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all"/>
+                </div>
+                <div>
+                  <label className="block text-sm text-purple-300/70 mb-1.5">Hair History</label>
+                  <input type="text" value={clientInfo.hairHistory} onChange={e=>setClientInfo(p=>({...p,hairHistory:e.target.value}))} placeholder="Recent treatments, color history..."
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-purple-100 placeholder-purple-400/30 focus:border-purple-400/50 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all"/>
+                </div>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div>
+                  <label className="block text-sm text-purple-300/70 mb-1.5">Allergies / Sensitivities</label>
+                  <input type="text" value={clientInfo.allergies} onChange={e=>setClientInfo(p=>({...p,allergies:e.target.value}))} placeholder="Any known allergies..."
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-purple-100 placeholder-purple-400/30 focus:border-purple-400/50 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all"/>
+                </div>
+                <div>
+                  <label className="block text-sm text-purple-300/70 mb-1.5">Style Inspiration</label>
+                  <input type="text" value={clientInfo.inspiration} onChange={e=>setClientInfo(p=>({...p,inspiration:e.target.value}))} placeholder="Describe your dream look..."
+                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-purple-100 placeholder-purple-400/30 focus:border-purple-400/50 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all"/>
+                </div>
+              </div>
+              {/* Photo Upload */}
+              <div className="mb-6">
+                <label className="block text-sm text-purple-300/70 mb-1.5">Inspiration Photos</label>
+                <p className="text-xs text-purple-400/40 mb-3">Upload reference photos to help us understand your vision</p>
+                <div className="relative">
+                  <input type="file" multiple accept="image/*" onChange={handlePhotoUpload} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"/>
+                  <div className="border-2 border-dashed border-white/10 rounded-2xl p-8 text-center hover:border-purple-400/30 hover:bg-white/[0.02] transition-all">
+                    <div className="text-4xl mb-2">{String.fromCodePoint(128247)}</div>
+                    <p className="text-purple-200/60 text-sm">Drop photos here or click to browse</p>
+                    <p className="text-purple-400/30 text-xs mt-1">JPG, PNG, HEIC up to 10MB each</p>
+                  </div>
+                </div>
+                {photos.length>0&&(
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mt-4">
+                    {photos.map((photo,i)=>(
+                      <div key={i} className="relative group rounded-xl overflow-hidden border border-white/10 aspect-square">
+                        <img src={photo.url} alt={photo.name} className="w-full h-full object-cover"/>
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <button onClick={()=>removePhoto(i)} className="w-8 h-8 rounded-full bg-red-500/80 text-white text-sm hover:bg-red-500 transition-colors">{String.fromCodePoint(10005)}</button>
+                        </div>
+                        <div className="absolute bottom-0 inset-x-0 bg-black/60 px-2 py-1">
+                          <p className="text-[10px] text-white/70 truncate">{photo.name}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Additional Notes */}
+              <div className="mb-6">
+                <label className="block text-sm text-purple-300/70 mb-1.5">Additional Notes</label>
+                <textarea value={clientInfo.notes} onChange={e=>setClientInfo(p=>({...p,notes:e.target.value}))} placeholder="Anything else we should know..." rows={3}
+                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-purple-100 placeholder-purple-400/30 focus:border-purple-400/50 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-all resize-none"/>
+              </div>
+
+              <div className="flex gap-3">
+                <button onClick={()=>setStep(1)} className="px-6 py-3 rounded-2xl border border-white/10 text-purple-300 hover:bg-white/5 transition-all">{String.fromCodePoint(8592)} Back</button>
+                <button onClick={()=>{if(clientInfo.name&&clientInfo.phone&&clientInfo.email)setStep(3);}} disabled={!clientInfo.name||!clientInfo.phone||!clientInfo.email}
+                  className="flex-1 py-3 rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 hover:scale-[1.02] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none">
+                  Review Booking {String.fromCodePoint(8594)}</button>
+              </div>
+            </div>
+          </div>
+        )}
+        {/* STEP 3: Review & Confirm */}
+        {step===3&&(
+          <div className="max-w-3xl mx-auto">
+            <div className="backdrop-blur-2xl bg-white/[0.03] border border-white/10 rounded-3xl p-8 shadow-xl">
+              <h3 className="text-2xl font-bold text-purple-100 mb-6" style={{fontFamily:"Playfair Display"}}>Review Your Booking</h3>
+              <div className="space-y-4 mb-8">
+                <div className="backdrop-blur-xl bg-purple-500/5 border border-purple-400/20 rounded-2xl p-5">
+                  <div className="text-xs text-purple-400/60 uppercase tracking-wider mb-2">Service</div>
+                  <div className="flex items-center gap-3">
+                    <span className="text-2xl">{BOOKING_SERVICES.find(s=>s.id===selectedService)?.icon}</span>
+                    <div>
+                      <div className="text-lg font-semibold text-purple-100">{BOOKING_SERVICES.find(s=>s.id===selectedService)?.name}</div>
+                      <div className="text-sm text-purple-300/60">{BOOKING_SERVICES.find(s=>s.id===selectedService)?.price} {String.fromCodePoint(183)} {BOOKING_SERVICES.find(s=>s.id===selectedService)?.duration}</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="backdrop-blur-xl bg-white/[0.03] border border-white/10 rounded-2xl p-5">
+                    <div className="text-xs text-purple-400/60 uppercase tracking-wider mb-2">Date</div>
+                    <div className="text-lg font-semibold text-purple-100">{BMONTHS[currentMonth]} {selectedDate}</div>
+                    <div className="text-sm text-purple-300/60">{currentYear}</div>
+                  </div>
+                  <div className="backdrop-blur-xl bg-white/[0.03] border border-white/10 rounded-2xl p-5">
+                    <div className="text-xs text-purple-400/60 uppercase tracking-wider mb-2">Time</div>
+                    <div className="text-lg font-semibold text-purple-100">{selectedTime}</div>
+                  </div>
+                </div>
+                <div className="backdrop-blur-xl bg-white/[0.03] border border-white/10 rounded-2xl p-5">
+                  <div className="text-xs text-purple-400/60 uppercase tracking-wider mb-2">Client Information</div>
+                  <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm">
+                    <div><span className="text-purple-400/60">Name: </span><span className="text-purple-200">{clientInfo.name}</span></div>
+                    <div><span className="text-purple-400/60">Phone: </span><span className="text-purple-200">{clientInfo.phone}</span></div>
+                    <div><span className="text-purple-400/60">Email: </span><span className="text-purple-200">{clientInfo.email}</span></div>
+                    {clientInfo.hairHistory&&<div><span className="text-purple-400/60">Hair History: </span><span className="text-purple-200">{clientInfo.hairHistory}</span></div>}
+                    {clientInfo.allergies&&<div><span className="text-purple-400/60">Allergies: </span><span className="text-purple-200">{clientInfo.allergies}</span></div>}
+                    {clientInfo.inspiration&&<div><span className="text-purple-400/60">Inspiration: </span><span className="text-purple-200">{clientInfo.inspiration}</span></div>}
+                  </div>
+                  {clientInfo.notes&&<div className="mt-3 pt-3 border-t border-white/5"><span className="text-purple-400/60 text-sm">Notes: </span><span className="text-purple-200/80 text-sm">{clientInfo.notes}</span></div>}
+                </div>
+                {photos.length>0&&(
+                  <div className="backdrop-blur-xl bg-white/[0.03] border border-white/10 rounded-2xl p-5">
+                    <div className="text-xs text-purple-400/60 uppercase tracking-wider mb-3">Attached Photos ({photos.length})</div>
+                    <div className="flex gap-2 overflow-x-auto pb-2">
+                      {photos.map((p,i)=>(<img key={i} src={p.url} alt={p.name} className="w-16 h-16 rounded-xl object-cover border border-white/10 flex-shrink-0"/>))}
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="flex gap-3">
+                <button onClick={()=>setStep(2)} className="px-6 py-3 rounded-2xl border border-white/10 text-purple-300 hover:bg-white/5 transition-all">{String.fromCodePoint(8592)} Back</button>
+                <button onClick={handleSubmit} disabled={isSubmitting}
+                  className="flex-1 py-4 rounded-2xl bg-gradient-to-r from-purple-500 via-purple-600 to-pink-500 text-white font-bold text-lg hover:shadow-2xl hover:shadow-purple-500/40 transition-all duration-300 hover:scale-[1.02] disabled:opacity-60">
+                  {isSubmitting?("Sending..."):("Confirm Booking "+String.fromCodePoint(10003))}</button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        </div>{/* end animateIn wrapper */}
+
+        {/* Quick Contact */}
+        <div className="max-w-2xl mx-auto mt-12 text-center">
+          <p className="text-purple-400/50 text-sm mb-3">Prefer to book directly?</p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a href="tel:+16135839977" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full backdrop-blur-xl bg-white/5 border border-white/10 text-purple-200 text-sm hover:bg-purple-500/10 hover:border-purple-400/30 transition-all">
+              {String.fromCodePoint(128222)} (613) 583-9977</a>
+            <a href="sms:+16135839977" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full backdrop-blur-xl bg-white/5 border border-white/10 text-purple-200 text-sm hover:bg-purple-500/10 hover:border-purple-400/30 transition-all">
+              {String.fromCodePoint(128172)} Text Us</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
 };
-
-    const App=()=>{
+const App=()=>{
   const [scrolled,setScrolled]=useState(false);
   const [mobileMenu,setMobileMenu]=useState(false);
   useScrollProgress();
@@ -2458,63 +2750,11 @@ const LiveCalendar=()=>{
         </div>
       </section>
 
-      {/* ═══ ONLINE BOOKING ═══ */}
-      <section id="booking" className="relative py-28 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <p className="reveal text-sm font-medium text-purple-400 uppercase tracking-[0.2em] mb-4">Schedule Your Visit</p>
-            <h2 className="reveal font-display text-5xl md:text-6xl font-bold text-white mb-4">Book Online</h2>
-            <p className="reveal text-purple-200/50 max-w-2xl mx-auto">Choose your preferred way to book — we make it easy to reserve your session</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            {[{icon:'\ud83d\udcc5',title:'Live Calendar',desc:'Select your date & time instantly. Real-time availability with SMS & email confirmation.',action:'#calendar',btn:'Open Calendar',color:'from-purple-600 to-purple-800',featured:true},
-              
-              {icon:'📧',title:'Email Booking',desc:'Send us your preferred date, time, and service. We will confirm within 24 hours.',action:'mailto:jordanch14@gmail.com?subject=Appointment%20Request&body=Hi%2C%20I%27d%20like%20to%20book%20an%20appointment.%0A%0AName%3A%0APreferred%20Date%3A%0AService%3A%0APhone%3A',btn:'Send Request',color:'from-purple-600 to-purple-700'},
-              {icon:'📱',title:'Call or Text',desc:'Reach out directly for same-day availability or quick questions about services.',action:'tel:+16135839977',btn:'(613) 583-9977',color:'from-purple-700 to-purple-800'},
-              {icon:'💬',title:'Instagram DM',desc:'Send us a direct message on Instagram for booking or consultation inquiries.',action:'https://instagram.com/studiosalonodessa',btn:'@studiosalonodessa',color:'from-pink-600 to-purple-600'}
-            ].map((b,i)=>(
-              <a key={i} href={b.action} target={b.action.startsWith('http')?'_blank':undefined} rel={b.action.startsWith('http')?'noopener noreferrer':undefined} className={"reveal glass-card p-8 text-center group cursor-pointer no-underline block"+(b.featured?" ring-2 ring-purple-500/50":"")} style={{transitionDelay:i*0.15+'s'}}>
-                <div className="text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">{b.icon}</div>
-                <h3 className="text-xl font-semibold text-white mb-3">{b.title}</h3>
-                <p className="text-purple-200/60 text-sm leading-relaxed mb-6">{b.desc}</p>
-                <div className={"inline-flex items-center gap-2 bg-gradient-to-r "+b.color+" text-white px-6 py-3 rounded-full text-sm font-semibold transition-transform group-hover:scale-105"}>
-                  {b.btn}
-                </div>
-              </a>
-            ))}
-          </div>
-          <div className="reveal glass-card p-8 md:p-10" style={{borderColor:'rgba(168,85,247,0.25)'}}>
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-2xl font-semibold text-white mb-4">What to Know Before Booking</h3>
-                <div className="space-y-3 text-sm text-purple-200/60">
-                  <div className="flex items-start gap-3"><span className="text-purple-400 mt-0.5">✓</span><span><strong className="text-purple-200">Consultation First</strong> — New clients receive a complimentary consultation to discuss goals and expectations</span></div>
-                  <div className="flex items-start gap-3"><span className="text-purple-400 mt-0.5">✓</span><span><strong className="text-purple-200">Deposit Required</strong> — A $50 deposit secures your booking and applies toward your service</span></div>
-                  <div className="flex items-start gap-3"><span className="text-purple-400 mt-0.5">✓</span><span><strong className="text-purple-200">Cancellation Policy</strong> — 48-hour notice required for rescheduling or cancellation</span></div>
-                  <div className="flex items-start gap-3"><span className="text-purple-400 mt-0.5">✓</span><span><strong className="text-purple-200">Payment Options</strong> — We accept all major cards, e-transfer, and cash</span></div>
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="inline-block p-6 rounded-2xl" style={{background:'rgba(88,28,135,0.2)',border:'1px solid var(--border)'}}>
-                  <div className="text-4xl mb-3">📅</div>
-                  <p className="text-white font-semibold text-lg mb-1">Hours of Operation</p>
-                  <div className="text-sm text-purple-200/60 space-y-1">
-                    <p>Tuesday – Friday: 9:00 AM – 6:00 PM</p>
-                    <p>Saturday: 9:00 AM – 4:00 PM</p>
-                    <p className="text-purple-400/50">Sunday & Monday: Closed</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            {/* ═══ ADVANCED BOOKING SYSTEM ═══ */}
+      <AdvancedBookingSystem />
 
       {/* ═══ SCHEDULE & AVAILABILITY ═══ */}
       <ScheduleSection />
-
-      {/* \u2550\u2550\u2550 LIVE BOOKING CALENDAR \u2550\u2550\u2550 */}
-      <LiveCalendar />
 
       {/* ═══ GALLERY — BEFORE & AFTER ═══ */}
       <section id="gallery" className="relative py-28 px-6">
